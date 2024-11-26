@@ -9,4 +9,4 @@
     31708119	AMANDA MERCEDES 	MENDOZA HERNÁNDEZ 
 
 ## MODELO DE DOMINIO
-
+    ![alt text](image.png)

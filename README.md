@@ -10,3 +10,6 @@
 
 ## MODELO DE DOMINIO
     ![alt text](image.png)
+
+## DIAGRAMA DE ESTADO
+    ![alt text](image-1.png)

@@ -21,7 +21,7 @@ c3-->Continuando_navegación :no
 Notificando_de_publicación-->c4
 Continuando_navegación-->c4:Eventos revisados?
 c4-->Terminando_de_revisar_publicaciones :si
-Terminando_de_revisar_publicaciones-->[*] :Cerrar sesión
+Terminando_de_revisar_publicaciones-->[*] :cerrar sesión
 c4--> Visualizando_publicaciones :no
 Añadiendo_publicaciones-->c5: verificar publicación?
 c5-->Consultando_lista_actividades_proyectos :si

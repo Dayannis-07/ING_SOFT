@@ -7,31 +7,33 @@ state c5 <<choice>>
 state c6 <<choice>>
 state c7 <<choice>>
 
-[*] --> Entrar_plataforma: Iniciar espacio virtual
-Entrar_plataforma-->c1:Registrar?
-c1-->Ingresar_datos :si
-c1-->Iniciar_sesión :no
-Ingresar_datos-->Iniciar_sesión
-Iniciar_sesión-->c2:Consultar publicaciones?
-c2-->Visualizar_publicaciones :si
-c2--> Añadir_publicaciones :no
-Visualizar_publicaciones-->c3:Comentar?
-c3-->Notificación_de_publicación :si
-c3-->Visualizar_publicaciones :no
-Notificación_de_publicación-->c4:Eventos revisados?
-c4-->Publicaciones_revisadas :si
-Publicaciones_revisadas-->[*] :Cerrar sesión
-c4--> Visualizar_publicaciones :no
-Añadir_publicaciones-->c5: verificar publicación?
-c5-->Consultar_lista_actividades_proyectos :si
-c5-->Consultar_calendario_eventos :no
-Consultar_lista_actividades_proyectos-->c6:Aprobar?
-c6-->Actualizar_calendaro_eventos :si
-c6-->Notificar_al_usuario :no
-Notificar_al_usuario-->c2
-Consultar_calendario_eventos-->c7:Agregar evento?
-c7-->Actualizar_calendaro_eventos :si
-c7--> Visualizar_publicaciones :no
+[*] --> Entrando_a_plataforma: Iniciar espacio virtual
+Entrando_a_plataforma-->c1:Registrar?
+c1-->Ingresando_datos :si
+c1-->Iniciando_sesión :no
+Ingresando_datos-->Iniciando_sesión
+Iniciando_sesión-->c2:Consultar publicaciones?
+c2-->Visualizando_publicaciones :si
+c2--> Añadiendo_publicaciones :no
+Visualizando_publicaciones-->c3:Comentar?
+c3-->Notificando_de_publicación :si
+c3-->Continuando_navegación :no
+Notificando_de_publicación-->c4
+Continuando_navegación-->c4:Eventos revisados?
+c4-->Terminando_de_revisar_publicaciones :si
+Terminando_de_revisar_publicaciones-->[*] :Cerrar sesión
+c4--> Visualizando_publicaciones :no
+Añadiendo_publicaciones-->c5: verificar publicación?
+c5-->Consultando_lista_actividades_proyectos :si
+c5-->Consultando_calendario_de_eventos :no
+Consultando_lista_actividades_proyectos-->c6:Aprobar?
+c6-->Actualizando_calendario_de_eventos :si
+Actualizando_calendario_de_eventos-->Continuando_navegación
+c6-->Notificando_al_usuario :no
+Notificando_al_usuario-->c2
+Consultando_calendario_de_eventos-->c7:Agregar evento?
+c7-->Actualizando_calendario_de_eventos :si
+c7--> Visualizando_publicaciones :no
 
 
 @enduml

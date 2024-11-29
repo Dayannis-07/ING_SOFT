@@ -6,6 +6,7 @@ state c4 <<choice>>
 state c5 <<choice>>
 state c6 <<choice>>
 state c7 <<choice>>
+state c8 <<choice>>
 
 [*] --> Entrando_a_plataforma: Iniciar espacio virtual
 Entrando_a_plataforma-->c1:Registrar?
@@ -21,7 +22,10 @@ c3-->Continuando_navegación :no
 Notificando_de_publicación-->c4
 Continuando_navegación-->c4:Eventos revisados?
 c4-->Terminando_de_revisar_publicaciones :si
-Terminando_de_revisar_publicaciones-->[*] :cerrar sesión
+Terminando_de_revisar_publicaciones-->c8:cerrar sesión?
+c8-->Finalizando_sesión :si
+Finalizando_sesión--> [*]:saliendo del espacio virtual
+c8-->Visualizando_publicaciones :no
 c4--> Visualizando_publicaciones :no
 Añadiendo_publicaciones-->c5: verificar publicación?
 c5-->Consultando_lista_actividades_proyectos :si

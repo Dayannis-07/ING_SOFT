@@ -22,10 +22,10 @@ admin -->UC11
 admin -->UC12
 user-->UC8
 user-->UC9
-UC7 .right.>UC3 :<<extend>>
-UC4 .right.>UC3 :<<extend>>
-UC5 .left.>UC3 :<<extend>>
-UC6 .right.>UC5 :<<extend>>
+UC7 .u.>UC3 :<<extend>>
+UC4 .u.>UC3 :<<extend>>
+UC5 .u.>UC3 :<<extend>>
+UC6 .u.>UC5 :<<extend>>
 user-down->UC10
 user-->UC1
 user-->UC2

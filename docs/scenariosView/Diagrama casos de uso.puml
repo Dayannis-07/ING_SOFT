@@ -8,25 +8,24 @@ rectangle Búho_Social{
     usecase "Iniciar sesión" as UC1
     usecase "Registrar usuario" as UC2
     usecase "Consultar publicaciones" as UC3
-    usecase "Crear evento" as UC4
+    usecase "Publicar evento" as UC4
     usecase "Ver publicación" as UC5
     usecase "Comentar" as UC6
     usecase "Editar evento" as UC7
-    usecase "Publicar evento" as UC8
-    usecase "Gestionar perfil" as UC9
-    usecase "Cerrar sesión" as UC10
-    usecase "Verificar publicación" as UC11
-    usecase "Consultar calendario" as UC12
+    usecase "Gestionar perfil" as UC8
+    usecase "Cerrar sesión" as UC9
+    usecase "Verificar publicación" as UC10
+    usecase "Consultar calendario" as UC11
 }
-admin -->UC11
-admin -->UC12
+admin -->UC10
+user -->UC11
+
 user-->UC8
-user-->UC9
 UC7 .u.>UC3 :<<extend>>
 UC4 .u.>UC3 :<<extend>>
 UC5 .u.>UC3 :<<extend>>
 UC6 .u.>UC5 :<<extend>>
-user-down->UC10
+user-down->UC9
 user-->UC1
 user-->UC2
 user-->UC3

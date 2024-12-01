@@ -1,5 +1,5 @@
 ## PROYECTO
-    Ingeniería del Software
+    BÚHO_SOCIAL
 
 ## INTEGRANTES
     29922041	DAYANNIS MARIA	COLMENARES MARQUINA
@@ -13,3 +13,6 @@
 
 ## DIAGRAMA DE ESTADO
     ![alt text](image-1.png)
+
+## MODELO DE CASOS DE USO
+    ![alt text](image-2.png)

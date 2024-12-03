@@ -1,0 +1,14 @@
+@startuml Diagrama de casos de uso del modelo de dominio
+state "Pensando iniciativa" as thinkingInit
+state "Organizando iniciativa" as organizing
+state "Promocionando iniciativa" as promote
+state c <<choice>>
+
+[*]-->thinkingInit:ocurre una idea
+thinkingInit-->organizing :planificar
+organizing-->c :¿Es aprobada por la coordinación de extensión?
+c-->organizing :no
+c-->promote :si
+promote-->[*]
+@enduml
+

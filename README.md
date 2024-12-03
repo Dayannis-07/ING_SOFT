@@ -12,7 +12,7 @@
     ![alt text](image.png)
 
 ## DIAGRAMA DE ESTADO
-    ![Diagrama de estado del modelo de dominio] (.\domainModel\stateDiagramIMG.svg)
+![Diagrama de estado del modelo de dominio](./domainModel/stateDiagramIMG.svg)
 
 ## MODELO DE CASOS DE USO
-    ![Diagrama de Casos de Uso](./docs/scenariosView/useCaseDiagramIMG.svg)
+![Diagrama de Casos de Uso](./docs/scenariosView/useCaseDiagramIMG.svg)

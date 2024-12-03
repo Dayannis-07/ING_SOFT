@@ -15,4 +15,4 @@
     ![Diagrama de estado del modelo de dominio] (.\domainModel\stateDiagramIMG.svg)
 
 ## MODELO DE CASOS DE USO
-    ![Diagrama de casos de uso](.\scenariosView\useCaseDiagramIMG.svg)
+    ![Diagrama de Casos de Uso](./docs/scenariosView/useCaseDiagramIMG.svg)

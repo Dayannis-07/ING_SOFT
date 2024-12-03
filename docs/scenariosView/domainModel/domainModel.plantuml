@@ -1,47 +1,62 @@
 @startuml Modelo de Dominio
 
-class Espacio_virtual{}
-class Publicacion{}
-class Usuario{}
+left to right direction
+
+class Campus{}
 class Estudiante{}
 class Profesor{}
-class Personal_Admin{}
+class "Personal de apoyo" as class1{}
 class Actividad{}
-class Propuesta{}
-class Evento{}
-class Taller{}
-class Grupo_Estudio{}
 class Seminario{}
+class Taller{}
+class Carrera{}
+class "Grupo de estudio" as class2{}
+class Club{}
 class Deporte{}
 class Cultura{}
-class Investigacion{}
+class Esparcimiento{}
+class "Temas de interes" as class3{}
+class Administrador{}
+class Técnico{}
+class Obrero{}
+class Evento{}
+class Información{}
 class Proyecto{}
 class Experiencia{}
+class Investigación{}
+class "Medios de difusión" as class4{}
 
-Publicacion "1..*" -l-o Espacio_virtual
-Usuario "1..*" -u-o Espacio_virtual
-Estudiante -u-|> Usuario
-Profesor -u-|> Usuario
-Personal_Admin -u-|> Usuario
-Usuario  --> "1..*" Publicacion: Crea 
-Personal_Admin --> "1.*" Publicacion: Aprueba 
-Actividad  -r-|> Publicacion
-Propuesta --|> Publicacion
-Evento --|> Publicacion
-Estudiante --> "1..*" Actividad: Organiza
-Profesor -r-> "1..*" Propuesta: Publica
-Personal_Admin --> "1..*" Evento: Agrega
+Estudiante --o Campus
+Profesor --o Campus
+class1 --o Campus
+Administrador --|> class1
+Obrero --|> class1
+Técnico --|> class1
+Estudiante --o Carrera
 
-Investigacion "0..*" -l-o Propuesta
-Proyecto "0..*" -u-o Propuesta
-Experiencia "0..*" -u-o Propuesta
+Seminario --|> Actividad
+Taller --|> Actividad
+Estudiante -[hidden]-> Actividad
+Estudiante -down-> "1..*" Actividad: Organiza
+Estudiante --> "1..*" class2: Crea
+Estudiante --> "1..*" Club: Forma
+Deporte --|> Club
+Cultura --|> Club
+Esparcimiento--|> Club
+class3 --o Club
+Administrador --> "1..*" Evento: Promueve
 
-Taller "0..*" -u-o Actividad
-Grupo_Estudio "0..*" -u-o Actividad
-Seminario "0..*" -r-o Actividad
-Deporte "0..*" --o Actividad
-Cultura "0..*" --o Actividad
+Profesor --> Información:Publica
+Proyecto --|> Información
+Experiencia --|> Información
+Investigación --|> Información
 
+Información --> class4
+Evento --> class4
+Actividad --> class4
+class2 --> class4
+Club --> class4
 
+hide members
 
 @enduml

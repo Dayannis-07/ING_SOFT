@@ -1,5 +1,5 @@
 ## PROYECTO
-    BÚHO_SOCIAL
+    BÚHO SOCIAL
 
 ## INTEGRANTES
     29922041	DAYANNIS MARIA	COLMENARES MARQUINA
@@ -9,7 +9,7 @@
     31708119	AMANDA MERCEDES 	MENDOZA HERNÁNDEZ 
 
 ## MODELO DE DOMINIO
-    ![alt text](image.png)
+![Modelo de dominio](./docs/scenariosView/domainModel/domainModel.svg)
 
 ## DIAGRAMA DE ESTADO
 ![Diagrama de estado del modelo de dominio](./docs/scenariosView/domainModel/stateDiagramIMG.svg)

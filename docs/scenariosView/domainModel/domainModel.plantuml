@@ -26,13 +26,13 @@ class Experiencia{}
 class Investigación{}
 class "Medios de difusión" as class4{}
 
-Estudiante --o Campus
-Profesor --o Campus
-class1 --o Campus
+Estudiante "1..*" --o Campus
+Profesor "1..*" --o Campus
+class1 "1..*" --o Campus
 Administrador --|> class1
 Obrero --|> class1
 Técnico --|> class1
-Estudiante --o Carrera
+Estudiante "1..*" --o Carrera
 
 Seminario --|> Actividad
 Taller --|> Actividad
@@ -51,11 +51,11 @@ Proyecto --|> Información
 Experiencia --|> Información
 Investigación --|> Información
 
-Información --> class4
-Evento --> class4
-Actividad --> class4
-class2 --> class4
-Club --> class4
+Información --> class4: Se comparte
+Evento --> class4: Se comparte
+Actividad --> class4: Se comparte
+class2 --> class4: Se comparte
+Club --> class4: Se comparte
 
 hide members
 

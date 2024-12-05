@@ -9,6 +9,10 @@ thinkingInit-->organizing :planificar
 organizing-->c :¿Es aprobada por la coordinación de extensión?
 c-->organizing :no
 c-->promote :si
+promote-->promote :redes sociales
+
+
+
 promote-->[*]
 @enduml
 

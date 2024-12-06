@@ -16,3 +16,15 @@
 
 ## MODELO DE CASOS DE USO
 ![Diagrama de Casos de Uso](./docs/scenariosView/useCaseDiagramIMG.svg)
+Ver Plantilla casos de uso
+
+## PROTOTIPO DE PANTALLAS
+![Iniciar Sesión](./docs/scenariosView/iniciarSesion.png)
+![Registrar Usuario](./docs/scenariosView/registrarUsuario.png)
+![Registro Fianlizado](./docs/scenariosView/registroFinalizado.png)
+![consultar Publicaciones](./docs/scenariosView/consultarPublicaciones.png)
+![Consultar Calendario](./docs/scenariosView/consultarCalendario.png)
+![Gestionar Usuario](./docs/scenariosView/gestionarUsuario.png)
+![Verificar Publicaciones](./docs/scenariosView/verificarPublicaciones.png)
+![Cerrar Sesión](./docs/scenariosView/cerrarSesion.png)
+![Crear Evento](./docs/scenariosView/crearEvento.png)

@@ -16,7 +16,7 @@
 
 ## MODELO DE CASOS DE USO
 ![Diagrama de Casos de Uso](./docs/scenariosView/useCaseDiagramIMG.svg)
-Ver Plantilla casos de uso
+![Plantillas de especificacion del diagrama de casos de uso](./docs/scenariosView/Plantilla%20casos%20de%20uso.pdf)
 
 ## PROTOTIPO DE PANTALLAS
 ![Iniciar Sesión](./docs/scenariosView/iniciarSesion.png)

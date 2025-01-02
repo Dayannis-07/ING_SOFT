@@ -1,0 +1,9 @@
+@startuml crear evento
+actor Usuario
+boundary "Crear publicación" as c
+Usuario--c 
+control "Validar publicación" as g
+c--g 
+entity "Publicación" as p
+g--p
+@enduml

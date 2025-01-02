@@ -1,0 +1,13 @@
+@startuml CollaborationDiagram-Gestionar Perfil
+
+:Usuario:
+boundary "Perfil del usuario"
+control "Actualizar información"
+entity "Información del usuario"
+
+Usuario -- "Perfil del usuario" : 1:verificar información/publicaciones
+"Perfil del usuario" -- "Actualizar información": 2:Modificar/Agregar
+"Actualizar información" -- "Información del usuario": 3:Guardar cambios
+
+
+@enduml

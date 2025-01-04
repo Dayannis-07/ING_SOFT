@@ -5,5 +5,5 @@ Usuario--c :1:solicitar crear una publicación
 control "Validar publicación" as g
 c--g :2:ingresar información
 entity "Publicación" as p
-g--p :3:mostrar
+g--p :3:guardar
 @enduml

@@ -1,0 +1,9 @@
+@startuml verificar publicaciones
+actor Personal_adminitsrativo
+boundary "Publicaciones por verificar" as m
+Personal_adminitsrativo--m 
+control "Gestor de publicaciones" as g
+m--g
+entity "Publicación" as p
+g--p
+@enduml

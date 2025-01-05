@@ -1,0 +1,12 @@
+@startuml Registrar Usuario
+
+    actor ":Usuario" as U
+    boundary ":Solicitud de datos" as SD
+    control ":Creador de usuario" as CU
+    entity ":Usuario" as UE
+
+    U -r- SD : "1:registrarse"
+    SD -r- CU : "2:validar"
+    CU -- UE : "3:guardar"
+
+@enduml

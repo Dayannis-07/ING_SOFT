@@ -1,0 +1,9 @@
+@startuml verificarPublicaciones
+actor Personal_administrativo as pm
+boundary "Publicaciones por verificar" as pv
+pm--pv :1:Ver publicación
+control "Gestor de publicaciones" as pg
+pv--pg :2:Aprobar/rechazar publicación
+entity Publicación as p
+pg--p :3:Borrar/subir publicación
+@enduml

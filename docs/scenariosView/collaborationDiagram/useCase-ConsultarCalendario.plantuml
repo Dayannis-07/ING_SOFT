@@ -1,0 +1,12 @@
+@startuml Consultar Calendario
+actor Usuario as U
+
+boundary VistaCalendario as V
+control GestorPublicaciones as C
+entity Publicación as E
+
+U -- V : "1: Consulta calendario"
+V -- C : "2: Pasa Parametros de filtros"
+C -- E : "2: Busca publicaciones"
+
+@enduml

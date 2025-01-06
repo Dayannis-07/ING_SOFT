@@ -1,0 +1,12 @@
+@startuml Cerrar Session
+actor Usuario as U
+
+boundary VistaCerrarSession as V
+control Autenticador as C
+entity Usuario as E
+
+U -- V
+V -- C
+C -- E
+
+@enduml

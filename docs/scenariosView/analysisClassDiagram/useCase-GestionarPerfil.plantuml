@@ -1,4 +1,4 @@
-@startuml AnalysisClassDiagram-Gestionar Perfil
+@startuml analysisClassDiagram-Gestionar Perfil
 
 :Usuario:
 boundary "Perfil del usuario"

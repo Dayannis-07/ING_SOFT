@@ -1,4 +1,4 @@
-@startuml CollaborationDiagram-Gestionar Perfil
+@startuml collaborationDiagram-Gestionar Perfil
 
 :Usuario:
 boundary "Perfil del usuario"

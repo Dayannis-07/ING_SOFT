@@ -1,0 +1,59 @@
+@startuml State diagram use cases
+state c1 <<choice>>
+state c2 <<choice>>
+state c3 <<choice>>
+state c4 <<choice>>
+state c5 <<choice>>
+state c6 <<choice>>
+state c7 <<choice>>
+state c8 <<choice>>
+state "Entrando al espacio virtual" as init
+state "Ingresando datos" as data
+state "Iniciando sesión" as inits
+state "Vizualizando publicaciones" as visualizep
+state "Añadiendo publicaciones" as addp 
+state "Consultando calendario" as consultc
+state "Actualizando calendario" as uptadec
+state "Consultando lista de publicaciones a verificar" as list
+state "Notificando al usuario" as notification
+state "Notificando sobre una publicación" as notip
+state "Terminando de revisar publicaciones" as finish
+state "Continuando navegación" as continue
+state "Ingresando información" as perfil
+state "Actualizando información" as safe
+
+
+[*] --> init: Iniciar espacio virtual
+init-->c1:¿Registrar?
+c1-->data :si
+c1-->inits :no
+data-->inits
+inits-->c2:¿Consultar publicaciones?
+c2-->visualizep :si
+c2--> addp :no
+visualizep-->c3:¿Comentar?
+c3-->notip :si
+c3-->continue :no
+notip-->c4:¿Eventos revisados?
+c4-->finish :si
+finish-->[*] :Cerrar sesión
+c4--> visualizep :no
+addp-->c5: ¿Verificar publicación?
+c5-->list :si
+c5-->consultc :no
+list-->c6:¿Aprobar?
+c6-->uptadec :si
+uptadec-->continue
+c6-->notification :no
+notification-->c2
+consultc-->c7:¿Agregar evento?
+c7-->uptadec :si
+c7--> visualizep :no
+continue-->c8: ¿Modificar perfil?
+c8-->perfil :si
+perfil--> safe
+safe-->c4
+c8-->visualizep :no
+
+
+@enduml

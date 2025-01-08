@@ -1,9 +1,9 @@
-@startuml packageDiagram
+@startuml packageDiagramDescription
 
 allowmixing
 
-package users <<Folder>> {
-    class Users{
+package user <<Folder>> {
+    class User{
         +name: String
         +last_Name: String
         +type: String
@@ -18,8 +18,8 @@ package users <<Folder>> {
     }
 }
 
-package publications <<Folder>> {
-    class Publications{
+package publication <<Folder>> {
+    class Publication{
         +title: String
         +image: attachment
         +description: String
@@ -27,7 +27,7 @@ package publications <<Folder>> {
         +edit()
         +consult()
     }
-    class Comments{
+    class Comment{
         +date: Date
         +hour: String
         +content: String
@@ -37,7 +37,7 @@ package publications <<Folder>> {
     }
 }
 
-package events <<Folder>> {
+package event <<Folder>> {
     class Calendar{
         +event_Activity: String
         +date: Date
@@ -49,7 +49,7 @@ package app <<Folder>> {
     class BuhoSocial{}
 }
 
-Profile --|> Users
-Comments --o Publications
+Profile --|> User
+Comment --o Publication
 
 @enduml

@@ -2,7 +2,7 @@
 
 class BuhoSocial{}
 
-class Users{
+class User{
     +name: String
     +last_Name: String
     +type: String
@@ -12,7 +12,7 @@ class Users{
     +register()
 }
 
-class Publications{
+class Publication{
     +title: String
     +image: attachment
     +description: String
@@ -26,7 +26,7 @@ class Profile{
     +add()
 }
 
-class Comments{
+class Comment{
     +date: Date
     +hour: String
     +content: String
@@ -41,11 +41,11 @@ class Calendar{
     +consult()
 }
 
-Publications --o BuhoSocial
-Users --o BuhoSocial
-Profile --|> Users
-Profile --> Publications: can see
-Comments --o Publications
-Publications --> Calendar: can consult
+Publication --o BuhoSocial
+User --o BuhoSocial
+Profile --|> User
+Profile --> Publication: can see
+Comment --o Publication
+Publication --> Calendar: can consult
 
 @enduml

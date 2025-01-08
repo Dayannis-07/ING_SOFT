@@ -1,0 +1,51 @@
+@startuml classDiagram
+
+class BuhoSocial{}
+
+class Users{
+    +name: String
+    +last_Name: String
+    +type: String
+    +email: String
+    +login()
+    +log_Out()
+    +register()
+}
+
+class Publications{
+    +title: String
+    +image: attachment
+    +description: String
+    +add()
+    +edit()
+    +consult()
+}
+
+class Profile{
+    +edit()
+    +add()
+}
+
+class Comments{
+    +date: Date
+    +hour: String
+    +content: String
+    +add()
+    +edit()
+    +delete()
+}
+
+class Calendar{
+    +event_Activity: String
+    +date: Date
+    +consult()
+}
+
+Publications --o BuhoSocial
+Users --o BuhoSocial
+Profile --|> Users
+Profile --> Publications: can see
+Comments --o Publications
+Publications --> Calendar: can consult
+
+@enduml

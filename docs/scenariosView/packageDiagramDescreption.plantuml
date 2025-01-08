@@ -1,0 +1,55 @@
+@startuml packageDiagram
+
+allowmixing
+
+package users <<Folder>> {
+    class Users{
+        +name: String
+        +last_Name: String
+        +type: String
+        +email: String
+        +login()
+        +log_Out()
+        +register()
+    }
+    class Profile{
+        +edit()
+        +add()
+    }
+}
+
+package publications <<Folder>> {
+    class Publications{
+        +title: String
+        +image: attachment
+        +description: String
+        +add()
+        +edit()
+        +consult()
+    }
+    class Comments{
+        +date: Date
+        +hour: String
+        +content: String
+        +add()
+        +edit()
+        +delete()
+    }
+}
+
+package events <<Folder>> {
+    class Calendar{
+        +event_Activity: String
+        +date: Date
+        +consult()
+    }
+}
+
+package app <<Folder>> {
+    class BuhoSocial{}
+}
+
+Profile --|> Users
+Comments --o Publications
+
+@enduml

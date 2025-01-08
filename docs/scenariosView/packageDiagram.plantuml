@@ -1,0 +1,16 @@
+@startuml packageDiagram
+
+package users{}
+
+package publications{}
+
+package events{}
+
+package app{}
+
+users ..> publications
+publications --o events
+app --o users
+app --o publications
+ 
+@enduml

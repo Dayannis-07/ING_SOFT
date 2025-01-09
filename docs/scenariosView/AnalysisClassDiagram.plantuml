@@ -1,5 +1,5 @@
-@startuml
-class user{
+@startuml Analysis Class Diagram
+class User{
  +name: String
     +last_Name: String
     +type: String
@@ -17,7 +17,7 @@ class profileView{
 }
 class ProfileManager{
 +editProfile()
-+delteProfile()
++deleteProfile()
 
 }
 class Calendar{
@@ -61,12 +61,12 @@ class logOutView{
 +requestLogOut()
 }
 
-user <|--Profile
-user-- registView
-user-- logOutView
+User <|--Profile
+User-- registView
+User-- logOutView
 logOutView-- userManager
 registView-- userManager
-user-- loginView
+User-- loginView
 loginView-- userManager
 Profile--profileView
 profileView--ProfileManager
@@ -78,5 +78,5 @@ postWallView--postManager
 createPostView--postManager
 postVerificationView--postManager
 calendarView--postManager
-user-->Post 
+User-->Post 
 @enduml

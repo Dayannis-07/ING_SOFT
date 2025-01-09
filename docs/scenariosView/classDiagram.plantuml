@@ -1,25 +1,29 @@
-@startuml
+@startuml classDiagram
 class user{
- +name: String
-    +last_Name: String
-    +type: String
-    +email: String
+  +name: String
+  +last_Name: String
+   +type: String
+   +email: String
 }
+
 class Post{
- +title: String
-    +image: attachment
-    +description: String
+  +title: String
+  +image: attachment
+  +description: String
 }
+
 class Profile{}
+
 class profileView{
-+showProfile()
-+requestData()
+  +showProfile()
+  +requestData()
 }
+
 class ProfileManager{
 +editProfile()
 +delteProfile()
-
 }
+
 class Calendar{
     +event_Activity: String
     +date: Date
@@ -43,22 +47,22 @@ class createPostView{
  +dataRequest()
 }
 class postManager{
-+searchPost()
-+showPost()
-+deletePost()
-+addPost()
+  +searchPost()
+  +showPost()
+  +deletePost()
+  +addPost()
 }
 class postVerificationView{
-+showPosts()
-+rejectPost()
-+approvePost()
+  +showPosts()
+  +rejectPost()
+  +approvePost()
 }
 class calendarView{
-+solicitarDatosBusqueda()
+  +solicitarDatosBusqueda()
 }
 
 class logOutView{
-+requestLogOut()
+  +requestLogOut()
 }
 
 user <|--Profile

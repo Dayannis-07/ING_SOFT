@@ -1,16 +1,12 @@
 @startuml packageDiagram
 
-package user{}
+package view{}
 
-package publication{}
+package controllers{}
 
-package event{}
+package models{}
 
-package app{}
-
-user ..> publication
-publication --o event
-app --o user
-app --o publication
+view ..> controllers
+controllers ..> models
  
 @enduml

@@ -2,19 +2,35 @@
 
 allowmixing
 
-package user <<Folder>> {
-    class User{
-        +name: String
-        +last_Name: String
-        +type: String
-        +email: String
-        +login()
-        +log_Out()
-        +register()
+package view <<Folder>> {
+    class postVerificationView{
+        +showPosts()
+        +rejectPost()
+        +approvePost()
     }
-    class Profile{
-        +edit()
-        +add()
+    class calendarView{
+        +solicitarDatosBusqueda()
+    }
+
+    class logOutView{
+        +requestLogOut()
+    }
+    class postWallView{
+        +showPosts()
+        +postViewingRequest()
+    }
+    class createPostView{
+        +dataRequest()
+    }
+    class loginView{
+        +dataRequest()
+    }
+    class registView{
+        +dataRequest()
+    }
+    class profileView{
+        +showProfile()
+        +requestData()
     }
 }
 

@@ -54,7 +54,7 @@ class postVerificationView{
 +approvePost()
 }
 class calendarView{
-+solicitarDatosBusqueda()
++requestSearhData()
 }
 
 class logOutView{

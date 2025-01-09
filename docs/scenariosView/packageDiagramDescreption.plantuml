@@ -34,38 +34,46 @@ package view <<Folder>> {
     }
 }
 
-package publication <<Folder>> {
-    class Publication{
+package controllers <<Folder>> {
+    class postManager{
+        +searchPost()
+        +showPost()
+        +deletePost()
+        +addPost()
+    }
+    class userManager{
+        +createUser()
+        +loginUser()
+        +nullify()
+    }
+    class ProfileManager{
+        +editProfile()
+        +delteProfile()
+    }
+}
+
+package models <<Folder>> {
+    class user{
+        +name: String
+        +last_Name: String
+        +type: String
+        +email: String
+    }
+    class Post{
         +title: String
         +image: attachment
         +description: String
-        +add()
-        +edit()
-        +consult()
     }
-    class Comment{
-        +date: Date
-        +hour: String
-        +content: String
-        +add()
-        +edit()
-        +delete()
+    class Profile{}
+    class profileView{
+        +showProfile()
+        +requestData()
     }
-}
-
-package event <<Folder>> {
     class Calendar{
         +event_Activity: String
         +date: Date
-        +consult()
     }
 }
 
-package app <<Folder>> {
-    class BuhoSocial{}
-}
-
-Profile --|> User
-Comment --o Publication
 
 @enduml

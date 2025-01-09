@@ -1,51 +1,82 @@
-@startuml classDiagram
-
-class BuhoSocial{}
-
-class User{
-    +name: String
+@startuml
+class user{
+ +name: String
     +last_Name: String
     +type: String
     +email: String
-    +login()
-    +log_Out()
-    +register()
 }
-
-class Publication{
-    +title: String
+class Post{
+ +title: String
     +image: attachment
     +description: String
-    +add()
-    +edit()
-    +consult()
 }
-
-class Profile{
-    +edit()
-    +add()
+class Profile{}
+class profileView{
++showProfile()
++requestData()
 }
+class ProfileManager{
++editProfile()
++delteProfile()
 
-class Comment{
-    +date: Date
-    +hour: String
-    +content: String
-    +add()
-    +edit()
-    +delete()
 }
-
 class Calendar{
     +event_Activity: String
     +date: Date
-    +consult()
+}
+class registView{
+   +dataRequest()
+}
+class userManager{
+     +createUser()
+     +loginUser()
+     +nullify()
+}
+class loginView{
++dataRequest()
+}
+class postWallView{
+  +showPosts()
+  +postViewingRequest()
+}
+class createPostView{
+ +dataRequest()
+}
+class postManager{
++searchPost()
++showPost()
++deletePost()
++addPost()
+}
+class postVerificationView{
++showPosts()
++rejectPost()
++approvePost()
+}
+class calendarView{
++solicitarDatosBusqueda()
 }
 
-Publication --o BuhoSocial
-User --o BuhoSocial
-Profile --|> User
-Profile --> Publication: can see
-Comment --o Publication
-Publication --> Calendar: can consult
+class logOutView{
++requestLogOut()
+}
 
+user <|--Profile
+user-- registView
+user-- logOutView
+logOutView-- userManager
+registView-- userManager
+user-- loginView
+loginView-- userManager
+Profile--profileView
+profileView--ProfileManager
+Post--postWallView
+Post-- postVerificationView
+Post-- createPostView
+Calendar--calendarView
+postWallView--postManager
+createPostView--postManager
+postVerificationView--postManager
+calendarView--postManager
+user-->Post 
 @enduml

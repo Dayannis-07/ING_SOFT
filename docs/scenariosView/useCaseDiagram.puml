@@ -23,6 +23,7 @@ admin--UC10
 user--UC1
 user--UC2
 user--UC3
+UC12 .u.>UC3 :extend
 user--UC4
 user--UC5
 user--UC6
@@ -30,7 +31,6 @@ user--UC7
 user--UC8
 user--UC9
 user--UC11
-user--UC12
 user <|-- admin
 userR--UC3
 userR--UC5

@@ -1,8 +1,9 @@
 @startuml Diagrama de casos de uso
-actor Personal_administrativo as admin
+actor "Personal administrativo" as admin
 actor Usuario as user
+actor "Usuario no registrado" as userR
 left to right direction
-user <|-- admin
+
 
 rectangle Búho_Social{
     usecase "Iniciar sesión" as UC1
@@ -16,18 +17,24 @@ rectangle Búho_Social{
     usecase "Cerrar sesión" as UC9
     usecase "Verificar publicación" as UC10
     usecase "Consultar calendario" as UC11
+    usecase "Buscar publicación" as UC12
 }
-admin -->UC10
-user -->UC11
-
-user-->UC8
-UC7 .u.>UC3 :<<extend>>
-UC4 .u.>UC3 :<<extend>>
-UC5 .u.>UC3 :<<extend>>
-UC6 .u.>UC5 :<<extend>>
-user-down->UC9
-user-->UC1
-user-->UC2
-user-->UC3
+admin--UC10
+user--UC1
+user--UC2
+user--UC3
+user--UC4
+user--UC5
+user--UC6
+user--UC7
+user--UC8
+user--UC9
+user--UC11
+user--UC12
+user <|-- admin
+userR--UC3
+userR--UC5
+userR--UC2
+userR--UC11
 
 @enduml

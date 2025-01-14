@@ -15,7 +15,7 @@
 ![Diagrama de estado del modelo de dominio](./docs/scenariosView/domainModel/stateDiagramIMG.svg)
 
 ## MODELO DE CASOS DE USO
-![Diagrama de Casos de Uso](./docs/scenariosView/img/useCaseDiagramIMG.svg)
+![Diagrama de Casos de Uso](./docs/scenariosView/img/useCaseDiagram.svg)
 ![Plantillas de especificacion del diagrama de casos de uso](./docs/scenariosView/Plantilla%20casos%20de%20uso.pdf)
 
 ## PROTOTIPO DE PANTALLAS

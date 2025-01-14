@@ -1,4 +1,4 @@
-@startuml Diagrama de casos de uso
+@startuml useCaseDiagram
 actor "Personal administrativo" as admin
 actor Usuario as user
 actor "Usuario no registrado" as userR

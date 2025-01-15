@@ -4,52 +4,33 @@ allowmixing
 
 package view <<Folder>> {
     class postVerificationView{
-        +showPosts()
         +rejectPost()
         +approvePost()
     }
     class calendarView{
-        +solicitarDatosBusqueda()
+        +requestSearchData()
     }
 
-    class logOutView{
-        +requestLogOut()
-    }
     class postWallView{
-        +showPosts()
         +postViewingRequest()
     }
     class createPostView{
         +dataRequest()
     }
-    class loginView{
-        +dataRequest()
-    }
-    class registView{
-        +dataRequest()
-    }
-    class profileView{
-        +showProfile()
-        +requestData()
+    class searchPostView{
+  +requestFilterParameter()
+  +requestSearchData()
     }
 }
+   
 
 package controllers <<Folder>> {
     class postManager{
-        +searchPost()
-        +showPost()
-        +deletePost()
-        +addPost()
-    }
-    class userManager{
-        +createUser()
-        +loginUser()
-        +nullify()
-    }
-    class ProfileManager{
-        +editProfile()
-        +delteProfile()
-    }
++filterPostByParameter()
++deletePost()
++addPost()
++ getLatestPost()
+}
 }
 
 package models <<Folder>> {
@@ -63,11 +44,7 @@ package models <<Folder>> {
         +title: String
         +image: attachment
         +description: String
-    }
-    class Profile{}
-    class profileView{
-        +showProfile()
-        +requestData()
+        + Author: String
     }
     class Calendar{
         +event_Activity: String

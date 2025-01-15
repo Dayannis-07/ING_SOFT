@@ -1,9 +1,10 @@
 @startuml consultar publicaciones
 actor Usuario
-boundary "Muro de publicaciones" as m
-Usuario--m :1:solicitar consultar publicaciones
-control "Gestor de muro de publicaciones" as g
-m--g :2:Ver una publicación
-entity "Publicación" as p
-g--p :3:mostrar
+boundary "Vista muro de publicaciones" as M
+Usuario--M :1: consultar publicaciones
+control "Gestor de publicaciones" as G
+M-r-G :2: solicitar últimas publicaciones subidas
+entity "Publicación" as P
+G--P :3: obtener últimas \n pulicaciones subidas
+P--M :4: Mostrar
 @enduml

@@ -1,9 +1,10 @@
 @startuml crear evento
 actor Usuario
-boundary "Crear publicación" as c
-Usuario--c :1:solicitar crear una publicación
-control "Validar publicación" as g
-c--g :2:ingresar información
+boundary "Vista crear publicación" as c
+Usuario--c :1: Crear publicación
+control "Gestor de publicaciones" as g
+c-r-g :2: Solicitar información
 entity "Publicación" as p
-g--p :3:guardar
+g--p :3: Crear
+p--c :4: Mostrar
 @enduml

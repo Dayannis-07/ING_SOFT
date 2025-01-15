@@ -1,12 +1,14 @@
 @startuml Consultar Calendario
 actor Usuario as U
 
-boundary VistaCalendario as V
-control GestorPublicaciones as C
-entity Publicación as E
+boundary "Vista calendario" as V
+control "Gestor de publicaciones" as G
+entity Publicación as P
+entity Calendario as C
 
-U -- V : "1: Consulta calendario"
-V -- C : "2: Pasa Parametros de filtros"
-C -- E : "2: Busca publicaciones"
-
+U -- V : "1: Consulta calendario" 
+V-r-C :"2: Mostrar"
+V -- G : "3: Pedir fecha"
+G -r- P : "4: Filtrar publicaciones por fecha"
+P--V :"5: Mostrar"
 @enduml

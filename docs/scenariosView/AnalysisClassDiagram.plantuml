@@ -9,66 +9,37 @@ class Post{
  +title: String
     +image: attachment
     +description: String
-}
-class Profile{}
-class profileView{
-+showProfile()
-+requestData()
-}
-class ProfileManager{
-+editProfile()
-+delteProfile()
+    + Author: String
+    + showPost()
 }
 class Calendar{
     +event_Activity: String
     +date: Date
 }
-class registView{
-   +dataRequest()
-}
-class userManager{
-     +createUser()
-     +loginUser()
-     +nullify()
-}
-class loginView{
-+dataRequest()
-}
 class postWallView{
-  +showPosts()
   +postViewingRequest()
 }
 class createPostView{
  +dataRequest()
 }
 class postManager{
-+searchPost()
-+showPost()
++filterPostByParameter()
 +deletePost()
 +addPost()
++ getLatestPost()
 }
 class postVerificationView{
-+showPosts()
 +rejectPost()
 +approvePost()
 }
 class calendarView{
 +requestSearchData()
 }
-
-class logOutView{
-+requestLogOut()
+class searchPostView{
+  +requestFilterParameter()
+  +requestSearchData()
 }
 
-user <|--Profile
-user-- registView
-user-- logOutView
-logOutView-- userManager
-registView-- userManager
-user-- loginView
-loginView-- userManager
-Profile--profileView
-profileView--ProfileManager
 Post--postWallView
 Post-- postVerificationView
 Post-- createPostView
@@ -77,5 +48,6 @@ postWallView--postManager
 createPostView--postManager
 postVerificationView--postManager
 calendarView--postManager
-user-->Post 
+searchPostView--postManager
+user-->Post
 @enduml

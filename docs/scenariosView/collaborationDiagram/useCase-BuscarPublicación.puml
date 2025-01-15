@@ -1,0 +1,12 @@
+@startuml Buscar publicación
+actor Usuario as U
+
+boundary "Vista Buscar publicación" as V
+control "Gestor de publicaciones" as G
+entity Publicación as P
+
+U -- V : "1: Buscar publicación" 
+V -r- G : "2: Pedir parámetro \n de filtro"
+G -- P : "3: Filtrar publicaciones \n por parámetro "
+P--V :"4: Mostrar publicaciones \n filtradas"
+@enduml

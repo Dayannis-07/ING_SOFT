@@ -1,59 +1,32 @@
 @startuml State diagram use cases
-state c1 <<choice>>
-state c2 <<choice>>
-state c3 <<choice>>
-state c4 <<choice>>
-state c5 <<choice>>
-state c6 <<choice>>
-state c7 <<choice>>
-state c8 <<choice>>
-state "Entrando al espacio virtual" as init
-state "Ingresando datos" as data
-state "Iniciando sesión" as inits
-state "Vizualizando publicaciones" as visualizep
-state "Añadiendo publicaciones" as addp 
-state "Consultando calendario" as consultc
-state "Actualizando calendario" as uptadec
-state "Consultando lista de publicaciones a verificar" as list
-state "Notificando al usuario" as notification
-state "Notificando sobre una publicación" as notip
-state "Terminando de revisar publicaciones" as finish
-state "Continuando navegación" as continue
-state "Ingresando información" as perfil
-state "Actualizando información" as safe
 
+state "Verificar publicación" as class1
+state "Iniciar sesión" as class2
+state "Publicar evento" as class3
+state "Comentar" as class4
+state "Editar evento" as class5
+state "Gestionar perfil" as class6
+state "Consultar publicaciones" as class7
+state "Buscar publicación" as class8
+state "Cerrar sesión" as class9
+state "Consultar calendario" as class10
+state "Ver publicación" as class11
+state "Registrar usuario" as class12
 
-[*] --> init: Iniciar espacio virtual
-init-->c1:¿Registrar?
-c1-->data :si
-c1-->inits :no
-data-->inits
-inits-->c2:¿Consultar publicaciones?
-c2-->visualizep :si
-c2--> addp :no
-visualizep-->c3:¿Comentar?
-c3-->notip :si
-c3-->continue :no
-notip-->c4:¿Eventos revisados?
-c4-->finish :si
-finish-->[*] :Cerrar sesión
-c4--> visualizep :no
-addp-->c5: ¿Verificar publicación?
-c5-->list :si
-c5-->consultc :no
-list-->c6:¿Aprobar?
-c6-->uptadec :si
-uptadec-->continue
-c6-->notification :no
-notification-->c2
-consultc-->c7:¿Agregar evento?
-c7-->uptadec :si
-c7--> visualizep :no
-continue-->c8: ¿Modificar perfil?
-c8-->perfil :si
-perfil--> safe
-safe-->c4
-c8-->visualizep :no
-
+[*] --> class7
+class7 --> class11
+class11 --> class12
+class11 --> class2
+class12 --> class2
+class2 --> class9
+class2 --> class6
+class2 --> class3
+class2 --> class7
+class7 --> class8
+class7 -r-> class4: [solo si el usuario inició sesión]
+class7 --> class5: [solo si el usuario inició sesión]
+class7 --> class1: [solo si el usuario inició sesión]
+class7 --> class10
+class9 --> [*]
 
 @enduml

@@ -6,5 +6,5 @@ control "Gestor de publicaciones" as G
 M-r-G :2: solicitar últimas publicaciones subidas
 entity "Publicación" as P
 G--P :3: obtener últimas \n pulicaciones subidas
-P--M :4: Mostrar
+
 @enduml

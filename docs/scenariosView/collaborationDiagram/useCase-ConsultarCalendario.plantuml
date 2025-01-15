@@ -10,5 +10,4 @@ U -- V : "1: Consulta calendario"
 V-r-C :"2: Mostrar"
 V -- G : "3: Pedir fecha"
 G -r- P : "4: Filtrar publicaciones por fecha"
-P--V :"5: Mostrar"
 @enduml

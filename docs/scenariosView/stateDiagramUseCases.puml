@@ -14,19 +14,19 @@ state "Ver publicación" as class11
 state "Registrar usuario" as class12
 
 [*] --> class7
-class7 --> class11
-class11 --> class12
-class11 --> class2
-class12 --> class2
-class2 --> class9
-class2 --> class6
-class2 --> class3
-class2 --> class7
-class7 --> class8
+class7 --> class11: Detallar evento
+class11 --> class12: Ingresar datos
+class11 --> class2: Ingresar datos
+class12 --> class2: Ingresar datos
+class2 --> class9: Salir
+class2 --> class6: Actualizar datos
+class2 --> class3: Subir imagen
+class2 --> class7: Detallar eventos
+class7 --> class8: Precisar evento
 class7 -r-> class4: [solo si el usuario inició sesión]
 class7 --> class5: [solo si el usuario inició sesión]
 class7 --> class1: [solo si el usuario inició sesión]
-class7 --> class10
+class7 --> class10: Conocer eventos
 class9 --> [*]
 
 @enduml

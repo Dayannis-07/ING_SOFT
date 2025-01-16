@@ -19,12 +19,8 @@
 ![Plantillas de especificacion del diagrama de casos de uso](./docs/scenariosView/Plantilla%20casos%20de%20uso.pdf)
 
 ## PROTOTIPO DE PANTALLAS
-![Iniciar Sesión](./docs/scenariosView/img/iniciarSesion.png)
-![Registrar Usuario](./docs/scenariosView/img/registrarUsuario.png)
-![Registro Fianlizado](./docs/scenariosView/img/registroFinalizado.png)
-![consultar Publicaciones](./docs/scenariosView/img/consultarPublicaciones.png)
-![Consultar Calendario](./docs/scenariosView/img/consultarCalendario.png)
-![Gestionar Usuario](./docs/scenariosView/img/gestionarUsuario.png)
+![Consultar Publicaciones](./docs/scenariosView/img/consultarPublicaciones.png)
+![Publicar Evento](./docs/scenariosView/img/publicarEvento.png)
 ![Verificar Publicaciones](./docs/scenariosView/img/verificarPublicaciones.png)
-![Cerrar Sesión](./docs/scenariosView/img/cerrarSesion.png)
-![Crear Evento](./docs/scenariosView/img/crearEvento.png)
+![Consultar Calendario](./docs/scenariosView/img/consultarCalendario.png)
+![Buscar Publicación](./docs/scenariosView/img/buscarPublicacion.png)

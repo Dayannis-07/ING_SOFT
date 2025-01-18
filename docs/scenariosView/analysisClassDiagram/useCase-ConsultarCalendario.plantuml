@@ -2,7 +2,7 @@
 actor User as User
 
 boundary "Calendar view" as view
-control "UC Consult calendar controller" as controller
+control "UC Calendar Controller" as controller
 entity Post as P
 User --> view
 view-r->controller 

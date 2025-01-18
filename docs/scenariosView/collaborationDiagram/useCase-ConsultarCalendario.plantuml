@@ -4,7 +4,7 @@ actor User as User
 boundary "Calendar view" as view
 control "UC Consult calendar controller" as controller
 entity Post as P
-User --> view : "1: Consult calendar" 
-view-r->controller : "2:"
-controller-->P 
+User --> view 
+view-r->controller : "2: Consultar Calendario"
+controller-->P : "2: Buscar Publicaciones por mes"
 @enduml

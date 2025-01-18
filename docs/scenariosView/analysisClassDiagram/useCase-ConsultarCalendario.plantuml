@@ -1,12 +1,10 @@
 @startuml Consultar Calendario
-actor Usuario
+actor User as User
 
-boundary "VistaCalendario" as V
-control "GestorPublicaciones" as C
-entity "Publicación" as E
-
-Usuario -- V
-V -- C
-C -- E
-
+boundary "Calendar view" as view
+control "UC Consult calendar controller" as controller
+entity Post as P
+User --> view
+view-r->controller 
+controller-->P 
 @enduml

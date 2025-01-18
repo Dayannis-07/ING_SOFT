@@ -10,7 +10,6 @@ class Post{
     +image: attachment
     +description: String
     + Author: String
-    + showPost()
 }
 class Calendar{
     +event_Activity: String
@@ -22,11 +21,18 @@ class postWallView{
 class createPostView{
  +dataRequest()
 }
-class postManager{
-+filterPostByParameter()
+class checkPostsController{
 +deletePost()
 +addPost()
+}
+class createPostController{
+  +setPost()
+}
+class consultPostsController{
 + getLatestPost()
+}
+class searchPostController{
++filterPostByParameter()
 }
 class postVerificationView{
 +rejectPost()
@@ -44,10 +50,9 @@ Post--postWallView
 Post-- postVerificationView
 Post-- createPostView
 Calendar--calendarView
-postWallView--postManager
-createPostView--postManager
-postVerificationView--postManager
-calendarView--postManager
-searchPostView--postManager
+postWallView--consultPostsController
+createPostView--createPostController
+postVerificationView--checkPostsController
+searchPostView--searchPostController
 user-->Post
 @enduml

@@ -5,7 +5,7 @@ boundary "Search Post view" as V
 control "UC search post controller" as G
 entity Post as P
 
-U -->V : "1: Search post" 
-V -r-> G : "2: Request filter \n parameter"
-G --> P : "3: Filter posts \n by parameter "
+U -- V
+V -r- G 
+G -- P 
 @enduml

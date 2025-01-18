@@ -1,9 +1,9 @@
 @startuml crear evento
-actor Usuario
-boundary "Vista crear publicación" as c
-Usuario--c :1: Crear publicación
-control "Gestor de publicaciones" as g
-c-r-g :2: Solicitar información
-entity "Publicación" as p
-g--p :3: Crear
+actor User
+boundary "Create post view" as view
+User-->view :1: Create post
+control "UC Create post controller" as controller
+view-r->controller :2: Request information
+entity "Post" as entity
+controller-->entity :3: Create
 @enduml

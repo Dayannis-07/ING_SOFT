@@ -21,20 +21,20 @@ class postWallView{
 class createPostView{
  +dataRequest()
 }
-class checkPostsController{
+class verifyPostController{
 +deletePost()
 +addPost()
 }
 class createPostController{
   +setPost()
 }
-class consultPostsController{
+class checkPostController{
 + getLatestPost()
 }
 class searchPostController{
 +filterPostByParameter()
 }
-class postVerificationView{
+class verifyPostView{
 +rejectPost()
 +approvePost()
 }
@@ -47,12 +47,12 @@ class searchPostView{
 }
 
 Post--postWallView
-Post-- postVerificationView
+Post-- verifyPostView
 Post-- createPostView
-Calendar--calendarView
-postWallView--consultPostsController
+Post-- searchPostView
+postWallView--checkPostController
 createPostView--createPostController
-postVerificationView--checkPostsController
+verifyPostView--verifyPostController
 searchPostView--searchPostController
 user-->Post
 @enduml

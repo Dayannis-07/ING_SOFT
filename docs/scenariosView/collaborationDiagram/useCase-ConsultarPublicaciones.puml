@@ -1,8 +1,8 @@
 @startuml consultar publicaciones
 actor User
-boundary "Wall Posts view" as view
-User-->view :1: Consult posts
-control "UC Consult Posts controller" as controller
+boundary "Posts view" as view
+User-->view :1: Check posts
+control "UC Check posts controller" as controller
 view-r->controller :2: request latest  \n uploaded posts
 entity "Post" as P
 controller-->P :3: get latest  \n uploaded posts

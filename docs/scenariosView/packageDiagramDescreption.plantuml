@@ -3,33 +3,42 @@
 allowmixing
 
 package view <<Folder>> {
-    class postVerificationView{
-        +rejectPost()
-        +approvePost()
-    }
-    class calendarView{
-        +requestSearchData()
-    }
-
-    class postWallView{
-        +postViewingRequest()
-    }
-    class createPostView{
-        +dataRequest()
-    }
     class searchPostView{
   +requestFilterParameter()
   +requestSearchData()
-    }
+}
+class verifyPostView{
++rejectPost()
++approvePost()
+}
+class calendarView{
++requestCheckCalendar()
+}
+class postsView{
+  +postViewingRequest()
+}
+class createPostView{
+ +dataRequest()
+}
 }
    
 
 package controllers <<Folder>> {
-    class postManager{
-+filterPostByParameter()
+ class checkCalendarController{
+  +searchPostByDate()
+}
+class verifyPostController{
 +deletePost()
 +addPost()
+}
+class createPostController{
+  +setPost()
+}
+class checkPostController{
 + getLatestPost()
+}
+class searchPostController{
++filterPostByParameter()
 }
 }
 
@@ -45,11 +54,8 @@ package models <<Folder>> {
         +image: attachment
         +description: String
         + Author: String
-    }
-    class Calendar{
-        +event_Activity: String
-        +date: Date
-    }
+    
+}
 }
 
 

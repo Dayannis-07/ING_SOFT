@@ -2,9 +2,9 @@
 actor User as User
 
 boundary "Calendar view" as view
-control "UC Consult calendar controller" as controller
+control "UC Check calendar controller" as controller
 entity Post as P
-User --> view 
-view-r->controller : "2: Consultar Calendario"
-controller-->P : "2: Buscar Publicaciones por mes"
+User --> view : "1: Check calendar"
+view-r->controller : "2: Request check calendar"
+controller-->P : "3: Search post by date"
 @enduml

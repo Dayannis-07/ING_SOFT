@@ -5,5 +5,5 @@ User-->view :1: Create post
 control "UC Create post controller" as controller
 view-r->controller :2: Request information
 entity "Post" as entity
-controller-->entity :3: Create
+controller-->entity :3: Set post
 @enduml

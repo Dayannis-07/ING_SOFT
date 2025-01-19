@@ -11,11 +11,7 @@ class Post{
     +description: String
     + Author: String
 }
-class Calendar{
-    +event_Activity: String
-    +date: Date
-}
-class postWallView{
+class postsView{
   +postViewingRequest()
 }
 class createPostView{
@@ -39,20 +35,25 @@ class verifyPostView{
 +approvePost()
 }
 class calendarView{
-+requestSearchData()
++requestCheckCalendar()
+}
+class checkCalendarController{
+  +searchPostByDate()
 }
 class searchPostView{
   +requestFilterParameter()
   +requestSearchData()
 }
 
-Post--postWallView
+Post--postsView
 Post-- verifyPostView
 Post-- createPostView
 Post-- searchPostView
-postWallView--checkPostController
+Post--calendarView
+postsView--checkPostController
 createPostView--createPostController
 verifyPostView--verifyPostController
 searchPostView--searchPostController
+calendarView--checkCalendarController
 user-->Post
 @enduml

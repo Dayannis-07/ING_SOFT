@@ -1,8 +1,8 @@
 @startuml verificarPublicaciones
 actor "Admin user" as Act
-boundary "Verify Post view" as view
+boundary "verifyPostView" as view
 Act--view
-control "UC verify post controller" as controller
+control "verifyPostController" as controller
 view-r-controller
 entity Post as entity
 controller--entity

@@ -1,9 +1,9 @@
 @startuml crear evento
 actor User
-boundary "Create post view" as view
-User-->view :1: Create post
-control "UC Create post controller" as controller
-view-r->controller :2: Request information
+boundary "createPostView" as view
+User-->view :1: setPost()
+control "createPostController" as controller
+view-r->controller :2: createPost()
 entity "Post" as entity
-controller-->entity :3: Set post
+controller-->entity :3: newPost()
 @enduml

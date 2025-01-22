@@ -1,8 +1,8 @@
 @startuml Consultar Calendario
 actor User as User
 
-boundary "Calendar view" as view
-control "UC Check calendar controller" as controller
+boundary "calendarView" as view
+control "consultCalendarController" as controller
 entity Post as P
 User --> view : "1: Check calendar"
 view-r->controller : "2: Request check calendar"

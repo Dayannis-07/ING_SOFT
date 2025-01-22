@@ -1,8 +1,8 @@
 @startuml consultar publicaciones
 actor User
-boundary "Posts view" as view
+boundary "PostsView" as view
 User--view 
-control "UC Check posts controller" as controller
+control "consultPostsController" as controller
 view-r-controller 
 entity "Post" as P
 controller--P 

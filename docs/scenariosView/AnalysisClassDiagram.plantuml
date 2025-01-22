@@ -9,51 +9,57 @@ class Post{
  +title: String
     +image: attachment
     +description: String
-    + Author: String
+    + author: String
+    + approve: bool
+    + getPost()
+    +newPost()
+    +setApprove()
+
+
 }
-class postsView{
-  +postViewingRequest()
-}
-class createPostView{
- +dataRequest()
-}
+
 class verifyPostController{
-+deletePost()
-+addPost()
++uploadPost()
 }
 class createPostController{
-  +setPost()
+  +createPost()
 }
-class checkPostController{
+class consultPostController{
 + getLatestPost()
 }
 class searchPostController{
-+filterPostByParameter()
++searchPost()
 }
-class verifyPostView{
-+rejectPost()
-+approvePost()
-}
-class calendarView{
-+requestCheckCalendar()
-}
-class checkCalendarController{
+class consultCalendarController{
   +searchPostByDate()
 }
+class verifyPostView{
++approveRejectPost()
+}
+class calendarView{
+}
+class postsView{
+  
+}
+class createPostView{
+ +setPost()
+}
 class searchPostView{
-  +requestFilterParameter()
-  +requestSearchData()
+  setFilterParameter()
 }
 
-Post--postsView
-Post-- verifyPostView
-Post-- createPostView
-Post-- searchPostView
-Post--calendarView
-postsView--checkPostController
+user--postsView
+user-- verifyPostView
+user-- createPostView
+user-- searchPostView
+postsView--consultPostController
 createPostView--createPostController
 verifyPostView--verifyPostController
 searchPostView--searchPostController
-calendarView--checkCalendarController
-user-->Post
+searchPostController--Post
+createPostController--Post
+verifyPostController--Post
+consultPostController--Post
+user--calendarView
+calendarView--consultCalendarController
 @enduml

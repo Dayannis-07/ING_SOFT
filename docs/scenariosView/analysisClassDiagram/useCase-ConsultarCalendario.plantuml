@@ -1,8 +1,8 @@
 @startuml Consultar Calendario
 actor User as User
 
-boundary "Calendar view" as view
-control "UC Calendar Controller" as controller
+boundary "CalendarView" as view
+control "calendarController" as controller
 entity Post as P
 User -- view
 view-r-controller 

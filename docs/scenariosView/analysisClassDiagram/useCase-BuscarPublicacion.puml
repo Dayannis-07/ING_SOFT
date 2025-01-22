@@ -1,8 +1,8 @@
 @startuml Buscar publicación
 actor User as U
 
-boundary "Search Post view" as V
-control "UC search post controller" as G
+boundary "searchPostView" as V
+control "searchPostController" as G
 entity Post as P
 
 U -- V

@@ -3,8 +3,8 @@ actor User as User
 
 boundary "CalendarView" as view
 control "calendarController" as controller
-entity Post as P
+entity Event as E
 User -- view
 view-r-controller 
-controller--P 
+controller--E
 @enduml

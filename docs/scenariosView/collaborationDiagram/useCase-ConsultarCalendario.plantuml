@@ -3,8 +3,8 @@ actor User as User
 
 boundary "calendarView" as view
 control "consultCalendarController" as controller
-entity Post as P
-User --> view : "1: Check calendar"
-view-r->controller : "2: Request check calendar"
-controller-->P : "3: Search post by date"
+entity Event as E
+User --> view
+view-r->controller : "1: GetCalendar"
+controller-->E : "3: GetEventsByMonth"
 @enduml

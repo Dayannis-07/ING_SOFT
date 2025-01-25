@@ -22,20 +22,20 @@ class SearchPostView{
    
 
 package controllers <<Folder>> {
-class VerifyPostView{
-+approveRejectPost()
+class VerifyPostController{
++uploadPost()
 }
-class CalendarView{
-  +getCalendar()
+class CreatePostController{
+  +createPost()
 }
-class PostsView{
-  +getLatestPost()
+class ConsultPostController{
++ getLatestUploadedPosts()
 }
-class CreatePostView{
- +setPost()
+class SearchPostController{
++searchPost()
 }
-class SearchPostView{
-  setFilterParameter()
+class ConsultCalendarController{
+  +getEventsByMonth()
 }
 }
 

@@ -6,6 +6,6 @@ control "searchPostController" as G
 entity Post as P
 
 U -->V : "1: setFilterParameter()" 
-V -r-> G : "2: searchPost(filter)"
+V -r-> G : "2: searchPost()"
 G --> P : "3: getPost() "
 @enduml

@@ -1,12 +1,12 @@
 @startuml packageDiagram
 
-package view{}
+package views{}
 
 package controllers{}
 
 package models{}
 
-view ..> controllers
+views ..> controllers
 controllers ..> models
  
 @enduml

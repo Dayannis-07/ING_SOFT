@@ -1,9 +1,9 @@
 @startuml consultar publicaciones
 actor User
 boundary "postsView" as view
-User-->view 
+User-->view : "getLatestPost()"
 control "consultPostsController" as controller
-view-r->controller :1: getLatestUploadedPosts()
+view-r->controller :2: getLatestUploadedPosts()
 entity "Post" as P
-controller-->P : 2: getPost()
+controller-->P : 3: getPost()
 @enduml

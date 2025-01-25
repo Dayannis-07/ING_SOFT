@@ -2,49 +2,45 @@
 
 allowmixing
 
-package view <<Folder>> {
-    class verifyPostView{
+package views <<Folder>> {
+    class VerifyPostView{
 +approveRejectPost()
 }
-class calendarView{
+class CalendarView{
+  +getCalendar()
 }
-class postsView{
-  
+class PostsView{
+  +getLatestPost()
 }
-class createPostView{
+class CreatePostView{
  +setPost()
 }
-class searchPostView{
+class SearchPostView{
   setFilterParameter()
 }
 }
    
 
 package controllers <<Folder>> {
- class verifyPostController{
-+uploadPost()
+class VerifyPostView{
++approveRejectPost()
 }
-class createPostController{
-  +createPost()
+class CalendarView{
+  +getCalendar()
 }
-class consultPostController{
-+ getLatestPost()
+class PostsView{
+  +getLatestPost()
 }
-class searchPostController{
-+searchPost()
+class CreatePostView{
+ +setPost()
 }
-class consultCalendarController{
-  +searchPostByDate()
+class SearchPostView{
+  setFilterParameter()
 }
 }
 
 package models <<Folder>> {
-    class user{
-        +name: String
-        +last_Name: String
-        +type: String
-        +email: String
-    }
+
     class Post{
         +title: String
         +image: attachment
@@ -52,6 +48,19 @@ package models <<Folder>> {
         +author: String
         +approve: bool
     
+}
+class Event{
+  +date: Date 
+  +time: Time
+  +getEvent()
+}
+Post<|--Event
+
+class User{
+ +name: String
+    +last_Name: String
+    +type: String
+    +email: String
 }
 }
 

@@ -4,7 +4,7 @@ actor User as User
 boundary "calendarView" as view
 control "consultCalendarController" as controller
 entity Event as E
-User --> view
-view-r->controller : "1: GetCalendar"
-controller-->E : "3: GetEventsByMonth"
+User --> view  : "1: getCalendar()"
+view-r->controller :"2: getEventsByMonth()"
+controller-->E :"3:getEvent()"
 @enduml

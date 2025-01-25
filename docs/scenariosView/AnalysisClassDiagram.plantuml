@@ -1,5 +1,5 @@
 @startuml classDiagram
-class user{
+class User{
  +name: String
     +last_Name: String
     +type: String
@@ -15,51 +15,58 @@ class Post{
     +newPost()
     +setApprove()
 
-
+}
+class Event{
+  +date: Date 
+  +time: Time
+  +getEvent()
 }
 
-class verifyPostController{
+class VerifyPostController{
 +uploadPost()
 }
-class createPostController{
+class CreatePostController{
   +createPost()
 }
-class consultPostController{
-+ getLatestPost()
+class ConsultPostController{
++ getLatestUploadedPosts()
 }
-class searchPostController{
+class SearchPostController{
 +searchPost()
 }
-class consultCalendarController{
-  +searchPostByDate()
+class ConsultCalendarController{
+  +getEventsByMonth()
 }
-class verifyPostView{
+class VerifyPostView{
 +approveRejectPost()
 }
-class calendarView{
+class CalendarView{
+  +getCalendar()
 }
-class postsView{
-  
+class PostsView{
+  +getLatestPost()
 }
-class createPostView{
+class CreatePostView{
  +setPost()
 }
-class searchPostView{
+class SearchPostView{
   setFilterParameter()
 }
 
-user--postsView
-user-- verifyPostView
-user-- createPostView
-user-- searchPostView
-postsView--consultPostController
-createPostView--createPostController
-verifyPostView--verifyPostController
-searchPostView--searchPostController
-searchPostController--Post
-createPostController--Post
-verifyPostController--Post
-consultPostController--Post
-user--calendarView
-calendarView--consultCalendarController
+User--PostsView
+User-- VerifyPostView
+User-- CreatePostView
+User-- SearchPostView
+PostsView..>ConsultPostController
+CreatePostView..>CreatePostController
+VerifyPostView..>VerifyPostController
+SearchPostView..>SearchPostController
+SearchPostController..>Post
+CreatePostController..>Post
+VerifyPostController..>Post
+ConsultPostController..>Post
+User--CalendarView
+CalendarView..>ConsultCalendarController
+Post<|--Event
+ConsultCalendarController..>Event
 @enduml

@@ -6,4 +6,5 @@ control "createPostController" as controller
 view-r->controller :2: createPost()
 entity "Post" as entity
 controller-->entity :3: newPost()
+
 @enduml

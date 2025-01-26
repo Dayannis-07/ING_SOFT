@@ -1,0 +1,14 @@
+@startuml "Sequence Diagram UC Create Post"
+actor User
+boundary createPostView
+control createPostController
+entity Post
+activate User
+activate createPostView
+User-->createPostView: setPost()
+activate createPostController
+createPostView-->createPostController:createPost()
+deactivate createPostView
+activate Post
+createPostController-->Post: newPost()
+@enduml

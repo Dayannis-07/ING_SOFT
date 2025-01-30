@@ -1,5 +1,5 @@
 @startuml classDiagram
-class user{
+class User{
  +name: String
     +last_Name: String
     +type: String
@@ -9,45 +9,64 @@ class Post{
  +title: String
     +image: attachment
     +description: String
-    + Author: String
-    + showPost()
+    + author: String
+    + approve: bool
+    + getPost()
+    +newPost()
+    +setApprove()
+
 }
-class Calendar{
-    +event_Activity: String
-    +date: Date
-}
-class postWallView{
-  +postViewingRequest()
-}
-class createPostView{
- +dataRequest()
-}
-class postManager{
-+filterPostByParameter()
-+deletePost()
-+addPost()
-+ getLatestPost()
-}
-class postVerificationView{
-+rejectPost()
-+approvePost()
-}
-class calendarView{
-+requestSearchData()
-}
-class searchPostView{
-  +requestFilterParameter()
-  +requestSearchData()
+class Event{
+  +date: Date 
+  +time: Time
+  +getEvent()
 }
 
-Post--postWallView
-Post-- postVerificationView
-Post-- createPostView
-Calendar--calendarView
-postWallView--postManager
-createPostView--postManager
-postVerificationView--postManager
-calendarView--postManager
-searchPostView--postManager
-user-->Post
+class VerifyPostController{
++uploadPost()
+}
+class CreatePostController{
+  +createPost()
+}
+class ConsultPostController{
++ getLatestUploadedPosts()
+}
+class SearchPostController{
++searchPost()
+}
+class ConsultCalendarController{
+  +getEventsByMonth()
+}
+class VerifyPostView{
++approveRejectPost()
+}
+class CalendarView{
+  +getCalendar()
+}
+class PostsView{
+  +getLatestPost()
+}
+class CreatePostView{
+ +setPost()
+}
+class SearchPostView{
+  setFilterParameter()
+}
+
+User--PostsView
+User-- VerifyPostView
+User-- CreatePostView
+User-- SearchPostView
+PostsView..>ConsultPostController
+CreatePostView..>CreatePostController
+VerifyPostView..>VerifyPostController
+SearchPostView..>SearchPostController
+SearchPostController..>Post
+CreatePostController..>Post
+VerifyPostController..>Post
+ConsultPostController..>Post
+User--CalendarView
+CalendarView..>ConsultCalendarController
+Post<|--Event
+ConsultCalendarController..>Event
 @enduml

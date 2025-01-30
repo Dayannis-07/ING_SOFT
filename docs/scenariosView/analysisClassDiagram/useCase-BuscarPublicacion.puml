@@ -5,7 +5,7 @@ boundary "searchPostView" as V
 control "searchPostController" as G
 entity Post as P
 
-U -->V : "1: setFilterParameter()" 
-V -r-> G : "2: searchPost()"
-G --> P : "3: getPost() "
+U -- V
+V -r- G 
+G -- P 
 @enduml

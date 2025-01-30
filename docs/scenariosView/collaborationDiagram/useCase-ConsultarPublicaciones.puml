@@ -1,10 +1,9 @@
 @startuml consultar publicaciones
-actor Usuario
-boundary "Vista muro de publicaciones" as M
-Usuario--M :1: consultar publicaciones
-control "Gestor de publicaciones" as G
-M-r-G :2: solicitar últimas publicaciones subidas
-entity "Publicación" as P
-G--P :3: obtener últimas \n pulicaciones subidas
-
+actor User
+boundary "postsView" as view
+User-->view : 1:getLatestPost()
+control "consultPostsController" as controller
+view-r->controller :2: getLatestUploadedPosts()
+entity "Post" as P
+controller-->P : 3: getPost()
 @enduml

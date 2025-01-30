@@ -2,54 +2,66 @@
 
 allowmixing
 
-package view <<Folder>> {
-    class postVerificationView{
-        +rejectPost()
-        +approvePost()
-    }
-    class calendarView{
-        +requestSearchData()
-    }
-
-    class postWallView{
-        +postViewingRequest()
-    }
-    class createPostView{
-        +dataRequest()
-    }
-    class searchPostView{
-  +requestFilterParameter()
-  +requestSearchData()
-    }
+package views <<Folder>> {
+    class VerifyPostView{
++approveRejectPost()
+}
+class CalendarView{
+  +getCalendar()
+}
+class PostsView{
+  +getLatestPost()
+}
+class CreatePostView{
+ +setPost()
+}
+class SearchPostView{
+  setFilterParameter()
+}
 }
    
 
 package controllers <<Folder>> {
-    class postManager{
-+filterPostByParameter()
-+deletePost()
-+addPost()
-+ getLatestPost()
+class VerifyPostController{
++uploadPost()
+}
+class CreatePostController{
+  +createPost()
+}
+class ConsultPostController{
++ getLatestUploadedPosts()
+}
+class SearchPostController{
++searchPost()
+}
+class ConsultCalendarController{
+  +getEventsByMonth()
 }
 }
 
 package models <<Folder>> {
-    class user{
-        +name: String
-        +last_Name: String
-        +type: String
-        +email: String
-    }
+
     class Post{
         +title: String
         +image: attachment
         +description: String
-        + Author: String
-    }
-    class Calendar{
-        +event_Activity: String
-        +date: Date
-    }
+        +author: String
+        +approve: bool
+    
+}
+class Event{
+  +date: Date 
+  +time: Time
+  +getEvent()
+}
+Post<|--Event
+
+class User{
+ +name: String
+    +last_Name: String
+    +type: String
+    +email: String
+}
 }
 
 

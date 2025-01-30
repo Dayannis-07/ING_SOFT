@@ -29,7 +29,7 @@ class Form <<JPanel>> {
 
 class CreatePostController{
     +createPost():void
-    +putOnVerifableList():void
+    +putOnVerifiableList():void
 }
 class Post{
     +title: String

@@ -5,10 +5,12 @@ control createPostController
 entity Post
 activate User
 activate createPostView
-User-->createPostView: setPost()
+User->createPostView: setPost()
+createPostView->createPostView:fieldCheck()
 activate createPostController
-createPostView-->createPostController:createPost()
+createPostView->createPostController:createPost()
 deactivate createPostView
 activate Post
 createPostController-->Post: newPost()
+Post->createPostController:putOnVerifableList()
 @enduml

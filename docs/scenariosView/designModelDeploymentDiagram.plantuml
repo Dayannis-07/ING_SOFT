@@ -27,7 +27,6 @@ class Form <<JPanel>> {
 class CreatePostController{
     +createPost():void
     +putOnVerifableList():void
-    +finishPostCreation():void
 }
 class Post{
     +title: String

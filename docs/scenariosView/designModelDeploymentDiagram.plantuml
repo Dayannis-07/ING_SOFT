@@ -1,0 +1,104 @@
+@startuml DesignModelDiagramCreatePostView
+
+class CreatePostView <<JFrame>> {
+    -header: JPanel
+    -form: JPanel
+}
+
+class Header <<JPanel>> {
+    -notification: JLabel
+    -calendar: JLabel
+    -profile: JLabel
+    -logOut: JLabel
+    -logo: JLabel
+    -bar: JLabel
+}
+
+class Form <<JPanel>> {
+    -title: JLabel
+    -place: JLabel
+    -date: JLabel
+    -description: JLabel
+    -uploadFile: JButton
+    -send: JButton
+}
+
+class Notification <<JLabel>> {
+    +addMouseListener():void
+}
+
+class Calendar <<JLabel>> {
+    +addMouseListener():void
+}
+
+class Profile <<JLabel>> {
+    +addMouseListener():void
+}
+
+class LogOut <<JLabel>> {
+    +addMouseListener():void
+}
+
+class Logo <<JLabel>> {
+    +addMouseListener():void
+}
+
+class Bar <<JLabel>> {}
+
+class Title <<JLabel>> {
+    -contentTitle: JTextField
+}
+
+class Place <<JLabel>> {
+    -contentPlace: JTextField
+}
+
+class Date <<JLabel>> {
+    -contentDate: JTextField
+}
+
+class Description <<JLabel>> {
+    -contentDescription: JTextArea
+    -scroll: JScrollPane
+}
+
+class UploadFile <<JLabel>> {
+    -file: JButton
+    -selectedFile: JLabel
+    +addActionListener():void
+}
+
+class Send <<JButton>> {
+    +addActionListener():void
+}
+
+class File <<JButton>>{
+    +addActionListener():void
+}
+
+hide <<JFrame>> circle
+hide <<JPanel>> circle
+hide <<JLabel>> circle
+hide <<JTextField>> circle
+hide <<JTextArea>> circle
+hide <<JButton>> circle
+
+CreatePostView -- Header
+CreatePostView -- Form
+Header -- Notification
+Header -- Calendar
+Header -- Profile
+Header -- LogOut
+Header -- Logo
+Header -- Bar
+
+Form -- Title
+Form -- Place
+Form -- Date
+Form -- Description
+Form -- UploadFile
+Form -- Send
+
+UploadFile -- File
+
+@enduml

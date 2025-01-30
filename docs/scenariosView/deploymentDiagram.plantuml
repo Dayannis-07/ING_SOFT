@@ -1,0 +1,8 @@
+@startuml DeploymentDiagram
+
+node BuhoSocial
+node BuhoSocial.jar
+
+BuhoSocial *--> BuhoSocial.jar
+
+@enduml

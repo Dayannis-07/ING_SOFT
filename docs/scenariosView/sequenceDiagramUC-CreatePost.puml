@@ -12,5 +12,5 @@ createPostView->createPostController:createPost()
 deactivate createPostView
 activate Post
 createPostController->Post: newPost()
-Post-->createPostController:putOnVerifiableList()
+Post->createPostController:putOnVerifiableList()
 @enduml

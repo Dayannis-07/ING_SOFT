@@ -1,0 +1,54 @@
+@startuml Trace diagram 
+allow_mixing
+package View <<folder>>{
+class CreatePostView <<JFrame>>{}
+class Header <<JPanel>>{}
+class Form <<JPanel>>{}
+class Notification <<JLabel>>{}
+class Calendar <<JLabel>>{}
+class Profile <<JLabel>>{}
+class LogOut <<JLabel>>{}
+class Logo <<JLabel>>{}
+class Bar <<JLabel>> {}
+class Title <<JLabel>>{}
+class Place <<JLabel>>{}
+class Date <<JLabel>>{}
+class Description <<JLabel>>{}
+class UploadFile <<JLabel>>{}
+class Send <<JButton>>{}
+class File <<JButton>>{}
+CreatePostView -- Header
+CreatePostView -- Form
+Header -- Notification
+Header -- Calendar
+Header -- Profile
+Header -- LogOut
+Header -- Logo
+Header -- Bar
+
+Form -- Title
+Form -- Place
+Form -- Date
+Form -- Description
+Form -- UploadFile
+Form -- Send
+
+UploadFile -- File
+hide members
+hide circle
+
+}
+boundary "CreatePostView" as view
+entity "Post" as post_entity
+control "createPostController" as controller
+view-r-controller
+controller-r-post_entity
+class createPostController{}
+class Post{}
+hide circle
+hide members
+CreatePostView.->view:<trace>
+createPostController.->controller:<trace>
+Post.-> post_entity:<trace>
+
+@enduml

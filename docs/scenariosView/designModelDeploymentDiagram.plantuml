@@ -1,3 +1,4 @@
+
 @startuml DesignModelDiagramCreatePostView
 
 class CreatePostView <<JFrame>> {
@@ -21,6 +22,22 @@ class Form <<JPanel>> {
     -description: JLabel
     -uploadFile: JButton
     -send: JButton
+}
+
+class CreatePostController{
+    +createPost():void
+    +putOnVerifableList():void
+    +finishPostCreation():void
+}
+class Post{
+    +title: String
+    +image: attachment
+    +description: String
+    + author: String
+    + approve: bool
+    - getPost()
+    -newPost()
+    -setApprove()
 }
 
 class Notification <<JLabel>> {
@@ -82,6 +99,8 @@ hide <<JLabel>> circle
 hide <<JTextField>> circle
 hide <<JTextArea>> circle
 hide <<JButton>> circle
+hide Post circle
+hide CreatePostController circle
 
 CreatePostView -- Header
 CreatePostView -- Form
@@ -100,5 +119,9 @@ Form -- UploadFile
 Form -- Send
 
 UploadFile -- File
+
+CreatePostView -- CreatePostController
+CreatePostController -- Post
+
 
 @enduml

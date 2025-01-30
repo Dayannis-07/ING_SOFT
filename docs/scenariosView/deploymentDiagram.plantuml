@@ -1,8 +1,8 @@
 @startuml DeploymentDiagram
 
-node BuhoSocial
+node PersonalComputer
 node BuhoSocial.jar
 
-BuhoSocial *--> BuhoSocial.jar
+PersonalComputer *--> BuhoSocial.jar
 
 @enduml

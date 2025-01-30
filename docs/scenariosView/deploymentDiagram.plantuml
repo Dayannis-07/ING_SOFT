@@ -1,7 +1,7 @@
 @startuml DeploymentDiagram
 
 node PersonalComputer
-node BuhoSocial.jar
+component BuhoSocial.jar
 
 PersonalComputer *--> BuhoSocial.jar
 

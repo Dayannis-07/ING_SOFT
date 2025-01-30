@@ -4,6 +4,8 @@
 class CreatePostView <<JFrame>> {
     -header: JPanel
     -form: JPanel
+    +setPost():void
+    +checkFields():bool
 }
 
 class Header <<JPanel>> {
@@ -22,6 +24,7 @@ class Form <<JPanel>> {
     -description: JLabel
     -uploadFile: JButton
     -send: JButton
+
 }
 
 class CreatePostController{

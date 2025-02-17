@@ -1,0 +1,315 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
+import utils.Palette;
+import utils.Size;
+
+public class createEvent {
+    private JFrame frame;
+    private JPanel topPanel;
+    private JPanel panelIconos;
+    private JPanel panelIcon;
+    private JPanel panel;
+    private JPanel panelGris;
+    private JPanel leftPanel;
+    private JPanel rightPanel;
+    private JPanel bottomPanel;
+
+    public createEvent() {
+        createFrame();
+        createTopPanel();
+        createMainPanel();
+        createBottomPanel();
+        assembleFrame();
+    }
+
+    private void createFrame() {
+        frame = new JFrame("Publicar Evento");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(Size.FRAME_SIZE); 
+        frame.setLayout(new BorderLayout());
+    }
+
+    private void createTopPanel() {
+        topPanel = new JPanel(new BorderLayout());
+        topPanel.setBackground(Palette.instance().getWhite());
+        topPanel.setBorder(BorderFactory.createLineBorder(Palette.instance().getLightGray(), 1, true));
+        topPanel.setPreferredSize(Size.TOP_PANEL_SIZE); 
+
+        panelIconos = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        panelIconos.setBackground(Palette.instance().getWhite());
+        panelIconos.setPreferredSize(Size.PANEL_ICONOS_SIZE); 
+
+        panelIcon = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        panelIcon.setBackground(Palette.instance().getWhite());
+        panelIcon.setPreferredSize(Size.PANEL_ICON_SIZE); 
+
+        addIconsToTopPanel();
+        topPanel.add(panelIconos, BorderLayout.EAST);
+        topPanel.add(panelIcon, BorderLayout.WEST);
+    }
+
+    private void addIconsToTopPanel() {
+        ImageIcon iconNotificationImg = new ImageIcon("notification_icon2.png");
+        ImageIcon iconCalendarImg = new ImageIcon("calendar_icon.png");
+        ImageIcon iconHomepageImg = new ImageIcon("home_icon2.png");
+        ImageIcon iconProfileImg = new ImageIcon("profile_icon2.png");
+        ImageIcon iconLogOutImg = new ImageIcon("logout_icon2.png");
+        ImageIcon iconBHImg = new ImageIcon("bh_icon.jpeg");
+
+        Image imgNotification = iconNotificationImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+        Image imgCalendar = iconCalendarImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+        Image imgHomepage = iconHomepageImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+        Image imgProfile = iconProfileImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+        Image imgLogOut = iconLogOutImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+        Image imgBH = iconBHImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+
+        JLabel iconNotification = new JLabel(new ImageIcon(imgNotification));
+        JLabel iconCalendar = new JLabel(new ImageIcon(imgCalendar));
+        JLabel iconHomepage = new JLabel(new ImageIcon(imgHomepage));
+        JLabel iconProfile = new JLabel(new ImageIcon(imgProfile));
+        JLabel iconLogOut = new JLabel(new ImageIcon(imgLogOut));
+        JLabel iconBH = new JLabel(new ImageIcon(imgBH));
+
+        panelIconos.add(iconNotification);
+        panelIconos.add(iconCalendar);
+        panelIconos.add(iconHomepage);
+        panelIconos.add(iconProfile);
+        panelIconos.add(iconLogOut);
+        panelIcon.add(iconBH);
+
+        addIconListeners(iconNotification, iconCalendar, iconHomepage, iconProfile, iconLogOut);
+    }
+
+    private void addIconListeners(JLabel iconNotification, JLabel iconCalendar, JLabel iconHomepage, JLabel iconProfile, JLabel iconLogOut) {
+        iconNotification.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JOptionPane.showMessageDialog(frame, "Redirigiendo a Notificaciones...");
+            }
+        });
+
+        iconCalendar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JOptionPane.showMessageDialog(frame, "Redirigiendo al Calendario...");
+            }
+        });
+
+        iconHomepage.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JOptionPane.showMessageDialog(frame, "Redirigiendo a la Página Principal...");
+            }
+        });
+
+        iconProfile.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JOptionPane.showMessageDialog(frame, "Redirigiendo al Perfil...");
+            }
+        });
+
+        iconLogOut.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int confirm = JOptionPane.showConfirmDialog(frame,
+                    "¿Seguro que deseas cerrar sesión?",
+                    "Cerrar Sesión",
+                    JOptionPane.YES_NO_OPTION
+                );
+                if (confirm == JOptionPane.YES_OPTION) {
+                    frame.dispose();
+                }
+            }
+        });
+    }
+
+    private void createMainPanel() {
+        panel = new JPanel(new GridBagLayout());
+        panel.setBorder(BorderFactory.createLineBorder(Palette.instance().getBeige(), 2, true));
+        panel.setBackground(Palette.instance().getWhite());
+
+        createGrayPanel();
+        panel.add(panelGris, new GridBagConstraints());
+    }
+
+    private void createGrayPanel() {
+        panelGris = new JPanel(new GridBagLayout());
+        panelGris.setBackground(Palette.instance().getLightGray());
+        panelGris.setBorder(BorderFactory.createLineBorder(Palette.instance().getDarkGray(), 1, true));
+        panelGris.setPreferredSize(Size.PANEL_GRIS_SIZE); 
+
+        addCreateEventLabel();
+        createLeftPanel();
+
+        GridBagConstraints gbcLeft = new GridBagConstraints();
+        gbcLeft.gridx = 0;
+        gbcLeft.gridy = 1;
+        gbcLeft.anchor = GridBagConstraints.NORTHWEST;
+        gbcLeft.insets = new Insets(10, 20, 10, 10); 
+        panelGris.add(leftPanel, gbcLeft);
+
+        createRightPanel();
+        GridBagConstraints gbcRight = new GridBagConstraints();
+        gbcRight.gridx = 1;
+        gbcRight.gridy = 1;
+        gbcRight.anchor = GridBagConstraints.NORTHWEST;
+        gbcRight.insets = new Insets(10, 10, 10, 20); 
+        panelGris.add(rightPanel, gbcRight);
+
+        addSubmitButton();
+    }
+
+    private void addCreateEventLabel() {
+        JLabel lblCreateEvent = new JLabel("Crear evento");
+        lblCreateEvent.setFont(new Font("Arial", Font.BOLD, 20));
+        lblCreateEvent.setForeground(Palette.instance().getGray());
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2; 
+        gbc.anchor = GridBagConstraints.NORTHWEST;
+        gbc.insets = new Insets(20, 20, 20, 20); 
+        panelGris.add(lblCreateEvent, gbc);
+    }
+
+    private void createLeftPanel() {
+        leftPanel = new JPanel(new GridBagLayout());
+        leftPanel.setBackground(Palette.instance().getLightGray());
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); 
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        JLabel lblEventTitle = new JLabel("Título del evento:");
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        leftPanel.add(lblEventTitle, gbc);
+
+        JTextField txtEventTitle = new JTextField(20);
+        txtEventTitle.setBorder(BorderFactory.createLineBorder(Palette.instance().getDarkGray(), 1, true));
+        gbc.gridy = 1;
+        leftPanel.add(txtEventTitle, gbc);
+
+        JLabel lblPlace = new JLabel("Lugar:");
+        gbc.gridy = 2;
+        leftPanel.add(lblPlace, gbc);
+
+        JTextField txtPlace = new JTextField(20);
+        txtPlace.setBorder(BorderFactory.createLineBorder(Palette.instance().getDarkGray(), 1, true));
+        gbc.gridy = 3;
+        leftPanel.add(txtPlace, gbc);
+
+        JLabel lblFile = new JLabel("Subir archivo:");
+        gbc.gridy = 4;
+        leftPanel.add(lblFile, gbc);
+
+        JButton btnFile = new JButton("Elegir archivo");
+        btnFile.setBorder(BorderFactory.createLineBorder(Palette.instance().getDarkGray(), 1, true));
+        gbc.gridy = 5;
+        leftPanel.add(btnFile, gbc);
+
+        JLabel selectedFile = new JLabel("Ningún archivo seleccionado");
+        gbc.gridy = 6;
+        leftPanel.add(selectedFile, gbc);
+
+        btnFile.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                int selection = fileChooser.showOpenDialog(null);
+
+                if (selection == JFileChooser.APPROVE_OPTION) {
+                    String filePath = fileChooser.getSelectedFile().getAbsolutePath();
+                    selectedFile.setText(filePath);
+                } else {
+                    selectedFile.setText("No se seleccionó ningún archivo.");
+                }
+            }
+        });
+    }
+
+    private void createRightPanel() {
+        rightPanel = new JPanel(new GridBagLayout());
+        rightPanel.setBackground(Palette.instance().getLightGray());
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); 
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        JLabel lblDate = new JLabel("Fecha:");
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        rightPanel.add(lblDate, gbc);
+
+        JTextField txtDate = new JTextField(15);
+        txtDate.setBorder(BorderFactory.createLineBorder(Palette.instance().getDarkGray(), 1, true));
+        gbc.gridy = 1;
+        rightPanel.add(txtDate, gbc);
+
+        JLabel lblDescription = new JLabel("Descripción:");
+        gbc.gridy = 2;
+        rightPanel.add(lblDescription, gbc);
+
+        JTextArea txtDescription = new JTextArea(7, 20);
+        txtDescription.setLineWrap(true);
+        txtDescription.setWrapStyleWord(true);
+        JScrollPane scrollDescription = new JScrollPane(txtDescription);
+        scrollDescription.setBorder(BorderFactory.createLineBorder(Palette.instance().getDarkGray(), 1, true));
+        gbc.gridy = 3;
+        rightPanel.add(scrollDescription, gbc);
+    }
+
+    private void addSubmitButton() {
+        JButton btnSubmit = new JButton("Enviar") {
+            @Override
+            protected void paintComponent(Graphics g) {
+                if (!isOpaque()) {
+                    Graphics2D g2 = (Graphics2D) g.create();
+                    g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                    g2.setColor(Palette.instance().getLightGreen());
+                    g2.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
+                    g2.dispose();
+                }
+                super.paintComponent(g);
+            }
+        };
+
+        btnSubmit.setPreferredSize(Size.BUTTON_SIZE); 
+        btnSubmit.setForeground(Palette.instance().getDarkGreen());
+        btnSubmit.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+        btnSubmit.setContentAreaFilled(false);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.insets = new Insets(20, 0, 20, 0); 
+        panelGris.add(btnSubmit, gbc);
+    }
+
+    private void createBottomPanel() {
+        bottomPanel = new JPanel();
+        bottomPanel.setBackground(Palette.instance().getBeige());
+        bottomPanel.setPreferredSize(Size.BOTTOM_PANEL_SIZE); 
+    }
+
+    private void assembleFrame() {
+        frame.add(topPanel, BorderLayout.NORTH);
+        frame.add(panel, BorderLayout.CENTER);
+        frame.add(bottomPanel, BorderLayout.SOUTH);
+        frame.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new createEvent();
+    }
+}

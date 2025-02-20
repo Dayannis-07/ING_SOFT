@@ -23,6 +23,9 @@ public class Size {
     // Tamaño del panelGris en register
     public static final Dimension PANEL_GRIS_REGISTER_SIZE = new Dimension(300, 500);
 
+    // Tamaño del panelGris en userProfile
+    public static final Dimension PANEL_GRIS_USERPROFILE_SIZE = new Dimension(650, 120);
+
     // Tamaño del panelGris en logIN
     public static final Dimension PANEL_GRIS_LOGIN_SIZE = new Dimension(300, 450);
 

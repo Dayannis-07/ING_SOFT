@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.table.JTableHeader;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,8 +18,14 @@ public class userProfile {
     private JPanel panelGris;
     private JPanel panelBlue;
     private JPanel panelCenter;
+    private JPanel panelNotification;
     private JPanel bottomPanel;
+    private JPanel notificationsContainer;
+    private JScrollPane scrollPane;
     private JLabel userImageProfile;
+    private JPanel header;
+    private JPanel footer;
+    private JPanel space;
 
     public userProfile() {
         createFrame();
@@ -109,8 +117,9 @@ public class userProfile {
         createGrayPanel();
         createCircleImage();
         infoPersonUser();
-        createPanelBlue();
+        
         createPanelCenter();
+        createPanelBlue();
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -121,18 +130,18 @@ public class userProfile {
         gbc.gridy = 1;
         panel.add(userImageProfile, gbc);
         panel.add(panelGris, gbc);
-
+        
         gbc.gridy = 2; 
         panel.add(panelBlue, gbc);
-
         panel.add(panelCenter, gbc);
+        
     }
 
     private void createGrayPanel() {
         panelGris = new JPanel(new GridBagLayout());
         panelGris.setBackground(Palette.instance().getLightGray());
         panelGris.setBorder(BorderFactory.createLineBorder(Palette.instance().getDarkGray(), 1, true));
-        panelGris.setPreferredSize(Size.PANEL_GRIS_USERPROFILE_SIZE); 
+        panelGris.setPreferredSize(Size.GRAY_PANEL_USERPROFILE_SIZE); 
         panel.setLayout(new FlowLayout(FlowLayout.RIGHT, 15, 20)); 
 
     }
@@ -142,16 +151,6 @@ public class userProfile {
         Image userImageCircle = userImage.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         userImageProfile = new JLabel(new ImageIcon(userImageCircle)); 
 
-    }
-
-    private void createPanelBlue() {
-        panelCenter = new JPanel();
-        panelCenter.setBackground(Palette.instance().getLightGray());
-        panelCenter.setPreferredSize(new Dimension(535, 390)); 
-        panelCenter.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
-        panelCenter.setLayout(new FlowLayout(FlowLayout.LEFT, 15, 20)); 
-        panelCenter.setBackground(Palette.instance().getBlue());
-        panelCenter.setBorder(BorderFactory.createLineBorder(Palette.instance().getDarkGray(), 1, true));
     }
 
     private void notifications(){
@@ -260,7 +259,7 @@ public class userProfile {
         panelGris.add(lblInfoPerson, gbc);
     }
 
-    private void createPanelCenter() {
+    private void createPanelBlue() {
         panelBlue = new JPanel();
         panelBlue.setBackground(Palette.instance().getLightGray());
         panelBlue.setPreferredSize(new Dimension(200, 390)); 
@@ -277,11 +276,169 @@ public class userProfile {
         information();
     }
 
+
+    private void createPanelCenter() {
+        panelCenter = new JPanel(new GridBagLayout());
+        panelCenter.setPreferredSize(new Dimension(535, 390)); 
+        panelCenter.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        panelCenter.setLayout(new FlowLayout(FlowLayout.LEFT, 7, 6)); 
+        panelCenter.setBackground(Palette.instance().getWhite());
+        panelCenter.setBorder(BorderFactory.createLineBorder(Palette.instance().getDarkGray(), 1, true));
+        //panelCenter.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+
+        createPanelNotification();
+        scrollPaneNotification();
+        createSpaceScroll();
+ 
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.anchor = GridBagConstraints.WEST; 
+
+        gbc.gridy = 1;
+        panelCenter.add(scrollPane, gbc);
+    } 
+
+    private void createHeader(){
+        header = new JPanel();
+        header.setPreferredSize(new Dimension(500,40));
+        header.setBackground(Palette.instance().getOtherLightGray());
+        header.setBorder(BorderFactory.createLineBorder(Palette.instance().getOtherLightGray(), 1, true));
+        header.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5)); 
+
+        ImageIcon iconViewMoreImg = new ImageIcon("viewMore.png");
+
+        Image imgViewMore = iconViewMoreImg.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+
+        JLabel iconViewMore = new JLabel(new ImageIcon(imgViewMore));
+
+        header.add(iconViewMore, BorderLayout.NORTH);
+
+        addIconListenersHeader(iconViewMore);
+    }
+
+    private void addIconListenersHeader(JLabel iconViewMore) {
+        iconViewMore.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JOptionPane.showMessageDialog(frame, "Ver detalles...");
+            }
+        });
+    }
+
+
+    private void createFooter(){
+        footer = new JPanel();
+        footer.setPreferredSize(new Dimension(500,40));
+        footer.setBackground(Palette.instance().getOtherLightGray());
+        footer.setBorder(BorderFactory.createLineBorder(Palette.instance().getOtherLightGray(), 1, true));
+        footer.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5)); 
+
+        ImageIcon iconLikeImg = new ImageIcon("like.png");
+        ImageIcon iconComentImg = new ImageIcon("coment.png");
+
+        Image imgLike = iconLikeImg.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+        Image imgComent = iconComentImg.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+
+        JLabel iconLike = new JLabel(new ImageIcon(imgLike));
+        JLabel iconComent = new JLabel(new ImageIcon(imgComent));
+
+        footer.add(iconLike);
+        footer.add(iconComent);
+
+        addIconListenersFooter(iconLike, iconComent);
+    }
+
+    private void addIconListenersFooter(JLabel iconLike, JLabel iconComent) {
+        iconLike.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JOptionPane.showMessageDialog(frame, "le diste 'Me gusta' a la publicación...");
+            }
+        });
+        iconComent.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JOptionPane.showMessageDialog(frame, "Abrir ventana de comentario...");
+            }
+        });
+    }
+
+    private JPanel createPanelNotification(){
+        panelNotification = new JPanel(new BorderLayout());
+        panelNotification.setBackground(Palette.instance().getLightGray());
+        panelNotification.setPreferredSize(new Dimension(500, 370)); 
+        panelNotification.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        panelNotification.setBackground(Palette.instance().getWhite());
+        panelNotification.setBorder(BorderFactory.createLineBorder(Palette.instance().getDarkGray(), 1, true));
+        panelNotification.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+
+        createHeader();
+        createFooter();
+
+        panelNotification.add(header, BorderLayout.NORTH);
+        panelNotification.add(footer, BorderLayout.SOUTH);
+
+        return panelNotification;
+    }
+
+    private JPanel createSpaceScroll(){
+        space = new JPanel();
+        space.setPreferredSize(new Dimension(500,5));
+        space.setBackground(Palette.instance().getWhite());
+        space.setBorder(BorderFactory.createLineBorder(Palette.instance().getWhite(), 1, true));
+
+        return space;
+    }
+
+    private void scrollPaneNotification(){
+        // Panel contenedor de notificaciones con BoxLayout
+        notificationsContainer = new JPanel();
+        notificationsContainer.setLayout(new BoxLayout(notificationsContainer, BoxLayout.Y_AXIS));
+        notificationsContainer.setBackground(Color.BLUE);
+
+        // Agregar 5 instancias de panelNotification
+        for (int i = 0; i < 5; i++) {
+            JPanel notification = createPanelNotification();
+            JPanel spaceBetweenNotification = createSpaceScroll();
+            notificationsContainer.add(notification);
+            notificationsContainer.add(spaceBetweenNotification);
+        }
+
+        // Agregar el contenedor dentro de un JScrollPane
+        scrollPane = new JScrollPane(notificationsContainer);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setPreferredSize(new Dimension(520, 375));
+    }
+
+    
     private void createBottomPanel() {
         bottomPanel = new JPanel();
         bottomPanel.setBackground(Palette.instance().getBeige());
         bottomPanel.setPreferredSize(Size.BOTTOM_PANEL_SIZE); 
+
+        ImageIcon iconAddImg = new ImageIcon("add_icon.png");
+
+        Image imgAdd = iconAddImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+
+        JLabel iconAdd = new JLabel(new ImageIcon(imgAdd));
+
+        bottomPanel.add(iconAdd);
+
+        addIconListenersBottomPanel(iconAdd);
     }
+
+    private void addIconListenersBottomPanel(JLabel iconAdd) {
+        iconAdd.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JOptionPane.showMessageDialog(frame, "Agregar evento...");
+            }
+        });
+    }
+
 
     private void assembleFrame() {
         frame.add(topPanel, BorderLayout.NORTH);

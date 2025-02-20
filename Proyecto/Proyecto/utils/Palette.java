@@ -13,6 +13,7 @@ public class Palette {
     private final Color darkGreen;
     private final Color transparentBeige;
     private final Color blue;
+    private final Color otherLightGray;
 
     private Palette() {
         white = new Color(255, 255, 255); // Blanco
@@ -24,6 +25,7 @@ public class Palette {
         darkGreen = new Color(29, 140, 31); // Verde oscuro
         lightGreen = new Color(171, 227, 79, 200); // Verde claro con transparencia
         blue = new Color(98, 133, 170, 200); 
+        otherLightGray = new Color(166, 166, 166);
     }
 
     /**
@@ -74,5 +76,9 @@ public class Palette {
 
     public Color getBlue() {
         return blue;
+   }
+
+   public Color getOtherLightGray(){
+    return otherLightGray;
    }
 }

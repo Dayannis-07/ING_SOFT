@@ -18,22 +18,23 @@ public class Size {
     public static final Dimension PANEL_SIZE = new Dimension(600, 400);
 
     // Tamaño del panelGris
-    public static final Dimension PANEL_GRIS_SIZE = new Dimension(600, 400);
+    public static final Dimension GRAY_PANEL_SIZE = new Dimension(600, 400);
 
     // Tamaño del panelGris en register
-    public static final Dimension PANEL_GRIS_REGISTER_SIZE = new Dimension(300, 500);
-
-    // Tamaño del panelGris en userProfile
-    public static final Dimension PANEL_GRIS_USERPROFILE_SIZE = new Dimension(650, 120);
+    public static final Dimension GRAY_PANEL_REGISTER_SIZE = new Dimension(300, 500);
 
     // Tamaño del panelGris en logIN
-    public static final Dimension PANEL_GRIS_LOGIN_SIZE = new Dimension(300, 450);
+    public static final Dimension GRAY_PANEL_LOGIN_SIZE = new Dimension(300, 450);
+
+
+    // Tamaño del panelGris en userProfile
+    public static final Dimension GRAY_PANEL_USERPROFILE_SIZE = new Dimension(650, 120);
 
     // Tamaño del leftPanel
-    public static final Dimension LEFT_PANEL_SIZE = new Dimension(250, PANEL_GRIS_SIZE.height);
+    public static final Dimension LEFT_PANEL_SIZE = new Dimension(250, GRAY_PANEL_SIZE.height);
 
     // Tamaño del rightPanel
-    public static final Dimension RIGHT_PANEL_SIZE = new Dimension(250, PANEL_GRIS_SIZE.height);
+    public static final Dimension RIGHT_PANEL_SIZE = new Dimension(250, GRAY_PANEL_SIZE.height);
 
     // Tamaño del bottomPanel
     public static final Dimension BOTTOM_PANEL_SIZE = new Dimension(FRAME_SIZE.width, 45);

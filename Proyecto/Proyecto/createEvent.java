@@ -13,7 +13,7 @@ public class createEvent {
     private JPanel panelIconos;
     private JPanel panelIcon;
     private JPanel panel;
-    private JPanel panelGris;
+    private JPanel grayPanel;
     private JPanel leftPanel;
     private JPanel rightPanel;
     private JPanel bottomPanel;
@@ -134,14 +134,14 @@ public class createEvent {
         panel.setBackground(Palette.instance().getWhite());
 
         createGrayPanel();
-        panel.add(panelGris, new GridBagConstraints());
+        panel.add(grayPanel, new GridBagConstraints());
     }
 
     private void createGrayPanel() {
-        panelGris = new JPanel(new GridBagLayout());
-        panelGris.setBackground(Palette.instance().getLightGray());
-        panelGris.setBorder(BorderFactory.createLineBorder(Palette.instance().getDarkGray(), 1, true));
-        panelGris.setPreferredSize(Size.PANEL_GRIS_SIZE); 
+        grayPanel = new JPanel(new GridBagLayout());
+        grayPanel.setBackground(Palette.instance().getLightGray());
+        grayPanel.setBorder(BorderFactory.createLineBorder(Palette.instance().getDarkGray(), 1, true));
+        grayPanel.setPreferredSize(Size.GRAY_PANEL_SIZE); 
 
         addCreateEventLabel();
         createLeftPanel();
@@ -151,7 +151,7 @@ public class createEvent {
         gbcLeft.gridy = 1;
         gbcLeft.anchor = GridBagConstraints.NORTHWEST;
         gbcLeft.insets = new Insets(10, 20, 10, 10); 
-        panelGris.add(leftPanel, gbcLeft);
+        grayPanel.add(leftPanel, gbcLeft);
 
         createRightPanel();
         GridBagConstraints gbcRight = new GridBagConstraints();
@@ -159,7 +159,7 @@ public class createEvent {
         gbcRight.gridy = 1;
         gbcRight.anchor = GridBagConstraints.NORTHWEST;
         gbcRight.insets = new Insets(10, 10, 10, 20); 
-        panelGris.add(rightPanel, gbcRight);
+        grayPanel.add(rightPanel, gbcRight);
 
         addSubmitButton();
     }
@@ -175,7 +175,7 @@ public class createEvent {
         gbc.gridwidth = 2; 
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.insets = new Insets(20, 20, 20, 20); 
-        panelGris.add(lblCreateEvent, gbc);
+        grayPanel.add(lblCreateEvent, gbc);
     }
 
     private void createLeftPanel() {
@@ -293,7 +293,7 @@ public class createEvent {
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.insets = new Insets(20, 0, 20, 0); 
-        panelGris.add(btnSubmit, gbc);
+        grayPanel.add(btnSubmit, gbc);
     }
 
     private void createBottomPanel() {

@@ -6,6 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import utils.Palette;
 import utils.Size;
+import controllers.logInController;
 
 public class logIn {
     private JFrame frame;
@@ -13,8 +14,11 @@ public class logIn {
     private JPanel panelIconos;
     private JPanel panelIcon;
     private JPanel panel;
-    private JPanel panelGris;
+    private JPanel grayPanel;
     private JPanel bottomPanel;
+
+    private JTextField txtEmail;
+    private JPasswordField txtPassword;
 
     public logIn() {
         createFrame();
@@ -104,14 +108,14 @@ public class logIn {
         panel.setPreferredSize(Size.PANEL_SIZE); 
 
         createGrayPanel();
-        panel.add(panelGris, new GridBagConstraints());
+        panel.add(grayPanel, new GridBagConstraints());
     }
 
     private void createGrayPanel() {
-        panelGris = new JPanel(new GridBagLayout());
-        panelGris.setBackground(Palette.instance().getLightGray());
-        panelGris.setBorder(BorderFactory.createLineBorder(Palette.instance().getDarkGray(), 1, true));
-        panelGris.setPreferredSize(Size.PANEL_GRIS_LOGIN_SIZE); 
+        grayPanel = new JPanel(new GridBagLayout());
+        grayPanel.setBackground(Palette.instance().getLightGray());
+        grayPanel.setBorder(BorderFactory.createLineBorder(Palette.instance().getDarkGray(), 1, true));
+        grayPanel.setPreferredSize(Size.GRAY_PANEL_LOGIN_SIZE); 
 
         addLoginTitle();
         addEmailField();
@@ -132,12 +136,12 @@ public class logIn {
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.insets = new Insets(10, 0, 20, 0);
 
-        panelGris.add(lblLoginTitle, gbc);
+        grayPanel.add(lblLoginTitle, gbc);
     }
 
     private void addEmailField() {
         JLabel lblEmail = new JLabel("Correo electrónico:");
-        JTextField txtEmail = new JTextField(20);
+        txtEmail = new JTextField(20);
         txtEmail.setBorder(BorderFactory.createLineBorder(Palette.instance().getDarkGray(), 1, true));
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -147,15 +151,15 @@ public class logIn {
         gbc.insets = new Insets(5, 10, 7, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        panelGris.add(lblEmail, gbc);
+        grayPanel.add(lblEmail, gbc);
 
         gbc.gridy = 2;
-        panelGris.add(txtEmail, gbc);
+        grayPanel.add(txtEmail, gbc);
     }
 
     private void addPasswordField() {
         JLabel lblPassword = new JLabel("Contraseña:");
-        JPasswordField txtPassword = new JPasswordField(20);
+        txtPassword = new JPasswordField(20);
         txtPassword.setBorder(BorderFactory.createLineBorder(Palette.instance().getDarkGray(), 1, true));
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -165,10 +169,10 @@ public class logIn {
         gbc.insets = new Insets(5, 10, 7, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        panelGris.add(lblPassword, gbc);
+        grayPanel.add(lblPassword, gbc);
 
         gbc.gridy = 4;
-        panelGris.add(txtPassword, gbc);
+        grayPanel.add(txtPassword, gbc);
     }
 
     private void addLoginButton() {
@@ -192,27 +196,26 @@ public class logIn {
 
         btnLogin.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                String email = ((JTextField) panelGris.getComponent(2)).getText();
-                String password = new String(((JPasswordField) panelGris.getComponent(4)).getPassword());
-
-                if (email.isEmpty() || password.isEmpty()) {
-                    JOptionPane.showMessageDialog(frame, "Por favor, complete todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(frame, "Inicio de sesión exitoso.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                public void actionPerformed(ActionEvent e) {
+                    String email = txtEmail.getText();
+                    String password = new String(txtPassword.getPassword());
+            
+                    String message = logInController.validateCredentials(email, password);
+                    JOptionPane.showMessageDialog(frame, message, message.startsWith("Inicio") ? "Éxito" : "Error",
+                            message.startsWith("Inicio") ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.ERROR_MESSAGE);
                 }
             }
-        });
+        );
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 5;
+        gbc.gridy = 9;
         gbc.gridwidth = 2;
         gbc.insets = new Insets(20, 60, 0, 60);
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.CENTER;
 
-        panelGris.add(btnLogin, gbc);
+        grayPanel.add(btnLogin, gbc);
     }
 
     private void addRegisterButton() {
@@ -243,13 +246,13 @@ public class logIn {
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 6;
+        gbc.gridy = 10;
         gbc.gridwidth = 2;
         gbc.insets = new Insets(20, 60, 0, 60);
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.CENTER;
 
-        panelGris.add(btnRegister, gbc);
+        grayPanel.add(btnRegister, gbc);
     }
 
     private void createBottomPanel() {

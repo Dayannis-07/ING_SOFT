@@ -6,6 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import utils.Palette;
 import utils.Size;
+import controllers.signInController;
 
 public class signIn {
     private JFrame frame;
@@ -13,8 +14,13 @@ public class signIn {
     private JPanel panelIconos;
     private JPanel panelIcon;
     private JPanel panel;
-    private JPanel panelGris;
+    private JPanel grayPanel;
     private JPanel bottomPanel;
+
+    private JTextField txtEmail;
+    private JPasswordField txtPassword;
+    private JPasswordField txtConfirmPassword;
+    private JComboBox <String> comboUserType;
 
     public signIn() {
         createFrame();
@@ -104,14 +110,14 @@ public class signIn {
         panel.setPreferredSize(Size.PANEL_SIZE);
 
         createGrayPanel();
-        panel.add(panelGris, new GridBagConstraints());
+        panel.add(grayPanel, new GridBagConstraints());
     }
 
     private void createGrayPanel() {
-        panelGris = new JPanel(new GridBagLayout());
-        panelGris.setBackground(Palette.instance().getLightGray());
-        panelGris.setBorder(BorderFactory.createLineBorder(Palette.instance().getDarkGray(), 1, true));
-        panelGris.setPreferredSize(Size.PANEL_GRIS_REGISTER_SIZE); 
+        grayPanel = new JPanel(new GridBagLayout());
+        grayPanel.setBackground(Palette.instance().getLightGray());
+        grayPanel.setBorder(BorderFactory.createLineBorder(Palette.instance().getDarkGray(), 1, true));
+        grayPanel.setPreferredSize(Size.GRAY_PANEL_REGISTER_SIZE); 
 
         addRegisterTitle();
         addEmailField();
@@ -132,12 +138,12 @@ public class signIn {
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.insets = new Insets(10, 0, 20, 0);
 
-        panelGris.add(lblRegisterTitle, gbc);
+        grayPanel.add(lblRegisterTitle, gbc);
     }
 
     private void addEmailField() {
         JLabel lblEmail = new JLabel("Correo Electrónico:");
-        JTextField txtEmail = new JTextField(20);
+        txtEmail = new JTextField(20);
         txtEmail.setBorder(BorderFactory.createLineBorder(Palette.instance().getDarkGray(), 1, true));
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -147,19 +153,19 @@ public class signIn {
         gbc.insets = new Insets(5, 10, 7, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        panelGris.add(lblEmail, gbc);
+        grayPanel.add(lblEmail, gbc);
 
         gbc.gridy = 2;
-        panelGris.add(txtEmail, gbc);
+        grayPanel.add(txtEmail, gbc);
     }
 
     private void addPasswordFields() {
         JLabel lblPassword = new JLabel("Contraseña:");
-        JPasswordField txtPassword = new JPasswordField(20);
+        txtPassword = new JPasswordField(20);
         txtPassword.setBorder(BorderFactory.createLineBorder(Palette.instance().getDarkGray(), 1, true));
 
         JLabel lblConfirmPassword = new JLabel("Confirmar Contraseña:");
-        JPasswordField txtConfirmPassword = new JPasswordField(20);
+        txtConfirmPassword = new JPasswordField(20);
         txtConfirmPassword.setBorder(BorderFactory.createLineBorder(Palette.instance().getDarkGray(), 1, true));
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -169,22 +175,22 @@ public class signIn {
         gbc.insets = new Insets(5, 10, 7, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        panelGris.add(lblPassword, gbc);
+        grayPanel.add(lblPassword, gbc);
 
         gbc.gridy = 4;
-        panelGris.add(txtPassword, gbc);
+        grayPanel.add(txtPassword, gbc);
 
         gbc.gridy = 5;
-        panelGris.add(lblConfirmPassword, gbc);
+        grayPanel.add(lblConfirmPassword, gbc);
 
         gbc.gridy = 6;
-        panelGris.add(txtConfirmPassword, gbc);
+        grayPanel.add(txtConfirmPassword, gbc);
     }
 
     private void addUserTypeDropdown() {
         JLabel lblUserType = new JLabel("Tipo de Usuario:");
         String[] userTypes = {"Profesor", "Estudiante", "Personal Administrativo", "Personal Obrero"};
-        JComboBox<String> comboUserType = new JComboBox<>(userTypes);
+        comboUserType = new JComboBox<>(userTypes);
         comboUserType.setBackground(Palette.instance().getWhite());
         comboUserType.setBorder(BorderFactory.createLineBorder(Palette.instance().getLightGray(), 1, true));
 
@@ -195,10 +201,10 @@ public class signIn {
         gbc.insets = new Insets(5, 10, 7, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        panelGris.add(lblUserType, gbc);
+        grayPanel.add(lblUserType, gbc);
 
         gbc.gridy = 8;
-        panelGris.add(comboUserType, gbc);
+        grayPanel.add(comboUserType, gbc);
     }
 
     private void addRegisterButton() {
@@ -223,8 +229,15 @@ public class signIn {
         btnRegister.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Lógica de validación y registro
-                JOptionPane.showMessageDialog(frame, "Registro exitoso.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                String email = txtEmail.getText();
+                String password = new String(txtPassword.getPassword());
+                String confirmPassword = new String(txtConfirmPassword.getPassword());
+                String userType = (String) comboUserType.getSelectedItem();
+        
+                String message = signInController.registerUser(email, password, confirmPassword, userType);
+                JOptionPane.showMessageDialog(frame, message, 
+                        message.equals("Registro exitoso.") ? "Éxito" : "Error",
+                        message.equals("Registro exitoso.") ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.ERROR_MESSAGE);
             }
         });
 
@@ -236,7 +249,7 @@ public class signIn {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.CENTER;
 
-        panelGris.add(btnRegister, gbc);
+        grayPanel.add(btnRegister, gbc);
     }
 
     private void createBottomPanel() {

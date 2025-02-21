@@ -62,10 +62,10 @@ public class userProfile {
     }
 
     private void addIconsToTopPanel() {
-        ImageIcon iconCalendarImg = new ImageIcon("calendar_icon.png");
-        ImageIcon iconHomepageImg = new ImageIcon("home_icon2.png");
-        ImageIcon iconProfileImg = new ImageIcon("profile_icon2.png");
-        ImageIcon iconBHImg = new ImageIcon("bh_icon.jpeg");
+        ImageIcon iconCalendarImg = new ImageIcon("Proyecto/Proyecto/calendar_icon.png");
+        ImageIcon iconHomepageImg = new ImageIcon("Proyecto/Proyecto/home_icon2.png");
+        ImageIcon iconProfileImg = new ImageIcon("Proyecto/Proyecto/profile_icon2.png");
+        ImageIcon iconBHImg = new ImageIcon("Proyecto/Proyecto/bh_icon.jpeg");
 
         Image imgCalendar = iconCalendarImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
         Image imgHomepage = iconHomepageImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
@@ -445,6 +445,7 @@ public class userProfile {
         frame.add(panel, BorderLayout.CENTER);
         frame.add(bottomPanel, BorderLayout.SOUTH);
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
     }
 
 

@@ -53,12 +53,12 @@ public class createEvent {
     }
 
     private void addIconsToTopPanel() {
-        ImageIcon iconNotificationImg = new ImageIcon("notification_icon2.png");
-        ImageIcon iconCalendarImg = new ImageIcon("calendar_icon.png");
-        ImageIcon iconHomepageImg = new ImageIcon("home_icon2.png");
-        ImageIcon iconProfileImg = new ImageIcon("profile_icon2.png");
-        ImageIcon iconLogOutImg = new ImageIcon("logout_icon2.png");
-        ImageIcon iconBHImg = new ImageIcon("bh_icon.jpeg");
+        ImageIcon iconNotificationImg = new ImageIcon("Proyecto/Proyecto/notification_icon2.png");
+        ImageIcon iconCalendarImg = new ImageIcon("Proyecto/Proyecto/calendar_icon.png");
+        ImageIcon iconHomepageImg = new ImageIcon("Proyecto/Proyecto/home_icon2.png");
+        ImageIcon iconProfileImg = new ImageIcon("Proyecto/Proyecto/profile_icon2.png");
+        ImageIcon iconLogOutImg = new ImageIcon("Proyecto/Proyecto/logout_icon2.png");
+        ImageIcon iconBHImg = new ImageIcon("Proyecto/Proyecto/bh_icon.jpeg");
 
         Image imgNotification = iconNotificationImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
         Image imgCalendar = iconCalendarImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
@@ -307,6 +307,7 @@ public class createEvent {
         frame.add(panel, BorderLayout.CENTER);
         frame.add(bottomPanel, BorderLayout.SOUTH);
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
     }
 
     public static void main(String[] args) {

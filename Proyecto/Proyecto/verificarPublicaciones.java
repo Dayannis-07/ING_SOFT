@@ -27,12 +27,12 @@ public class verificarPublicaciones {
         panelIcon.setBackground(Color.WHITE);
 
         // Redimensionar iconos
-        ImageIcon iconNotificationImg = new ImageIcon("notification_icon2.png");
-        ImageIcon iconCalendarImg = new ImageIcon("calendar_icon.png");
-        ImageIcon iconHomepageImg = new ImageIcon("home_icon2.png");
-        ImageIcon iconProfileImg = new ImageIcon("profile_icon2.png");
-        ImageIcon iconLogOutImg = new ImageIcon("logout_icon2.png");
-        ImageIcon iconBHImg = new ImageIcon("bh_icon.jpeg");
+        ImageIcon iconNotificationImg = new ImageIcon("Proyecto/Proyecto/notification_icon2.png");
+        ImageIcon iconCalendarImg = new ImageIcon("Proyecto/Proyecto/calendar_icon.png");
+        ImageIcon iconHomepageImg = new ImageIcon("Proyecto/Proyecto/home_icon2.png");
+        ImageIcon iconProfileImg = new ImageIcon("Proyecto/Proyecto/profile_icon2.png");
+        ImageIcon iconLogOutImg = new ImageIcon("Proyecto/Proyecto/logout_icon2.png");
+        ImageIcon iconBHImg = new ImageIcon("Proyecto/Proyecto/bh_icon.jpeg");
 
         // Escalar imágenes a 40x40
         Image imgNotification = iconNotificationImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
@@ -220,6 +220,8 @@ public class verificarPublicaciones {
 
         // Mostrar ventana
         frame.setVisible(true);
+
+        frame.setLocationRelativeTo(null);
     }
     public static void main(String[] args) {
         new verificarPublicaciones();

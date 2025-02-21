@@ -1,4 +1,8 @@
 import javax.swing.*;
+
+import utils.Palette;
+import utils.Size;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -154,7 +158,23 @@ public class verificarPublicaciones {
             JLabel titleLabel = new JLabel("Título: " + publicacion[0]);
             JLabel dateLabel = new JLabel("Fecha: " + publicacion[1]);
             JLabel locationLabel = new JLabel("Ubicación: " + publicacion[2]);
-            JButton viewButton = new JButton("Ver Publicación");
+            JButton viewButton = new JButton("Ver más"){
+                @Override
+                protected void paintComponent(Graphics g) {
+                    if (!isOpaque()) {
+                        Graphics2D g2 = (Graphics2D) g.create();
+                        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                        g2.setColor(Palette.instance().getDarkGray());
+                        g2.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
+                        g2.dispose();
+                    }
+                    super.paintComponent(g);
+                }
+            };
+
+            viewButton.setPreferredSize(Size.BUTTON_SIZE); 
+            viewButton.setBorder(BorderFactory.createEmptyBorder(10, 5, 10, 5));
+            viewButton.setContentAreaFilled(false);
 
             viewButton.addActionListener(new ActionListener() {
                 @Override

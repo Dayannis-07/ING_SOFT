@@ -7,12 +7,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Point2D;
 import java.awt.event.MouseAdapter;
+import java.awt.Graphics;
 
-public class consultarPublicaciones {
-    public consultarPublicaciones() {
+public class verificarPublicaciones {
+    public verificarPublicaciones() {
         // Crear el marco
-        JFrame frame = new JFrame("Consultar Publicaciones");
+        JFrame frame = new JFrame("Verificar Evento");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(700, 500);
         frame.setLayout(new BorderLayout());
@@ -31,13 +33,12 @@ public class consultarPublicaciones {
         panelIcon.setBackground(Color.WHITE);
 
         // Redimensionar iconos
-        ImageIcon iconNotificationImg = new ImageIcon("Proyecto/Proyecto/notification_icon2.png");
-        ImageIcon iconCalendarImg = new ImageIcon("Proyecto/Proyecto/calendar_icon.png");
-        ImageIcon iconHomepageImg = new ImageIcon("Proyecto/Proyecto/home_icon2.png");
-        ImageIcon iconProfileImg = new ImageIcon("Proyecto/Proyecto/profile_icon2.png");
-        ImageIcon iconLogOutImg = new ImageIcon("Proyecto/Proyecto/logout_icon2.png");
-        ImageIcon iconBHImg = new ImageIcon("Proyecto/Proyecto/bh_icon.jpeg");
-        ImageIcon iconSrchImg = new ImageIcon("Proyecto/Proyecto/search_icon.png");
+        ImageIcon iconNotificationImg = new ImageIcon("src/Assets/notification_icon2.png");
+        ImageIcon iconCalendarImg = new ImageIcon("src/Assets/calendar_icon.png");
+        ImageIcon iconHomepageImg = new ImageIcon("src/Assets/home_icon2.png");
+        ImageIcon iconProfileImg = new ImageIcon("src/Assets/profile_icon2.png");
+        ImageIcon iconLogOutImg = new ImageIcon("src/Assets/logout_icon2.png");
+        ImageIcon iconBHImg = new ImageIcon("src/Assets/bh_icon.jpeg");
 
         // Escalar imágenes a 40x40
         Image imgNotification = iconNotificationImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
@@ -46,7 +47,6 @@ public class consultarPublicaciones {
         Image imgProfile = iconProfileImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
         Image imgLogOut = iconLogOutImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
         Image imgBH = iconBHImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
-        Image imgSrch = iconSrchImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
 
         // Crear JLabels con los íconos escalados
         JLabel iconNotification = new JLabel(new ImageIcon(imgNotification));
@@ -55,7 +55,6 @@ public class consultarPublicaciones {
         JLabel iconProfile = new JLabel(new ImageIcon(imgProfile));
         JLabel iconLogOut = new JLabel(new ImageIcon(imgLogOut));
         JLabel iconBH = new JLabel(new ImageIcon(imgBH));
-        JLabel iconSrch = new JLabel(new ImageIcon(imgSrch));
 
         // Agregar íconos al panel derecho
         panelIconos.add(iconNotification);
@@ -108,14 +107,6 @@ public class consultarPublicaciones {
             }
         });
 
-        //Acción para buscar publicación
-        iconSrch.addMouseListener(new java.awt.event.MouseAdapter(){
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(frame, "Redirigiendo a Búsqueda...");
-            }
-        });
-
         // Agregar paneles al superior
         topPanel.add(panelIconos, BorderLayout.EAST);
         topPanel.add(panelIcon, BorderLayout.WEST);
@@ -126,39 +117,39 @@ public class consultarPublicaciones {
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         panel.setBackground(Color.WHITE);
 
-        JPanel titulo = new JPanel();
-        titulo.setLayout(new BorderLayout());
+        JPanel titulo = new JPanel(new FlowLayout(FlowLayout.LEFT));
         titulo.setBackground(Color.WHITE);
 
-        JLabel lblConsultarPublicaciones = new JLabel("Consultar publicaciones");
-        lblConsultarPublicaciones.setFont(new Font("Arial", Font.BOLD, 20));
+        JLabel lblVerificarPublicaciones = new JLabel("Verificar publicaciones");
+        lblVerificarPublicaciones.setFont(new Font("Arial", Font.BOLD, 20));
+        // lblVerificarPublicaciones.setForeground(new Color(90, 90, 90)); // Gris
+        // oscuro
 
-        titulo.add(lblConsultarPublicaciones, BorderLayout.WEST);
-        titulo.add(iconSrch, BorderLayout.EAST);
+        titulo.add(lblVerificarPublicaciones);
         panel.add(titulo);
 
         // Crear publicaciones
         String[][] publicaciones = {
-            {"Título Publicación 1", "2023-10-01", "Ubicación 1"},
-            {"Título Publicación 2", "2023-10-02", "Ubicación 2"},
-            {"Título Publicación 3", "2023-10-03", "Ubicación 3"},
-            {"Título Publicación 4", "2023-10-04", "Ubicación 4"},
-            {"Título Publicación 5", "2023-10-05", "Ubicación 5"},
-            {"Título Publicación 6", "2023-10-06", "Ubicación 6"}
+                { "Título Publicación 1", "2023-10-01", "Ubicación 1" },
+                { "Título Publicación 2", "2023-10-02", "Ubicación 2" },
+                { "Título Publicación 2", "2023-10-02", "Ubicación 2" },
+                { "Título Publicación 2", "2023-10-02", "Ubicación 2" },
+                { "Título Publicación 2", "2023-10-02", "Ubicación 2" },
+                { "Título Publicación 3", "2023-10-03", "Ubicación 3" }
         };
 
         for (String[] publicacion : publicaciones) {
             JPanel pubPanel = new JPanel(new BorderLayout());
             pubPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
             pubPanel.setBorder(BorderFactory.createCompoundBorder(
-                 BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1),
-                 BorderFactory.createEmptyBorder(10, 10, 10, 10) // Add padding here
+                    BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1),
+                    BorderFactory.createEmptyBorder(10, 10, 10, 10) // Add padding here
             ));
             pubPanel.setBackground(Color.WHITE);
-            //             JPanel pubPanel = new JPanel(new BorderLayout());
+            // JPanel pubPanel = new JPanel(new BorderLayout());
             // pubPanel.setBorder(BorderFactory.createCompoundBorder(
-            //     BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1),
-            //     BorderFactory.createEmptyBorder(10, 10, 10, 10) // Add padding here
+            // BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1),
+            // BorderFactory.createEmptyBorder(10, 10, 10, 10) // Add padding here
             // ));
 
             // Panel izquierdo para detalles de la publicación
@@ -209,6 +200,27 @@ public class consultarPublicaciones {
             centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.X_AXIS));
             centerPanel.setBackground(Color.WHITE);
 
+            JButton acceptButton = new CircleButton("✔", Color.GREEN);
+
+            JButton denyButton = new CircleButton("✖", Color.RED); 
+
+            acceptButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JOptionPane.showMessageDialog(frame, "Publicación aceptada: " + publicacion[0]);
+                }
+            });
+
+            denyButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JOptionPane.showMessageDialog(frame, "Publicación denegada: " + publicacion[0]);
+                }
+            });
+
+            centerPanel.add(acceptButton);
+            centerPanel.add(denyButton);
+
             rightPanel.add(centerPanel, BorderLayout.CENTER);
 
             // Agregar paneles izquierdo y derecho al panel de publicación
@@ -234,8 +246,104 @@ public class consultarPublicaciones {
 
         frame.setLocationRelativeTo(null);
     }
-
     public static void main(String[] args) {
-        new consultarPublicaciones();
+        new verificarPublicaciones();
     }
+}
+
+class CircleButton extends JButton{
+
+	private boolean mouseOver = false;
+	private boolean mousePressed = false;
+    private Color buttonColor;
+
+	public CircleButton(String text, Color c){
+		super(text);
+		setOpaque(false);
+		setFocusPainted(false);
+		setBorderPainted(false);
+
+        buttonColor = c;
+
+		MouseAdapter mouseListener = new MouseAdapter(){
+
+			@Override
+			public void mousePressed(MouseEvent me){
+				if(contains(me.getX(), me.getY())){
+					mousePressed = true;
+					repaint();
+				}
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent me){
+				mousePressed = false;
+				repaint();
+			}
+
+			@Override
+			public void mouseExited(MouseEvent me){
+				mouseOver = false;
+				mousePressed = false;
+				repaint();
+			}
+
+			@Override
+			public void mouseMoved(MouseEvent me){
+				mouseOver = contains(me.getX(), me.getY());
+				repaint();
+			}
+		};
+
+		addMouseListener(mouseListener);
+		addMouseMotionListener(mouseListener);		
+	}
+
+	private int getDiameter(){
+		int diameter = Math.min(getWidth(), getHeight());
+		return diameter;
+	}
+
+	@Override
+	public Dimension getPreferredSize(){
+		FontMetrics metrics = getGraphics().getFontMetrics(getFont());
+		int minDiameter = 10 + Math.max(metrics.stringWidth(getText()), metrics.getHeight());
+		return new Dimension(minDiameter, minDiameter);
+	}
+
+	@Override
+	public boolean contains(int x, int y){
+		int radius = getDiameter()/2;
+		return Point2D.distance(x, y, getWidth()/2, getHeight()/2) < radius;
+	}
+
+	@Override
+	public void paintComponent(Graphics g){
+
+		int diameter = getDiameter();
+		int radius = diameter/2;
+
+		if(mousePressed){
+			g.setColor(buttonColor.darker());
+		}
+		else{
+			g.setColor(buttonColor);
+		}
+		g.fillOval(getWidth()/2 - radius, getHeight()/2 - radius, diameter, diameter);
+
+		if(mouseOver){
+			g.setColor(Color.BLUE);
+		}
+		else{
+			g.setColor(Color.BLACK);
+		}
+		//g.drawOval(getWidth()/2 - radius, getHeight()/2 - radius, diameter, diameter);
+
+		g.setColor(Color.WHITE);
+		g.setFont(getFont());
+		FontMetrics metrics = g.getFontMetrics(getFont());
+		int stringWidth = metrics.stringWidth(getText());
+		int stringHeight = metrics.getHeight();
+		g.drawString(getText(), getWidth()/2 - stringWidth/2, getHeight()/2 + stringHeight/4);
+	}
 }

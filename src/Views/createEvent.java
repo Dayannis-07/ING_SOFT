@@ -53,12 +53,12 @@ public class createEvent {
     }
 
     private void addIconsToTopPanel() {
-        ImageIcon iconNotificationImg = new ImageIcon("Proyecto/Proyecto/notification_icon2.png");
-        ImageIcon iconCalendarImg = new ImageIcon("Proyecto/Proyecto/calendar_icon.png");
-        ImageIcon iconHomepageImg = new ImageIcon("Proyecto/Proyecto/home_icon2.png");
-        ImageIcon iconProfileImg = new ImageIcon("Proyecto/Proyecto/profile_icon2.png");
-        ImageIcon iconLogOutImg = new ImageIcon("Proyecto/Proyecto/logout_icon2.png");
-        ImageIcon iconBHImg = new ImageIcon("Proyecto/Proyecto/bh_icon.jpeg");
+        ImageIcon iconNotificationImg = new ImageIcon("src/Assets/notification_icon2.png");
+        ImageIcon iconCalendarImg = new ImageIcon("src/Assets/calendar_icon.png");
+        ImageIcon iconHomepageImg = new ImageIcon("src/Assets/home_icon2.png");
+        ImageIcon iconProfileImg = new ImageIcon("src/Assets/profile_icon2.png");
+        ImageIcon iconLogOutImg = new ImageIcon("src/Assets/logout_icon2.png");
+        ImageIcon iconBHImg = new ImageIcon("src/Assets/bh_icon.jpeg");
 
         Image imgNotification = iconNotificationImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
         Image imgCalendar = iconCalendarImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);

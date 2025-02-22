@@ -57,10 +57,10 @@ public class signIn {
     }
 
     private void addIconsToTopPanel() {
-        ImageIcon iconCalendarImg = new ImageIcon("../Assets/calendar_icon.png");
-        ImageIcon iconHomepageImg = new ImageIcon("../Assets/home_icon2.png");
-        ImageIcon iconProfileImg = new ImageIcon("../Assets/profile_icon2.png");
-        ImageIcon iconBHImg = new ImageIcon("../Assets/bh_icon.jpeg");
+        ImageIcon iconCalendarImg = new ImageIcon("src/Assets/calendar_icon.png");
+        ImageIcon iconHomepageImg = new ImageIcon("src/Assets/home_icon2.png");
+        ImageIcon iconProfileImg = new ImageIcon("src/Assets/profile_icon2.png");
+        ImageIcon iconBHImg = new ImageIcon("src/Assets/bh_icon.jpeg");
 
         Image imgCalendar = iconCalendarImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
         Image imgHomepage = iconHomepageImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);

@@ -1,10 +1,12 @@
 import javax.swing.*;
+import javax.swing.border.Border;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class CalendarApp extends JFrame {
+public class CalendarApp {
     private JLabel monthLabel;
     private JPanel[] dayPanels;
     private int month, year;
@@ -13,16 +15,113 @@ public class CalendarApp extends JFrame {
     private JLabel prevMonthLabel;
 
     public CalendarApp() {
-        setTitle("Calendario");
-        setSize(1000, 700);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(null); 
+        JFrame frame = new JFrame("Calendario");
+        
+        frame.setTitle("Calendario");
+        frame.setSize(1000, 700);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout()); 
+        frame.setLocationRelativeTo(null);
 
+        // Panel superior para el título y los iconos
+        JPanel topPanel = new JPanel(new BorderLayout());
+        topPanel.setBackground(Color.WHITE);
+        topPanel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1, true)); 
+
+        // Panel para los iconos (derecha)
+        JPanel panelIconos = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        panelIconos.setBackground(Color.WHITE);
+
+        // Icono adicional a la izquierda
+        JPanel panelIcon = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        panelIcon.setBackground(Color.WHITE);
+
+        // Redimensionar iconos
+        ImageIcon iconNotificationImg = new ImageIcon("src/Assets/notification_icon2.png");
+        ImageIcon iconCalendarImg = new ImageIcon("src/Assets/calendar_icon.png");
+        ImageIcon iconHomepageImg = new ImageIcon("src/Assets/home_icon2.png");
+        ImageIcon iconProfileImg = new ImageIcon("src/Assets/profile_icon2.png");
+        ImageIcon iconLogOutImg = new ImageIcon("src/Assets/logout_icon2.png");
+        ImageIcon iconBHImg = new ImageIcon("src/Assets/bh_icon.jpeg");
+
+        // Escalar imágenes a 40x40
+        Image imgNotification = iconNotificationImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+        Image imgCalendar = iconCalendarImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+        Image imgHomepage = iconHomepageImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+        Image imgProfile = iconProfileImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+        Image imgLogOut = iconLogOutImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+        Image imgBH = iconBHImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+
+        // Crear JLabels con los íconos escalados
+        JLabel iconNotification = new JLabel(new ImageIcon(imgNotification));
+        JLabel iconCalendar = new JLabel(new ImageIcon(imgCalendar));
+        JLabel iconHomepage = new JLabel(new ImageIcon(imgHomepage));
+        JLabel iconProfile = new JLabel(new ImageIcon(imgProfile));
+        JLabel iconLogOut = new JLabel(new ImageIcon(imgLogOut));
+        JLabel iconBH = new JLabel(new ImageIcon(imgBH));
+
+        // Agregar íconos al panel derecho
+        panelIconos.add(iconNotification);
+        panelIconos.add(iconCalendar);
+        panelIconos.add(iconHomepage);
+        panelIconos.add(iconProfile);
+        panelIconos.add(iconLogOut);
+        panelIcon.add(iconBH);
+
+        // Agregar funcionalidad de clic (simularemos redirección con mensajes)
+        iconNotification.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JOptionPane.showMessageDialog(frame, "Redirigiendo a Notificaciones...");
+            }
+        });
+
+        iconCalendar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JOptionPane.showMessageDialog(frame, "Redirigiendo al Calendario...");
+            }
+        });
+
+        iconHomepage.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JOptionPane.showMessageDialog(frame, "Redirigiendo a la Página Principal...");
+            }
+        });
+
+        iconProfile.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JOptionPane.showMessageDialog(frame, "Redirigiendo al Perfil...");
+            }
+        });
+
+        // Acción para cerrar sesión
+        iconLogOut.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int confirm = JOptionPane.showConfirmDialog(null, 
+                    "¿Seguro que deseas cerrar sesión?", 
+                    "Cerrar Sesión", 
+                    JOptionPane.YES_NO_OPTION
+                );
+                if (confirm == JOptionPane.YES_OPTION) {
+                    frame.dispose();
+                }
+            }
+        });
+
+        // Agregar paneles al superior
+        topPanel.add(panelIconos, BorderLayout.EAST);
+        topPanel.add(panelIcon, BorderLayout.WEST);
+
+        frame.add(topPanel, BorderLayout.NORTH);
+        
         // Configurar la etiqueta del mes y año
         monthLabel = new JLabel();
         monthLabel.setFont(new Font("SansSerif", Font.PLAIN, 18)); 
         monthLabel.setBounds(70, 60, 200, 50);
-        add(monthLabel);
+        frame.add(monthLabel);
 
         // Cargar y redimensionar íconos
         ImageIcon nextIcon = new ImageIcon("src/Assets/right_arrow.png");
@@ -37,18 +136,18 @@ public class CalendarApp extends JFrame {
         // Etiqueta para avanzar al siguiente mes
         nextMonthLabel = new JLabel(nextIcon);
         nextMonthLabel.setBounds(200, 60, 50, 50); // Coordenadas personalizadas
-        add(nextMonthLabel);
+        frame.add(nextMonthLabel);
 
         // Etiqueta para retroceder al mes anterior
         prevMonthLabel = new JLabel(prevIcon);
         prevMonthLabel.setBounds(20, 60, 50, 50); // Coordenadas personalizadas
-        add(prevMonthLabel);
+        frame.add(prevMonthLabel);
 
         // Panel para los días del mes
         calendarPanel = new JPanel();
         calendarPanel.setLayout(new GridLayout(7, 7, 1, 1)); 
-        calendarPanel.setBounds(10, 100, getWidth() - 40, getHeight() - 150); 
-        add(calendarPanel);
+        calendarPanel.setBounds(10, 100, frame.getWidth() - 40, frame.getHeight() - 150); 
+        frame.add(calendarPanel);
 
         // Añadir etiquetas para los días de la semana
         String[] days = {"Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"};
@@ -77,9 +176,9 @@ public class CalendarApp extends JFrame {
         updateCalendar();
 
         // Añadir listener para redimensionar el frame
-        addComponentListener(new ComponentAdapter() {
+        frame.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent componentEvent) {
-                calendarPanel.setBounds(10, 100, getWidth() - 40, getHeight() - 150);
+                calendarPanel.setBounds(10, 100, frame.getWidth() - 40, frame.getHeight() - 150);
                 calendarPanel.revalidate();
                 calendarPanel.repaint();
             }
@@ -100,7 +199,7 @@ public class CalendarApp extends JFrame {
         });
 
         // Hacer visible el frame
-        setVisible(true);
+        frame.setVisible(true);
     }
 
     private void nextMonth() {

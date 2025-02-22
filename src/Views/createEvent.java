@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import utils.Palette;
 import utils.Size;
+import Controllers.createEventController;
 
 public class createEvent {
     private JFrame frame;
@@ -17,6 +18,12 @@ public class createEvent {
     private JPanel leftPanel;
     private JPanel rightPanel;
     private JPanel bottomPanel;
+
+    private JTextField txtEventTitle;
+    private JTextField txtPlace;
+    private JTextField txtDate;
+    private JTextArea txtDescription;
+    private JLabel selectedFile;
 
     public createEvent() {
         createFrame();
@@ -96,6 +103,8 @@ public class createEvent {
             @Override
             public void mouseClicked(MouseEvent e) {
                 JOptionPane.showMessageDialog(frame, "Redirigiendo al Calendario...");
+                frame.dispose();
+                new CalendarApp();
             }
         });
 
@@ -103,6 +112,8 @@ public class createEvent {
             @Override
             public void mouseClicked(MouseEvent e) {
                 JOptionPane.showMessageDialog(frame, "Redirigiendo a la Página Principal...");
+                frame.dispose();
+                new consultarPublicaciones();
             }
         });
 
@@ -110,6 +121,8 @@ public class createEvent {
             @Override
             public void mouseClicked(MouseEvent e) {
                 JOptionPane.showMessageDialog(frame, "Redirigiendo al Perfil...");
+                frame.dispose();
+                new userProfile();
             }
         });
 
@@ -123,6 +136,7 @@ public class createEvent {
                 );
                 if (confirm == JOptionPane.YES_OPTION) {
                     frame.dispose();
+                    new logIn();
                 }
             }
         });
@@ -192,7 +206,7 @@ public class createEvent {
         gbc.gridy = 0;
         leftPanel.add(lblEventTitle, gbc);
 
-        JTextField txtEventTitle = new JTextField(20);
+        txtEventTitle = new JTextField(20);
         txtEventTitle.setBorder(BorderFactory.createLineBorder(Palette.instance().getDarkGray(), 1, true));
         gbc.gridy = 1;
         leftPanel.add(txtEventTitle, gbc);
@@ -201,7 +215,7 @@ public class createEvent {
         gbc.gridy = 2;
         leftPanel.add(lblPlace, gbc);
 
-        JTextField txtPlace = new JTextField(20);
+        txtPlace = new JTextField(20);
         txtPlace.setBorder(BorderFactory.createLineBorder(Palette.instance().getDarkGray(), 1, true));
         gbc.gridy = 3;
         leftPanel.add(txtPlace, gbc);
@@ -215,7 +229,7 @@ public class createEvent {
         gbc.gridy = 5;
         leftPanel.add(btnFile, gbc);
 
-        JLabel selectedFile = new JLabel("Ningún archivo seleccionado");
+        selectedFile = new JLabel("Ningún archivo seleccionado");
         gbc.gridy = 6;
         leftPanel.add(selectedFile, gbc);
 
@@ -249,7 +263,7 @@ public class createEvent {
         gbc.gridy = 0;
         rightPanel.add(lblDate, gbc);
 
-        JTextField txtDate = new JTextField(15);
+        txtDate = new JTextField(15);
         txtDate.setBorder(BorderFactory.createLineBorder(Palette.instance().getDarkGray(), 1, true));
         gbc.gridy = 1;
         rightPanel.add(txtDate, gbc);
@@ -258,7 +272,7 @@ public class createEvent {
         gbc.gridy = 2;
         rightPanel.add(lblDescription, gbc);
 
-        JTextArea txtDescription = new JTextArea(7, 20);
+        txtDescription = new JTextArea(7, 20);
         txtDescription.setLineWrap(true);
         txtDescription.setWrapStyleWord(true);
         JScrollPane scrollDescription = new JScrollPane(txtDescription);
@@ -287,6 +301,13 @@ public class createEvent {
         btnSubmit.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
         btnSubmit.setContentAreaFilled(false);
 
+        btnSubmit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                createEventController.submitEvent(txtEventTitle, txtPlace, txtDate, txtDescription, selectedFile, frame);
+            }
+        });
+
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 2;
@@ -307,7 +328,6 @@ public class createEvent {
         frame.add(panel, BorderLayout.CENTER);
         frame.add(bottomPanel, BorderLayout.SOUTH);
         frame.setVisible(true);
-        frame.setLocationRelativeTo(null);
     }
 
     public static void main(String[] args) {

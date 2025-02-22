@@ -62,30 +62,30 @@ public class userProfile {
     }
 
     private void addIconsToTopPanel() {
-        ImageIcon iconCalendarImg = new ImageIcon("src/Assets/calendar_icon.png");
-        ImageIcon iconHomepageImg = new ImageIcon("src/Assets/home_icon2.png");
-        ImageIcon iconProfileImg = new ImageIcon("src/Assets/profile_icon2.png");
-        ImageIcon iconBHImg = new ImageIcon("src/Assets/bh_icon.jpeg");
+        ImageIcon iconCalendarImg = new ImageIcon("../Assets/calendar_icon.png");
+        ImageIcon iconHomepageImg = new ImageIcon("../Assets/home_icon2.png");
+        ImageIcon iconLogOutImg = new ImageIcon("../Assets/logout_icon2.png");
+        ImageIcon iconBHImg = new ImageIcon("../Assets/bh_icon.jpeg");
 
         Image imgCalendar = iconCalendarImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
         Image imgHomepage = iconHomepageImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
-        Image imgProfile = iconProfileImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+        Image imgLogOut = iconLogOutImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
         Image imgBH = iconBHImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
 
         JLabel iconCalendar = new JLabel(new ImageIcon(imgCalendar));
         JLabel iconHomepage = new JLabel(new ImageIcon(imgHomepage));
-        JLabel iconProfile = new JLabel(new ImageIcon(imgProfile));
+        JLabel iconLogOut = new JLabel(new ImageIcon(imgLogOut));
         JLabel iconBH = new JLabel(new ImageIcon(imgBH));
 
         panelIconos.add(iconCalendar);
         panelIconos.add(iconHomepage);
-        panelIconos.add(iconProfile);
+        panelIconos.add(iconLogOut);
         panelIcon.add(iconBH);
 
-        addIconListeners(iconCalendar, iconHomepage, iconProfile);
+        addIconListeners(iconCalendar, iconHomepage, iconLogOut);
     }
 
-    private void addIconListeners(JLabel iconCalendar, JLabel iconHomepage, JLabel iconProfile) {
+    private void addIconListeners(JLabel iconCalendar, JLabel iconHomepage, JLabel iconLogOut) {
         iconCalendar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -100,10 +100,17 @@ public class userProfile {
             }
         });
 
-        iconProfile.addMouseListener(new MouseAdapter() {
+        iconLogOut.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(frame, "Redirigiendo al Perfil...");
+                int confirm = JOptionPane.showConfirmDialog(frame,
+                    "¿Seguro que deseas cerrar sesión?",
+                    "Cerrar Sesión",
+                    JOptionPane.YES_NO_OPTION
+                );
+                if (confirm == JOptionPane.YES_OPTION) {
+                    frame.dispose();
+                }
             }
         });
     }
@@ -147,7 +154,7 @@ public class userProfile {
     }
 
     private void createCircleImage() {
-        ImageIcon userImage = new ImageIcon("userProfileImage.jpg");
+        ImageIcon userImage = new ImageIcon("../Assets/userProfileImage.jpg");
         Image userImageCircle = userImage.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         userImageProfile = new JLabel(new ImageIcon(userImageCircle)); 
 
@@ -307,7 +314,7 @@ public class userProfile {
         header.setBorder(BorderFactory.createLineBorder(Palette.instance().getOtherLightGray(), 1, true));
         header.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5)); 
 
-        ImageIcon iconViewMoreImg = new ImageIcon("viewMore.png");
+        ImageIcon iconViewMoreImg = new ImageIcon("../Assets/viewMore.png");
 
         Image imgViewMore = iconViewMoreImg.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 
@@ -335,8 +342,8 @@ public class userProfile {
         footer.setBorder(BorderFactory.createLineBorder(Palette.instance().getOtherLightGray(), 1, true));
         footer.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5)); 
 
-        ImageIcon iconLikeImg = new ImageIcon("like.png");
-        ImageIcon iconComentImg = new ImageIcon("coment.png");
+        ImageIcon iconLikeImg = new ImageIcon("../Assets/like.png");
+        ImageIcon iconComentImg = new ImageIcon("../Assets/coment.png");
 
         Image imgLike = iconLikeImg.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         Image imgComent = iconComentImg.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
@@ -419,7 +426,7 @@ public class userProfile {
         bottomPanel.setBackground(Palette.instance().getBeige());
         bottomPanel.setPreferredSize(Size.BOTTOM_PANEL_SIZE); 
 
-        ImageIcon iconAddImg = new ImageIcon("add_icon.png");
+        ImageIcon iconAddImg = new ImageIcon("../Assets/add_icon.png");
 
         Image imgAdd = iconAddImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
 

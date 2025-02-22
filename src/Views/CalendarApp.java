@@ -1,6 +1,4 @@
 import javax.swing.*;
-import javax.swing.border.Border;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Calendar;
@@ -38,7 +36,6 @@ public class CalendarApp {
 
         // Redimensionar iconos
         ImageIcon iconNotificationImg = new ImageIcon("src/Assets/notification_icon2.png");
-        ImageIcon iconCalendarImg = new ImageIcon("src/Assets/calendar_icon.png");
         ImageIcon iconHomepageImg = new ImageIcon("src/Assets/home_icon2.png");
         ImageIcon iconProfileImg = new ImageIcon("src/Assets/profile_icon2.png");
         ImageIcon iconLogOutImg = new ImageIcon("src/Assets/logout_icon2.png");
@@ -46,7 +43,6 @@ public class CalendarApp {
 
         // Escalar imágenes a 40x40
         Image imgNotification = iconNotificationImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
-        Image imgCalendar = iconCalendarImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
         Image imgHomepage = iconHomepageImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
         Image imgProfile = iconProfileImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
         Image imgLogOut = iconLogOutImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
@@ -54,7 +50,6 @@ public class CalendarApp {
 
         // Crear JLabels con los íconos escalados
         JLabel iconNotification = new JLabel(new ImageIcon(imgNotification));
-        JLabel iconCalendar = new JLabel(new ImageIcon(imgCalendar));
         JLabel iconHomepage = new JLabel(new ImageIcon(imgHomepage));
         JLabel iconProfile = new JLabel(new ImageIcon(imgProfile));
         JLabel iconLogOut = new JLabel(new ImageIcon(imgLogOut));
@@ -62,7 +57,6 @@ public class CalendarApp {
 
         // Agregar íconos al panel derecho
         panelIconos.add(iconNotification);
-        panelIconos.add(iconCalendar);
         panelIconos.add(iconHomepage);
         panelIconos.add(iconProfile);
         panelIconos.add(iconLogOut);
@@ -73,13 +67,6 @@ public class CalendarApp {
             @Override
             public void mouseClicked(MouseEvent e) {
                 JOptionPane.showMessageDialog(frame, "Redirigiendo a Notificaciones...");
-            }
-        });
-
-        iconCalendar.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(frame, "Redirigiendo al Calendario...");
             }
         });
 
@@ -117,11 +104,15 @@ public class CalendarApp {
 
         frame.add(topPanel, BorderLayout.NORTH);
         
-        // Configurar la etiqueta del mes y año
+
+        // Panel para el calendario
+        calendarPanel = new JPanel(new BorderLayout());
+
+        // Panel para la etiqueta del mes
+        JPanel monthPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         monthLabel = new JLabel();
-        monthLabel.setFont(new Font("SansSerif", Font.PLAIN, 18)); 
-        monthLabel.setBounds(70, 60, 200, 50);
-        frame.add(monthLabel);
+        monthLabel.setFont(new Font("SansSerif", Font.PLAIN, 18));
+        monthPanel.add(monthLabel);
 
         // Cargar y redimensionar íconos
         ImageIcon nextIcon = new ImageIcon("src/Assets/right_arrow.png");
@@ -135,37 +126,66 @@ public class CalendarApp {
 
         // Etiqueta para avanzar al siguiente mes
         nextMonthLabel = new JLabel(nextIcon);
-        nextMonthLabel.setBounds(200, 60, 50, 50); // Coordenadas personalizadas
-        frame.add(nextMonthLabel);
+        nextMonthLabel.setBounds(200, 60, 50, 50); 
 
         // Etiqueta para retroceder al mes anterior
         prevMonthLabel = new JLabel(prevIcon);
-        prevMonthLabel.setBounds(20, 60, 50, 50); // Coordenadas personalizadas
-        frame.add(prevMonthLabel);
+        prevMonthLabel.setBounds(20, 60, 50, 50); 
+        
+        //Añadir todo al panel del calendario
+        monthPanel.add(prevMonthLabel);
+        monthPanel.add(monthLabel);
+        monthPanel.add(nextMonthLabel);
+        calendarPanel.add(monthPanel, BorderLayout.NORTH);
 
         // Panel para los días del mes
-        calendarPanel = new JPanel();
-        calendarPanel.setLayout(new GridLayout(7, 7, 1, 1)); 
-        calendarPanel.setBounds(10, 100, frame.getWidth() - 40, frame.getHeight() - 150); 
-        frame.add(calendarPanel);
+        JPanel daysPanel = new JPanel();
+        GridBagLayout layout = new GridBagLayout();
+        daysPanel.setLayout(layout);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
 
         // Añadir etiquetas para los días de la semana
         String[] days = {"Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"};
-        for (String day : days) {
-            JLabel dayLabel = new JLabel(day, SwingConstants.CENTER);
-            dayLabel.setFont(new Font("SansSerif", Font.PLAIN, 12)); // Usa fuente SansSerif
-            calendarPanel.add(dayLabel);
+        for (int i = 0; i < days.length; i++) {
+            JLabel dayLabel = new JLabel(days[i], SwingConstants.CENTER);
+            dayLabel.setFont(new Font("SansSerif", Font.PLAIN, 12));
+            dayLabel.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0)); // Ajustar márgenes
+            gbc.gridx = i;
+            gbc.gridy = 0;
+            gbc.weightx = 1.0;
+            gbc.weighty = 0.1; 
+            daysPanel.add(dayLabel, gbc);
         }
+        
+         // Añadir paneles para los días del mes
+         dayPanels = new JPanel[42];
+         for (int i = 0; i < 42; i++) {
+             dayPanels[i] = new JPanel();
+             dayPanels[i].setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY)); // Añadir borde para diferenciar los días
+             dayPanels[i].setLayout(new BorderLayout());
+             JLabel dayLabel = new JLabel("", SwingConstants.RIGHT);
+             dayLabel.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0)); // Ajustar márgenes
+             dayPanels[i].add(dayLabel, BorderLayout.NORTH); // Añadir etiqueta para el número del día
+             gbc.gridx = i % 7;
+             gbc.gridy = (i / 7) + 1;
+             gbc.weightx = 1.0;
+             gbc.weighty = 1.0;
+             gbc.ipady = 15;
+             daysPanel.add(dayPanels[i], gbc);
+         }
+ 
+         calendarPanel.add(daysPanel, BorderLayout.CENTER);
+         // Panel inferior (Beige)
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setBackground(new Color(222, 196, 145)); // Beige
+        bottomPanel.setPreferredSize(new Dimension(700, 30));
+        calendarPanel.add(bottomPanel, BorderLayout.SOUTH);
 
-        // Añadir paneles para los días del mes
-        dayPanels = new JPanel[42];
-        for (int i = 0; i < 42; i++) {
-            dayPanels[i] = new JPanel();
-            dayPanels[i].setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY)); // Añadir borde para diferenciar los días
-            dayPanels[i].setLayout(new BorderLayout());
-            dayPanels[i].add(new JLabel("", SwingConstants.RIGHT), BorderLayout.NORTH); // Añadir etiqueta para el número del día
-            calendarPanel.add(dayPanels[i]);
-        }
+        frame.add(calendarPanel, BorderLayout.CENTER);
+
 
         // Obtener el mes y año actual
         Calendar cal = new GregorianCalendar();
@@ -252,6 +272,3 @@ public class CalendarApp {
         new CalendarApp();
     }
 }
-
-
-

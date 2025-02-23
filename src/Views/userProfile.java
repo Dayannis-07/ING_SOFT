@@ -89,14 +89,18 @@ public class userProfile {
         iconCalendar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(frame, "Redirigiendo al Calendario...");
+                //JOptionPane.showMessageDialog(frame, "Redirigiendo al Calendario...");
+                frame.dispose();
+                new CalendarApp();
             }
         });
 
         iconHomepage.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(frame, "Redirigiendo a la Página Principal...");
+                //JOptionPane.showMessageDialog(frame, "Redirigiendo a la Página Principal...");
+                frame.dispose();
+                new consultarPublicaciones();
             }
         });
 
@@ -110,6 +114,7 @@ public class userProfile {
                 );
                 if (confirm == JOptionPane.YES_OPTION) {
                     frame.dispose();
+                    new logIn();
                 }
             }
         });
@@ -441,7 +446,9 @@ public class userProfile {
         iconAdd.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(frame, "Agregar evento...");
+                //JOptionPane.showMessageDialog(frame, "Agregar evento...");
+                frame.dispose();
+                new createEvent();
             }
         });
     }

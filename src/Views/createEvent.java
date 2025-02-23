@@ -8,7 +8,7 @@ import utils.Palette;
 import utils.Size;
 import Controllers.createEventController;
 
-public class createEvent {
+public class createEvent extends JFrame{
     private JFrame frame;
     private JPanel topPanel;
     private JPanel panelIconos;
@@ -95,14 +95,16 @@ public class createEvent {
         iconNotification.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(frame, "Redirigiendo a Notificaciones...");
+                //JOptionPane.showMessageDialog(frame, "Redirigiendo a Notificaciones...");
+                frame.dispose();
+                new verificarPublicaciones();
             }
         });
 
         iconCalendar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(frame, "Redirigiendo al Calendario...");
+                //JOptionPane.showMessageDialog(frame, "Redirigiendo al Calendario...");
                 frame.dispose();
                 new CalendarApp();
             }
@@ -111,7 +113,7 @@ public class createEvent {
         iconHomepage.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(frame, "Redirigiendo a la Página Principal...");
+                //JOptionPane.showMessageDialog(frame, "Redirigiendo a la Página Principal...");
                 frame.dispose();
                 new consultarPublicaciones();
             }
@@ -120,7 +122,7 @@ public class createEvent {
         iconProfile.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(frame, "Redirigiendo al Perfil...");
+                //JOptionPane.showMessageDialog(frame, "Redirigiendo al Perfil...");
                 frame.dispose();
                 new userProfile();
             }
@@ -137,6 +139,7 @@ public class createEvent {
                 if (confirm == JOptionPane.YES_OPTION) {
                     frame.dispose();
                     new logIn();
+                    
                 }
             }
         });

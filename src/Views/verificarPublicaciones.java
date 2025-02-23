@@ -9,9 +9,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.awt.event.MouseAdapter;
-import java.awt.Graphics;
 
-public class verificarPublicaciones {
+public class verificarPublicaciones extends JFrame{
     public verificarPublicaciones() {
         // Crear el marco
         JFrame frame = new JFrame("Verificar Evento");
@@ -68,41 +67,51 @@ public class verificarPublicaciones {
         iconNotification.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(frame, "Redirigiendo a Notificaciones...");
+                //JOptionPane.showMessageDialog(frame, "Redirigiendo a Notificaciones...");
+                frame.dispose();
+                new verificarPublicaciones();
             }
         });
 
         iconCalendar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(frame, "Redirigiendo al Calendario...");
+                //JOptionPane.showMessageDialog(frame, "Redirigiendo al Calendario...");
+                frame.dispose();
+                new CalendarApp();
             }
         });
 
         iconHomepage.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(frame, "Redirigiendo a la Página Principal...");
+                //JOptionPane.showMessageDialog(frame, "Redirigiendo a la Página Principal...");
+                frame.dispose();
+                new consultarPublicaciones();
             }
         });
 
         iconProfile.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(frame, "Redirigiendo al Perfil...");
+                //JOptionPane.showMessageDialog(frame, "Redirigiendo al Perfil...");
+                frame.dispose();
+                new userProfile();
             }
         });
 
-        // Acción para cerrar sesión
-        iconLogOut.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                int confirm = JOptionPane.showConfirmDialog(frame, 
-                    "¿Seguro que deseas cerrar sesión?", 
-                    "Cerrar Sesión", 
+        iconLogOut.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int confirm = JOptionPane.showConfirmDialog(frame,
+                    "¿Seguro que deseas cerrar sesión?",
+                    "Cerrar Sesión",
                     JOptionPane.YES_NO_OPTION
                 );
                 if (confirm == JOptionPane.YES_OPTION) {
                     frame.dispose();
+                    new logIn();
+                    
                 }
             }
         });
@@ -245,6 +254,7 @@ public class verificarPublicaciones {
         frame.setVisible(true);
 
         frame.setLocationRelativeTo(null);
+        
     }
     public static void main(String[] args) {
         new verificarPublicaciones();
@@ -346,4 +356,6 @@ class CircleButton extends JButton{
 		int stringHeight = metrics.getHeight();
 		g.drawString(getText(), getWidth()/2 - stringWidth/2, getHeight()/2 + stringHeight/4);
 	}
+
+        
 }

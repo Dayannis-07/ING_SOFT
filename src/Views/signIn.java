@@ -84,21 +84,27 @@ public class signIn {
         iconCalendar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(frame, "Redirigiendo al Calendario...");
+                //JOptionPane.showMessageDialog(frame, "Redirigiendo al Calendario...");
+                frame.dispose();
+                new CalendarApp();
             }
         });
 
         iconHomepage.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(frame, "Redirigiendo a la Página Principal...");
+                //JOptionPane.showMessageDialog(frame, "Redirigiendo a la Página Principal...");
+                frame.dispose();
+                new consultarPublicaciones();
             }
         });
 
         iconProfile.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(frame, "Redirigiendo al Perfil...");
+                //JOptionPane.showMessageDialog(frame, "Redirigiendo al Perfil...");
+                frame.dispose();
+                new userProfile();
             }
         });
     }
@@ -236,7 +242,7 @@ public class signIn {
         
                 String message = signInController.registerUser(email, password, confirmPassword, userType);
                 JOptionPane.showMessageDialog(frame, message, 
-                        message.equals("Registro exitoso.") ? "Éxito" : "Error",
+                        message.equals("Registro exitoso.") ? "Éxito": "Error",
                         message.equals("Registro exitoso.") ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.ERROR_MESSAGE);
             }
         });

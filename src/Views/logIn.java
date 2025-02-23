@@ -8,7 +8,7 @@ import utils.Palette;
 import utils.Size;
 import Controllers.logInController;
 
-public class logIn {
+public class logIn extends JFrame{
     private JFrame frame;
     private JPanel topPanel;
     private JPanel panelIconos;
@@ -82,21 +82,27 @@ public class logIn {
         iconCalendar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(frame, "Redirigiendo al Calendario...");
+                //JOptionPane.showMessageDialog(frame, "Redirigiendo al Calendario...");
+                frame.dispose();
+                new CalendarApp();
             }
         });
 
         iconHomepage.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(frame, "Redirigiendo a la Página Principal...");
+                //JOptionPane.showMessageDialog(frame, "Redirigiendo a la Página Principal...");
+                frame.dispose();
+                new consultarPublicaciones();
             }
         });
 
         iconProfile.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(frame, "Redirigiendo al Perfil...");
+                //JOptionPane.showMessageDialog(frame, "Redirigiendo al Perfil...");
+                frame.dispose();
+                new userProfile();
             }
         });
     }
@@ -240,7 +246,9 @@ public class logIn {
         btnRegister.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(frame, "Redirigiendo a la pantalla de registro...", "Registrarse", JOptionPane.INFORMATION_MESSAGE);
+                //JOptionPane.showMessageDialog(frame, "Redirigiendo a la pantalla de registro...", "Registrarse", JOptionPane.INFORMATION_MESSAGE);
+                frame.dispose();
+                new signIn();
             }
         });
 

@@ -4,7 +4,7 @@ import java.awt.event.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class CalendarApp {
+public class CalendarApp extends JFrame{
     private JLabel monthLabel;
     private JPanel[] dayPanels;
     private int month, year;
@@ -70,41 +70,51 @@ public class CalendarApp {
         iconNotification.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(frame, "Redirigiendo a Notificaciones...");
+                //JOptionPane.showMessageDialog(frame, "Redirigiendo a Notificaciones...");
+                frame.dispose();
+                new verificarPublicaciones();
             }
         });
 
         iconCalendar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(frame, "Redirigiendo al Calendario...");
+                //JOptionPane.showMessageDialog(frame, "Redirigiendo al Calendario...");
+                frame.dispose();
+                new CalendarApp();
             }
         });
 
         iconHomepage.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(frame, "Redirigiendo a la Página Principal...");
+                //JOptionPane.showMessageDialog(frame, "Redirigiendo a la Página Principal...");
+                frame.dispose();
+                new consultarPublicaciones();
             }
         });
 
         iconProfile.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(frame, "Redirigiendo al Perfil...");
+                //JOptionPane.showMessageDialog(frame, "Redirigiendo al Perfil...");
+                frame.dispose();
+                new userProfile();
             }
         });
 
-        // Acción para cerrar sesión
-        iconLogOut.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                int confirm = JOptionPane.showConfirmDialog(null, 
-                    "¿Seguro que deseas cerrar sesión?", 
-                    "Cerrar Sesión", 
+        iconLogOut.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int confirm = JOptionPane.showConfirmDialog(frame,
+                    "¿Seguro que deseas cerrar sesión?",
+                    "Cerrar Sesión",
                     JOptionPane.YES_NO_OPTION
                 );
                 if (confirm == JOptionPane.YES_OPTION) {
                     frame.dispose();
+                    new logIn();
+                    
                 }
             }
         });

@@ -24,3 +24,6 @@
 ![Verificar Publicaciones](./docs/scenariosView/img/verificarPublicaciones.jpg)
 ![Consultar Calendario](./docs/scenariosView/img/consultarCalendario.jpg)
 ![Buscar Publicación](./docs/scenariosView/img/buscarPublicacion.jpg)
+
+## MODELO DE IMPLEMENTACIÓN
+No utilizamos ninguna librería externa

@@ -202,8 +202,24 @@ public class CalendarApp extends JFrame{
          // Panel inferior (Beige)
         JPanel bottomPanel = new JPanel();
         bottomPanel.setBackground(new Color(222, 196, 145)); // Beige
-        bottomPanel.setPreferredSize(new Dimension(700, 30));
+        bottomPanel.setPreferredSize(new Dimension(700, 45));
         calendarPanel.add(bottomPanel, BorderLayout.SOUTH);
+        ImageIcon iconAddImg = new ImageIcon("../Assets/add_icon.png");
+
+        Image imgAdd = iconAddImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+
+        JLabel iconAdd = new JLabel(new ImageIcon(imgAdd));
+
+        bottomPanel.add(iconAdd);
+
+        iconAdd.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                //JOptionPane.showMessageDialog(frame, "Agregar evento...");
+                frame.dispose();
+                new createEvent();
+            }
+        });
 
         frame.add(calendarPanel, BorderLayout.CENTER);
 

@@ -32,7 +32,7 @@ public class verificarPublicaciones extends JFrame{
         panelIcon.setBackground(Color.WHITE);
 
         // Redimensionar iconos
-        ImageIcon iconNotificationImg = new ImageIcon("../Assets/notification_icon2.png");
+        ImageIcon iconNotificationImg = new ImageIcon("src/Assets/notification_icon2.png");
         ImageIcon iconCalendarImg = new ImageIcon("../Assets/calendar_icon.png");
         ImageIcon iconHomepageImg = new ImageIcon("../Assets/home_icon2.png");
         ImageIcon iconProfileImg = new ImageIcon("../Assets/profile_icon2.png");

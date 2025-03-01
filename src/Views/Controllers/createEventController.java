@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import org.json.JSONObject;
 
 public class createEventController {
 
@@ -64,8 +65,16 @@ public class createEventController {
     }
 
     private static void saveEventToFile(String eventTitle, String place, String date, String description, String filePath) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("events.txt", true))) {
-            bw.write("Título: " + eventTitle + ", Lugar: " + place + ", Fecha: " + date + ", Descripción: " + description + ", Archivo: " + filePath);
+        JSONObject event = new JSONObject();
+
+        event.put("title", eventTitle);
+        event.put("place", place);
+        event.put("date", date);
+        event.put("description", description);
+        event.put("file", filePath);
+        
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("events.json", true))) {
+            bw.write(event.toString());
             bw.newLine();
         } catch (IOException e) {
             e.printStackTrace();

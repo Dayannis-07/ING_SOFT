@@ -1,6 +1,5 @@
 import javax.swing.*;
 
-import utils.FooterFactory;
 import utils.Palette;
 import utils.Size;
 
@@ -22,7 +21,8 @@ public class verificarPublicaciones extends JFrame{
 
         // build sections
         JPanel header = new HeaderFactory(this).createHeader();
-        JPanel footer = FooterFactory.createBottomPanel();
+        JPanel footer = new FooterFactory(this).createBottomPanel();
+        //JPanel footer = FooterFactory.createBottomPanel();
 
         createMainPanel();
 
@@ -118,10 +118,10 @@ public class verificarPublicaciones extends JFrame{
             centerPanel.setLayout(new BorderLayout(10, 20));
             centerPanel.setBackground(Color.WHITE);
 
-            ImageIcon iconCheckImg = new ImageIcon("src/Assets/check.png");
-            ImageIcon iconXImg = new ImageIcon("src/Assets/remove.png");
+            ImageIcon iconCheckImg = new ImageIcon("../Assets/check.png");
+            ImageIcon iconXImg = new ImageIcon("../Assets/remove.png");
 
-            Image imgCheck = iconCheckImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+            Image imgCheck = iconCheckImg.getImage().getScaledInstance(45, 45, Image.SCALE_SMOOTH);
             Image imgX = iconXImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
 
             JLabel iconCheck = new JLabel(new ImageIcon(imgCheck));

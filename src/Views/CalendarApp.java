@@ -3,7 +3,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import utils.FooterFactory;
 
 public class CalendarApp {
     private JFrame frame;
@@ -39,7 +38,8 @@ public class CalendarApp {
     private void initializeHeaderAndFooter() {
         // Añadir el header y footer usando HeaderFactory y FooterFactory
         JPanel header = new HeaderFactory(frame).createHeader();
-        JPanel footer = FooterFactory.createBottomPanel();
+        JPanel footer = new FooterFactory(frame).createBottomPanel();
+        //JPanel footer = FooterFactory.createBottomPanel();
         frame.add(header, BorderLayout.NORTH);
         frame.add(footer, BorderLayout.SOUTH);
     }

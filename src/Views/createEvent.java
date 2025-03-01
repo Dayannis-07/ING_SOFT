@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import utils.Palette;
 import utils.Size;
-import utils.FooterFactory;
 import Controllers.createEventController;
 
 public class createEvent extends JFrame {
@@ -37,7 +36,7 @@ public class createEvent extends JFrame {
     private void initializeHeaderAndFooter() {
         // Añadir el header y footer usando HeaderFactory y FooterFactory
         JPanel header = new HeaderFactory(frame).createHeader();
-        JPanel footer = FooterFactory.createBottomPanel();
+        JPanel footer = new FooterFactory(frame).createBottomPanel();
         frame.add(header, BorderLayout.NORTH);
         frame.add(footer, BorderLayout.SOUTH);
     }

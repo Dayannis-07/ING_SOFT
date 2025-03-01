@@ -1,3 +1,5 @@
+package Views;
+
 import javax.swing.*;
 
 import utils.Palette;
@@ -9,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.awt.event.MouseAdapter;
+import utils.Layout;
 
 public class verificarPublicaciones extends Layout{
 

@@ -1,3 +1,4 @@
+package utils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +11,11 @@ import Controllers.logInController;
 import utils.Palette;
 import utils.Size;
 
-abstract class Layout extends JFrame {
+import Views.CalendarApp;
+import Views.consultarPublicaciones;
+import Views.userProfile;
+
+public abstract class Layout extends JFrame {
     private JFrame frame;
     private JPanel topPanel;
     private JPanel panelIconos;

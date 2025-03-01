@@ -1,3 +1,5 @@
+package Views;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -60,12 +62,12 @@ public class createEvent extends JFrame{
     }
 
     private void addIconsToTopPanel() {
-        ImageIcon iconNotificationImg = new ImageIcon("../Assets/notification_icon2.png");
-        ImageIcon iconCalendarImg = new ImageIcon("../Assets/calendar_icon.png");
-        ImageIcon iconHomepageImg = new ImageIcon("../Assets/home_icon2.png");
-        ImageIcon iconProfileImg = new ImageIcon("../Assets/profile_icon2.png");
-        ImageIcon iconLogOutImg = new ImageIcon("../Assets/logout_icon2.png");
-        ImageIcon iconBHImg = new ImageIcon("../Assets/bh_icon.jpeg");
+        ImageIcon iconNotificationImg = new ImageIcon("src/Assets/notification_icon2.png");
+        ImageIcon iconCalendarImg = new ImageIcon("src/Assets/calendar_icon.png");
+        ImageIcon iconHomepageImg = new ImageIcon("src/Assets/home_icon2.png");
+        ImageIcon iconProfileImg = new ImageIcon("src/Assets/profile_icon2.png");
+        ImageIcon iconLogOutImg = new ImageIcon("src/Assets/logout_icon2.png");
+        ImageIcon iconBHImg = new ImageIcon("src/Assets/bh_icon.jpeg");
 
         Image imgNotification = iconNotificationImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
         Image imgCalendar = iconCalendarImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
@@ -95,7 +97,7 @@ public class createEvent extends JFrame{
         iconNotification.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                //JOptionPane.showMessageDialog(frame, "Redirigiendo a Notificaciones...");
+                //JOptionPane.showMessageDialog(frame, "Redirigiendo a Notificacionessrc.");
                 frame.dispose();
                 new verificarPublicaciones();
             }
@@ -104,7 +106,7 @@ public class createEvent extends JFrame{
         iconCalendar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                //JOptionPane.showMessageDialog(frame, "Redirigiendo al Calendario...");
+                //JOptionPane.showMessageDialog(frame, "Redirigiendo al Calendariosrc.");
                 frame.dispose();
                 new CalendarApp();
             }
@@ -113,7 +115,7 @@ public class createEvent extends JFrame{
         iconHomepage.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                //JOptionPane.showMessageDialog(frame, "Redirigiendo a la Página Principal...");
+                //JOptionPane.showMessageDialog(frame, "Redirigiendo a la Página Principalsrc.");
                 frame.dispose();
                 new consultarPublicaciones();
             }
@@ -122,7 +124,7 @@ public class createEvent extends JFrame{
         iconProfile.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                //JOptionPane.showMessageDialog(frame, "Redirigiendo al Perfil...");
+                //JOptionPane.showMessageDialog(frame, "Redirigiendo al Perfilsrc.");
                 frame.dispose();
                 new userProfile();
             }

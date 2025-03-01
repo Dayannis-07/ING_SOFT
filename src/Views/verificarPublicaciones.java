@@ -2,6 +2,7 @@ import javax.swing.*;
 
 import utils.FooterFactory;
 import utils.HeaderFactory;
+import utils.Size;
 import utils.Palette;
 
 import java.awt.*;

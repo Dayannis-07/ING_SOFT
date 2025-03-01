@@ -1,31 +1,58 @@
 import javax.swing.*;
 import utils.Palette;
 import utils.Size;
+import utils.HeaderFactory;
+import utils.FooterFactory;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 
-public class consultarPublicaciones extends Layout {
-    public consultarPublicaciones() {
-        super("Consultar Publicaciones");
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        panel.setBackground(Color.WHITE);
+public class consultarPublicaciones {
+    private JFrame frame;
+    private JPanel panel;
 
+    public consultarPublicaciones() {
+        initializeFrame();
+        initializeHeaderAndFooter();
+        initializeMainPanel();
         addTitleToPanel();
         createPosts();
 
-        // Ensamblar el frame usando el método de Layout
-        assembleFrame();
+        // Hacer visible el frame
+        frame.setVisible(true);
+    }
+
+    private void initializeFrame() {
+        frame = new JFrame("Consultar Posts");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(700, 500);
+        frame.setLayout(new BorderLayout());
+        frame.setLocationRelativeTo(null);
+    }
+
+    private void initializeHeaderAndFooter() {
+        // Añadir el header y footer usando HeaderFactory y FooterFactory
+        JPanel header = HeaderFactory.createHeader();
+        JPanel footer = FooterFactory.createBottomPanel();
+        frame.add(header, BorderLayout.NORTH);
+        frame.add(footer, BorderLayout.SOUTH);
+    }
+
+    private void initializeMainPanel() {
+        panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        panel.setBackground(Color.WHITE);
+        frame.add(new JScrollPane(panel), BorderLayout.CENTER);
     }
 
     private void addTitleToPanel() {
         JPanel titulo = new JPanel(new BorderLayout());
         titulo.setBackground(Color.WHITE);
 
-        JLabel lblConsultarPosts = new JLabel("Consultar publicaciones");
+        JLabel lblConsultarPosts = new JLabel("Consultar posts");
         lblConsultarPosts.setFont(new Font("Arial", Font.BOLD, 20));
 
         titulo.add(lblConsultarPosts, BorderLayout.WEST);
@@ -105,7 +132,7 @@ public class consultarPublicaciones extends Layout {
         viewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(getFrame(), "Mostrando detalles de la publicación: " + postTitle);
+                JOptionPane.showMessageDialog(frame, "Mostrando detalles del post: " + postTitle);
             }
         });
 
@@ -129,4 +156,5 @@ public class consultarPublicaciones extends Layout {
         new consultarPublicaciones();
     }
 }
+
 

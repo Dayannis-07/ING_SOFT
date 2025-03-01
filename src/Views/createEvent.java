@@ -6,18 +6,16 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import utils.Palette;
 import utils.Size;
+import utils.HeaderFactory;
+import utils.FooterFactory;
 import Controllers.createEventController;
 
-public class createEvent extends JFrame{
+public class createEvent extends JFrame {
     private JFrame frame;
-    private JPanel topPanel;
-    private JPanel panelIconos;
-    private JPanel panelIcon;
     private JPanel panel;
     private JPanel grayPanel;
     private JPanel leftPanel;
     private JPanel rightPanel;
-    private JPanel bottomPanel;
 
     private JTextField txtEventTitle;
     private JTextField txtPlace;
@@ -27,122 +25,24 @@ public class createEvent extends JFrame{
 
     public createEvent() {
         createFrame();
-        createTopPanel();
+        initializeHeaderAndFooter();
         createMainPanel();
-        createBottomPanel();
         assembleFrame();
     }
 
     private void createFrame() {
         frame = new JFrame("Publicar Evento");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(Size.FRAME_SIZE); 
+        frame.setSize(Size.FRAME_SIZE);
         frame.setLayout(new BorderLayout());
     }
 
-    private void createTopPanel() {
-        topPanel = new JPanel(new BorderLayout());
-        topPanel.setBackground(Palette.instance().getWhite());
-        topPanel.setBorder(BorderFactory.createLineBorder(Palette.instance().getLightGray(), 1, true));
-        topPanel.setPreferredSize(Size.TOP_PANEL_SIZE); 
-
-        panelIconos = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        panelIconos.setBackground(Palette.instance().getWhite());
-        panelIconos.setPreferredSize(Size.PANEL_ICONOS_SIZE); 
-
-        panelIcon = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        panelIcon.setBackground(Palette.instance().getWhite());
-        panelIcon.setPreferredSize(Size.PANEL_ICON_SIZE); 
-
-        addIconsToTopPanel();
-        topPanel.add(panelIconos, BorderLayout.EAST);
-        topPanel.add(panelIcon, BorderLayout.WEST);
-    }
-
-    private void addIconsToTopPanel() {
-        ImageIcon iconNotificationImg = new ImageIcon("../Assets/notification_icon2.png");
-        ImageIcon iconCalendarImg = new ImageIcon("../Assets/calendar_icon.png");
-        ImageIcon iconHomepageImg = new ImageIcon("../Assets/home_icon2.png");
-        ImageIcon iconProfileImg = new ImageIcon("../Assets/profile_icon2.png");
-        ImageIcon iconLogOutImg = new ImageIcon("../Assets/logout_icon2.png");
-        ImageIcon iconBHImg = new ImageIcon("../Assets/bh_icon.jpeg");
-
-        Image imgNotification = iconNotificationImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
-        Image imgCalendar = iconCalendarImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
-        Image imgHomepage = iconHomepageImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
-        Image imgProfile = iconProfileImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
-        Image imgLogOut = iconLogOutImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
-        Image imgBH = iconBHImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
-
-        JLabel iconNotification = new JLabel(new ImageIcon(imgNotification));
-        JLabel iconCalendar = new JLabel(new ImageIcon(imgCalendar));
-        JLabel iconHomepage = new JLabel(new ImageIcon(imgHomepage));
-        JLabel iconProfile = new JLabel(new ImageIcon(imgProfile));
-        JLabel iconLogOut = new JLabel(new ImageIcon(imgLogOut));
-        JLabel iconBH = new JLabel(new ImageIcon(imgBH));
-
-        panelIconos.add(iconNotification);
-        panelIconos.add(iconCalendar);
-        panelIconos.add(iconHomepage);
-        panelIconos.add(iconProfile);
-        panelIconos.add(iconLogOut);
-        panelIcon.add(iconBH);
-
-        addIconListeners(iconNotification, iconCalendar, iconHomepage, iconProfile, iconLogOut);
-    }
-
-    private void addIconListeners(JLabel iconNotification, JLabel iconCalendar, JLabel iconHomepage, JLabel iconProfile, JLabel iconLogOut) {
-        iconNotification.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                //JOptionPane.showMessageDialog(frame, "Redirigiendo a Notificaciones...");
-                frame.dispose();
-                new verificarPublicaciones();
-            }
-        });
-
-        iconCalendar.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                //JOptionPane.showMessageDialog(frame, "Redirigiendo al Calendario...");
-                frame.dispose();
-                new CalendarApp();
-            }
-        });
-
-        iconHomepage.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                //JOptionPane.showMessageDialog(frame, "Redirigiendo a la Página Principal...");
-                frame.dispose();
-                new consultarPublicaciones();
-            }
-        });
-
-        iconProfile.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                //JOptionPane.showMessageDialog(frame, "Redirigiendo al Perfil...");
-                frame.dispose();
-                new userProfile();
-            }
-        });
-
-        iconLogOut.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                int confirm = JOptionPane.showConfirmDialog(frame,
-                    "¿Seguro que deseas cerrar sesión?",
-                    "Cerrar Sesión",
-                    JOptionPane.YES_NO_OPTION
-                );
-                if (confirm == JOptionPane.YES_OPTION) {
-                    frame.dispose();
-                    new logIn();
-                    
-                }
-            }
-        });
+    private void initializeHeaderAndFooter() {
+        // Añadir el header y footer usando HeaderFactory y FooterFactory
+        JPanel header = HeaderFactory.createHeader();
+        JPanel footer = FooterFactory.createBottomPanel();
+        frame.add(header, BorderLayout.NORTH);
+        frame.add(footer, BorderLayout.SOUTH);
     }
 
     private void createMainPanel() {
@@ -158,7 +58,7 @@ public class createEvent extends JFrame{
         grayPanel = new JPanel(new GridBagLayout());
         grayPanel.setBackground(Palette.instance().getLightGray());
         grayPanel.setBorder(BorderFactory.createLineBorder(Palette.instance().getDarkGray(), 1, true));
-        grayPanel.setPreferredSize(Size.GRAY_PANEL_SIZE); 
+        grayPanel.setPreferredSize(Size.GRAY_PANEL_SIZE);
 
         addCreateEventLabel();
         createLeftPanel();
@@ -167,7 +67,7 @@ public class createEvent extends JFrame{
         gbcLeft.gridx = 0;
         gbcLeft.gridy = 1;
         gbcLeft.anchor = GridBagConstraints.NORTHWEST;
-        gbcLeft.insets = new Insets(10, 20, 10, 10); 
+        gbcLeft.insets = new Insets(10, 20, 10, 10);
         grayPanel.add(leftPanel, gbcLeft);
 
         createRightPanel();
@@ -175,7 +75,7 @@ public class createEvent extends JFrame{
         gbcRight.gridx = 1;
         gbcRight.gridy = 1;
         gbcRight.anchor = GridBagConstraints.NORTHWEST;
-        gbcRight.insets = new Insets(10, 10, 10, 20); 
+        gbcRight.insets = new Insets(10, 10, 10, 20);
         grayPanel.add(rightPanel, gbcRight);
 
         addSubmitButton();
@@ -189,9 +89,9 @@ public class createEvent extends JFrame{
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.gridwidth = 2; 
+        gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.NORTHWEST;
-        gbc.insets = new Insets(20, 20, 20, 20); 
+        gbc.insets = new Insets(20, 20, 20, 20);
         grayPanel.add(lblCreateEvent, gbc);
     }
 
@@ -200,7 +100,7 @@ public class createEvent extends JFrame{
         leftPanel.setBackground(Palette.instance().getLightGray());
 
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5); 
+        gbc.insets = new Insets(5, 5, 5, 5);
         gbc.anchor = GridBagConstraints.WEST;
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
@@ -257,7 +157,7 @@ public class createEvent extends JFrame{
         rightPanel.setBackground(Palette.instance().getLightGray());
 
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5); 
+        gbc.insets = new Insets(5, 5, 5, 5);
         gbc.anchor = GridBagConstraints.WEST;
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
@@ -299,7 +199,7 @@ public class createEvent extends JFrame{
             }
         };
 
-        btnSubmit.setPreferredSize(Size.BUTTON_SIZE); 
+        btnSubmit.setPreferredSize(Size.BUTTON_SIZE);
         btnSubmit.setForeground(Palette.instance().getDarkGreen());
         btnSubmit.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
         btnSubmit.setContentAreaFilled(false);
@@ -316,20 +216,12 @@ public class createEvent extends JFrame{
         gbc.gridy = 2;
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.CENTER;
-        gbc.insets = new Insets(20, 0, 20, 0); 
+        gbc.insets = new Insets(20, 0, 20, 0);
         grayPanel.add(btnSubmit, gbc);
     }
 
-    private void createBottomPanel() {
-        bottomPanel = new JPanel();
-        bottomPanel.setBackground(Palette.instance().getBeige());
-        bottomPanel.setPreferredSize(Size.BOTTOM_PANEL_SIZE); 
-    }
-
     private void assembleFrame() {
-        frame.add(topPanel, BorderLayout.NORTH);
         frame.add(panel, BorderLayout.CENTER);
-        frame.add(bottomPanel, BorderLayout.SOUTH);
         frame.setVisible(true);
     }
 

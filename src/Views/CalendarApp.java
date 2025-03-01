@@ -1,13 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import utils.FooterFactory;
+import utils.HeaderFactory;
 
-public class CalendarApp extends Layout {
+public class CalendarApp {
+    private JFrame frame;
     private JLabel monthLabel;
     private JPanel[] dayPanels;
     private int month, year;
@@ -17,23 +17,40 @@ public class CalendarApp extends Layout {
     Calendar cal;
 
     public CalendarApp() {
-        super("Calendario"); // Llama al constructor de Layout con el título del frame
-        panel = new JPanel(new BorderLayout()); // Inicializa el panel
+        initializeFrame();
+        initializeHeaderAndFooter();
         initializeCalendarPanel();
         initializeMonthPanel();
         initializeDaysPanel();
         initializeCalendar();
 
-        // Ensamblar el frame usando el método de Layout
-        assembleFrame();
+        // Hacer visible el frame
+        frame.setVisible(true);
+    }
+
+    private void initializeFrame() {
+        frame = new JFrame("Calendario");
+        frame.setTitle("Calendario");
+        frame.setSize(1000, 700);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+        frame.setLocationRelativeTo(null);
+    }
+
+    private void initializeHeaderAndFooter() {
+        // Añadir el header y footer usando HeaderFactory y FooterFactory
+        JPanel header = HeaderFactory.createHeader();
+        JPanel footer = FooterFactory.createBottomPanel();
+        frame.add(header, BorderLayout.NORTH);
+        frame.add(footer, BorderLayout.SOUTH);
     }
 
     private void initializeCalendarPanel() {
         calendarPanel = new JPanel(new BorderLayout());
-        panel.add(calendarPanel, BorderLayout.CENTER);
-        calendarPanel.addComponentListener(new ComponentAdapter() {
+        frame.add(calendarPanel, BorderLayout.CENTER);
+        frame.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent componentEvent) {
-                calendarPanel.setBounds(10, 100, panel.getWidth() - 40, panel.getHeight() - 150);
+                calendarPanel.setBounds(10, 100, frame.getWidth() - 40, frame.getHeight() - 150);
                 calendarPanel.revalidate();
                 calendarPanel.repaint();
             }

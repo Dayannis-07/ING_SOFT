@@ -1,33 +1,33 @@
 
 import javax.swing.*;
+import utils.Palette;
+import utils.Size;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
 
-import Controllers.logInController;
-import utils.Palette;
-import utils.Size;
-
-abstract class Layout extends JFrame {
+public abstract class Layout extends JFrame {
     private JFrame frame;
     private JPanel topPanel;
     private JPanel panelIconos;
     private JPanel panelIcon;
-    public JPanel panel;
-    private JPanel grayPanel;
+    protected JPanel panel; // Cambiar a protected para que sea accesible en subclases
     private JPanel bottomPanel;
     private String frameTitle;
 
     public Layout(String title) {
         frameTitle = title;
+        createFrame();
+        createTopPanel();
+        createBottomPanel();
     }
 
     private void createFrame() {
         frame = new JFrame(frameTitle);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(Size.FRAME_SIZE); 
+        frame.setSize(Size.FRAME_SIZE);
         frame.setLayout(new BorderLayout());
     }
 
@@ -35,15 +35,15 @@ abstract class Layout extends JFrame {
         topPanel = new JPanel(new BorderLayout());
         topPanel.setBackground(Palette.instance().getWhite());
         topPanel.setBorder(BorderFactory.createLineBorder(Palette.instance().getLightGray(), 1, true));
-        topPanel.setPreferredSize(Size.TOP_PANEL_SIZE); 
+        topPanel.setPreferredSize(Size.TOP_PANEL_SIZE);
 
         panelIconos = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         panelIconos.setBackground(Palette.instance().getWhite());
-        panelIconos.setPreferredSize(Size.PANEL_ICONOS_SIZE); 
+        panelIconos.setPreferredSize(Size.PANEL_ICONOS_SIZE);
 
         panelIcon = new JPanel(new FlowLayout(FlowLayout.LEFT));
         panelIcon.setBackground(Palette.instance().getWhite());
-        panelIcon.setPreferredSize(Size.PANEL_ICON_SIZE); 
+        panelIcon.setPreferredSize(Size.PANEL_ICON_SIZE);
 
         addIconsToTopPanel();
         topPanel.add(panelIconos, BorderLayout.EAST);
@@ -78,7 +78,6 @@ abstract class Layout extends JFrame {
         iconCalendar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                //JOptionPane.showMessageDialog(frame, "Redirigiendo al Calendario...");
                 frame.dispose();
                 new CalendarApp();
             }
@@ -87,7 +86,6 @@ abstract class Layout extends JFrame {
         iconHomepage.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                //JOptionPane.showMessageDialog(frame, "Redirigiendo a la Página Principal...");
                 frame.dispose();
                 new consultarPublicaciones();
             }
@@ -96,7 +94,6 @@ abstract class Layout extends JFrame {
         iconProfile.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                //JOptionPane.showMessageDialog(frame, "Redirigiendo al Perfil...");
                 frame.dispose();
                 new userProfile();
             }
@@ -106,22 +103,23 @@ abstract class Layout extends JFrame {
     private void createBottomPanel() {
         bottomPanel = new JPanel();
         bottomPanel.setBackground(Palette.instance().getBeige());
-        bottomPanel.setPreferredSize(Size.BOTTOM_PANEL_SIZE); 
+        bottomPanel.setPreferredSize(Size.BOTTOM_PANEL_SIZE);
     }
 
     /* 
-    Aniadir todos los componentes al panel principal
-    (panel) antes de llamar a este metodo
+    Añadir todos los componentes al panel principal
+    (panel) antes de llamar a este método
     */
     public void assembleFrame() {
-        createFrame();
-        createTopPanel();
-        createBottomPanel();
-
         frame.add(topPanel, BorderLayout.NORTH);
         frame.add(panel, BorderLayout.CENTER);
         frame.add(bottomPanel, BorderLayout.SOUTH);
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
     }
+
+    public JFrame getFrame() {
+        return frame;
+    }
 }
+

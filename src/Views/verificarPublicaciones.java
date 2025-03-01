@@ -1,5 +1,7 @@
 import javax.swing.*;
 
+import utils.FooterFactory;
+import utils.HeaderFactory;
 import utils.Palette;
 import utils.Size;
 
@@ -10,12 +12,29 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.awt.event.MouseAdapter;
 
-public class verificarPublicaciones extends Layout{
+public class verificarPublicaciones extends JFrame{
+
+    JPanel panel;
 
     public verificarPublicaciones() {
-        super("Verificar Publicaciones");
+        // set up frame options
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(Size.FRAME_SIZE); 
+        setLayout(new BorderLayout());
+
+        // build sections
+        JPanel header = HeaderFactory.createHeader();
+        JPanel footer = FooterFactory.createBottomPanel();
+
         createMainPanel();
-        assembleFrame();
+
+        // add secctions
+        add(header, BorderLayout.NORTH);
+        add(panel, BorderLayout.CENTER);
+        add(footer, BorderLayout.SOUTH);
+
+        setVisible(true);
+        setLocationRelativeTo(null);
     }
 
     private void createMainPanel() {

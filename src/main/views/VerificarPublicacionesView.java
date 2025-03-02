@@ -64,11 +64,7 @@ public class VerificarPublicacionesView extends JFrame{
     }
 
     private void createPublicationsPanel() {
-        String[][] publicaciones = {
-            { "Título Publicación 1", "2023-10-01", "Ubicación 1" },
-            { "Título Publicación 2", "2023-10-02", "Ubicación 2" },
-            { "Título Publicación 3", "2023-10-03", "Ubicación 3" }
-        };
+        ArrayList<String[]>publicaciones = consultarPublicacionesController.getPosts(false);
 
         JPanel publicationsPanel = new JPanel();
         publicationsPanel.setLayout(new BoxLayout(publicationsPanel, BoxLayout.Y_AXIS));
@@ -171,6 +167,7 @@ public class VerificarPublicacionesView extends JFrame{
             @Override
             public void mouseClicked(MouseEvent e) {
                 JOptionPane.showMessageDialog(panel, "Publicación aceptada: " + publicacion[0]);
+                consultarPublicacionesController.checkPost(publicacion[0]);
             }
         });
 
@@ -178,6 +175,7 @@ public class VerificarPublicacionesView extends JFrame{
             @Override
             public void mouseClicked(MouseEvent e) {
                 JOptionPane.showMessageDialog(panel, "Publicación denegada: " + publicacion[0]);
+                consultarPublicacionesController.denyPost(publicacion[0]);
             }
         });
 

@@ -94,7 +94,8 @@ public class consultarPublicacionesController {
         catch (IOException e) { 
   
             // printing the error 
-            e.printStackTrace(); 
+            System.out.println("no conseguido");
+            return "[]";
         } 
   
         // returning the string 

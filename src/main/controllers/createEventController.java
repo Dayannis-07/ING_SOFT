@@ -95,7 +95,8 @@ public class createEventController {
         catch (IOException e) { 
   
             // printing the error 
-            e.printStackTrace(); 
+            System.out.println("no coneguido");
+            return "[]";
         } 
   
         // returning the string 

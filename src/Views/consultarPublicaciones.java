@@ -6,8 +6,7 @@ import utils.FooterFactory;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseAdapter;
+
 
 public class consultarPublicaciones {
     private JFrame frame;
@@ -25,7 +24,7 @@ public class consultarPublicaciones {
     }
 
     private void initializeFrame() {
-        frame = new JFrame("Consultar Posts");
+        frame = new JFrame("Consultar Publicaciones");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(700, 500);
         frame.setLayout(new BorderLayout());
@@ -52,7 +51,7 @@ public class consultarPublicaciones {
         JPanel titulo = new JPanel(new BorderLayout());
         titulo.setBackground(Color.WHITE);
 
-        JLabel lblConsultarPosts = new JLabel("Consultar posts");
+        JLabel lblConsultarPosts = new JLabel("Consultar publicaciones");
         lblConsultarPosts.setFont(new Font("Arial", Font.BOLD, 20));
 
         titulo.add(lblConsultarPosts, BorderLayout.WEST);

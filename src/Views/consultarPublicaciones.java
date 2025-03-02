@@ -6,8 +6,8 @@ import utils.FooterFactory;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseAdapter;
+import java.net.URL;
+
 
 public class consultarPublicaciones {
     private JFrame frame;
@@ -51,14 +51,41 @@ public class consultarPublicaciones {
     private void addTitleToPanel() {
         JPanel titulo = new JPanel(new BorderLayout());
         titulo.setBackground(Color.WHITE);
-
+    
         JLabel lblConsultarPosts = new JLabel("Consultar posts");
         lblConsultarPosts.setFont(new Font("Arial", Font.BOLD, 20));
-
+    
+        JButton searchButton = createSearchButton();
+        searchButton.setPreferredSize(new Dimension(30, 30)); // Ajustar tamaño del botón
+        titulo.add(searchButton, BorderLayout.EAST);
+    
         titulo.add(lblConsultarPosts, BorderLayout.WEST);
         panel.add(titulo);
     }
-
+    
+    private JButton createSearchButton() {
+        URL iconURL = getClass().getResource("/Assets/search_icon.png");
+        if (iconURL == null) {
+            System.err.println("Error loading image: /Assets/search_icon.png");
+            return new JButton("Search");
+        }
+        ImageIcon searchIcon = new ImageIcon(iconURL);
+        Image searchImage = searchIcon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+        searchIcon = new ImageIcon(searchImage);
+    
+        JButton searchButton = new JButton(searchIcon);
+        searchButton.setPreferredSize(new Dimension(30, 30));
+        searchButton.setBorder(BorderFactory.createEmptyBorder());
+        searchButton.setContentAreaFilled(false);
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //showSearchDialog();
+            }
+        });
+        return searchButton;
+    }
+    
     private void createPosts() {
         String[][] posts = {
             {"Título Post 1", "2023-10-01", "Ubicación 1"},

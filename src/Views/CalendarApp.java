@@ -89,37 +89,37 @@ public class CalendarApp {
     }
 
     private void createMonthButtons(JPanel monthPanel) {
-        ImageIcon nextIcon = new ImageIcon("../Assets/right_arrow.png");
-        ImageIcon prevIcon = new ImageIcon("../Assets/left_arrow.png");
-
+        ImageIcon nextIcon = new ImageIcon(HeaderFactory.class.getResource("/Assets/right_arrow.png"));
+        ImageIcon prevIcon = new ImageIcon(HeaderFactory.class.getResource("/Assets/left_arrow.png"));
+    
         Image nextImage = nextIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         Image prevImage = prevIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-
+    
         nextIcon = new ImageIcon(nextImage);
         prevIcon = new ImageIcon(prevImage);
-
+    
         nextMonthLabel = new JLabel(nextIcon);
         nextMonthLabel.setBounds(200, 60, 50, 50);
         prevMonthLabel = new JLabel(prevIcon);
         prevMonthLabel.setBounds(20, 60, 50, 50);
-
+    
         monthPanel.add(prevMonthLabel);
         monthPanel.add(monthLabel);
         monthPanel.add(nextMonthLabel);
-
+    
         nextMonthLabel.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 nextMonth();
             }
         });
-
+    
         prevMonthLabel.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 prevMonth();
             }
         });
     }
-
+    
     private JPanel createDaysPanel() {
         JPanel daysPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();

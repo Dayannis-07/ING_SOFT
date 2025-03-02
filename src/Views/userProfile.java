@@ -89,7 +89,7 @@ public class userProfile extends JFrame {
     }
 
     private void createCircleImage() {
-        ImageIcon userImage = new ImageIcon("../Assets/userProfileImage.jpg");
+        ImageIcon userImage = new ImageIcon("/Assets/userProfileImage.jpg");
         Image userImageCircle = userImage.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         userImageProfile = new JLabel(new ImageIcon(userImageCircle)); 
 
@@ -268,7 +268,7 @@ public class userProfile extends JFrame {
         header.setBorder(BorderFactory.createLineBorder(Palette.instance().getOtherLightGray(), 1, true));
         header.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5)); 
 
-        ImageIcon iconViewMoreImg = new ImageIcon("../Assets/viewMore.png");
+        ImageIcon iconViewMoreImg = new ImageIcon("/Assets/viewMore.png");
 
         Image imgViewMore = iconViewMoreImg.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 
@@ -296,8 +296,8 @@ public class userProfile extends JFrame {
         footer.setBorder(BorderFactory.createLineBorder(Palette.instance().getOtherLightGray(), 1, true));
         footer.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5)); 
 
-        ImageIcon iconLikeImg = new ImageIcon("../Assets/like.png");
-        ImageIcon iconComentImg = new ImageIcon("../Assets/coment.png");
+        ImageIcon iconLikeImg = new ImageIcon("/Assets/like.png");
+        ImageIcon iconComentImg = new ImageIcon("/Assets/coment.png");
 
         Image imgLike = iconLikeImg.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         Image imgComent = iconComentImg.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);

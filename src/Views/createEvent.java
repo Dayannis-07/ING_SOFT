@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import utils.Palette;
 import utils.Size;
+import utils.FooterFactory;
+import utils.HeaderFactory;
 import Controllers.createEventController;
 
 public class createEvent extends JFrame {
@@ -33,12 +35,12 @@ public class createEvent extends JFrame {
         frame.setLayout(new BorderLayout());
     }
 
-    private void initializeHeaderAndFooter() {
-        // Añadir el header y footer usando HeaderFactory y FooterFactory
-        JPanel header = new HeaderFactory(frame).createHeader();
-        JPanel footer = new FooterFactory(frame).createBottomPanel();
-        frame.add(header, BorderLayout.NORTH);
-        frame.add(footer, BorderLayout.SOUTH);
+    private void initializeHeaderAndFooter() { 
+        // Añadir el header y footer usando HeaderFactory y FooterFactory 
+        JPanel header = HeaderFactory.createHeader(); 
+        JPanel footer = FooterFactory.createBottomPanel(); 
+        frame.add(header, BorderLayout.NORTH); 
+        frame.add(footer, BorderLayout.SOUTH); 
     }
 
     private void createMainPanel() {

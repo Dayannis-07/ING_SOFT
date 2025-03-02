@@ -1,10 +1,13 @@
 import javax.swing.*;
 import utils.Palette;
 import utils.Size;
+import utils.FooterFactory;
+import utils.HeaderFactory;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.util.ArrayList;
 
 import Controllers.consultarPublicacionesController;
@@ -25,20 +28,19 @@ public class consultarPublicaciones {
     }
 
     private void initializeFrame() {
-        frame = new JFrame("Consultar Posts");
+        frame = new JFrame("Consultar Publicaciones");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(700, 500);
         frame.setLayout(new BorderLayout());
         frame.setLocationRelativeTo(null);
     }
 
-    private void initializeHeaderAndFooter() {
-        // Añadir el header y footer usando HeaderFactory y FooterFactory
-        JPanel header = new HeaderFactory(frame).createHeader();
-        JPanel footer = new FooterFactory(frame).createBottomPanel();
-        //JPanel footer = FooterFactory.createBottomPanel();
-        frame.add(header, BorderLayout.NORTH);
-        frame.add(footer, BorderLayout.SOUTH);
+    private void initializeHeaderAndFooter() { 
+        // Añadir el header y footer usando HeaderFactory y FooterFactory 
+        JPanel header = HeaderFactory.createHeader(); 
+        JPanel footer = FooterFactory.createBottomPanel(); 
+        frame.add(header, BorderLayout.NORTH); 
+        frame.add(footer, BorderLayout.SOUTH); 
     }
 
     private void initializeMainPanel() {
@@ -52,14 +54,52 @@ public class consultarPublicaciones {
     private void addTitleToPanel() {
         JPanel titulo = new JPanel(new BorderLayout());
         titulo.setBackground(Color.WHITE);
-
+    
         JLabel lblConsultarPosts = new JLabel("Consultar posts");
         lblConsultarPosts.setFont(new Font("Arial", Font.BOLD, 20));
-
+    
+        JButton searchButton = createSearchButton();
+        searchButton.setPreferredSize(new Dimension(30, 30)); // Ajustar tamaño del botón
+        titulo.add(searchButton, BorderLayout.EAST);
+    
         titulo.add(lblConsultarPosts, BorderLayout.WEST);
         panel.add(titulo);
     }
-
+    
+    private JButton createSearchButton() {
+        URL iconURL = getClass().getResource("/Assets/search_icon.png");
+        if (iconURL == null) {
+            System.err.println("Error loading image: /Assets/search_icon.png");
+            return new JButton("Search");
+        }
+        ImageIcon searchIcon = new ImageIcon(iconURL);
+        Image searchImage = searchIcon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+        searchIcon = new ImageIcon(searchImage);
+    
+        JButton searchButton = new JButton(searchIcon);
+        searchButton.setPreferredSize(new Dimension(30, 30));
+        searchButton.setBorder(BorderFactory.createEmptyBorder());
+        searchButton.setContentAreaFilled(false);
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                buscarPublicacionView buscarView = new buscarPublicacionView(frame);
+                buscarView.addBuscarListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        String fecha = buscarView.getFecha();
+                        String titulo = buscarView.getTitulo();
+                        JOptionPane.showMessageDialog(frame, "Buscando publicaciones con Fecha: " + fecha + " y Título: " + titulo);
+                        // Aquí puedes añadir la lógica para filtrar las publicaciones
+                        buscarView.dispose();
+                    }
+                });
+                buscarView.setVisible(true);
+            }
+        });
+        return searchButton;
+    }
+    
     private void createPosts() {
         /*String[][] posts = {
             {"Título Post 1", "2023-10-01", "Ubicación 1"},

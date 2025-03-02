@@ -8,6 +8,8 @@ import java.util.List;
 
 import utils.Palette;
 import utils.Size;
+import utils.FooterFactory;
+import utils.HeaderFactory;
 
 public class userProfile extends JFrame {
     private JFrame frame;
@@ -39,13 +41,14 @@ public class userProfile extends JFrame {
         frame.setLayout(new BorderLayout());
     }
 
-    private void initializeHeaderAndFooter() {
-        // Añadir el header y footer usando HeaderFactory y FooterFactory
-        JPanel header = new HeaderFactory(frame).createHeader();
-        JPanel footer = new FooterFactory(frame).createBottomPanel();
-        frame.add(header, BorderLayout.NORTH);
-        frame.add(footer, BorderLayout.SOUTH);
+    private void initializeHeaderAndFooter() { 
+        // Añadir el header y footer usando HeaderFactory y FooterFactory 
+        JPanel header = HeaderFactory.createHeader(); 
+        JPanel footer = FooterFactory.createBottomPanel(); 
+        frame.add(header, BorderLayout.NORTH); 
+        frame.add(footer, BorderLayout.SOUTH); 
     }
+
 
     private void createMainPanel() {
         panel = new JPanel(new GridBagLayout());
@@ -86,7 +89,7 @@ public class userProfile extends JFrame {
     }
 
     private void createCircleImage() {
-        ImageIcon userImage = new ImageIcon("../Assets/userProfileImage.jpg");
+        ImageIcon userImage = new ImageIcon("/Assets/userProfileImage.jpg");
         Image userImageCircle = userImage.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         userImageProfile = new JLabel(new ImageIcon(userImageCircle)); 
 
@@ -265,7 +268,7 @@ public class userProfile extends JFrame {
         header.setBorder(BorderFactory.createLineBorder(Palette.instance().getOtherLightGray(), 1, true));
         header.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5)); 
 
-        ImageIcon iconViewMoreImg = new ImageIcon("../Assets/viewMore.png");
+        ImageIcon iconViewMoreImg = new ImageIcon("/Assets/viewMore.png");
 
         Image imgViewMore = iconViewMoreImg.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 
@@ -293,8 +296,8 @@ public class userProfile extends JFrame {
         footer.setBorder(BorderFactory.createLineBorder(Palette.instance().getOtherLightGray(), 1, true));
         footer.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5)); 
 
-        ImageIcon iconLikeImg = new ImageIcon("../Assets/like.png");
-        ImageIcon iconComentImg = new ImageIcon("../Assets/coment.png");
+        ImageIcon iconLikeImg = new ImageIcon("/Assets/like.png");
+        ImageIcon iconComentImg = new ImageIcon("/Assets/coment.png");
 
         Image imgLike = iconLikeImg.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         Image imgComent = iconComentImg.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
@@ -324,7 +327,7 @@ public class userProfile extends JFrame {
     }
 
     private void loadImagePaths() {
-        File folder = new File("../Assets/publications");
+        File folder = new File("/Assets/publications");
         if (folder.exists() && folder.isDirectory()) {
             File[] files = folder.listFiles((dir, name) -> name.toLowerCase().endsWith(".jpg") || name.toLowerCase().endsWith(".png"));
             if (files != null) {

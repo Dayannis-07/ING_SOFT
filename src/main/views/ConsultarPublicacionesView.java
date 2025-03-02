@@ -69,12 +69,7 @@ public class ConsultarPublicacionesView {
     }
     
     private JButton createSearchButton() {
-        URL iconURL = getClass().getResource("/Assets/search_icon.png");
-        if (iconURL == null) {
-            System.err.println("Error loading image: /Assets/search_icon.png");
-            return new JButton("Search");
-        }
-        ImageIcon searchIcon = new ImageIcon(iconURL);
+        ImageIcon searchIcon = loadIcon("/assets/search_icon.png");
         Image searchImage = searchIcon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         searchIcon = new ImageIcon(searchImage);
     
@@ -209,6 +204,16 @@ public class ConsultarPublicacionesView {
         rightPanel.add(centerPanel, BorderLayout.CENTER);
 
         return rightPanel;
+    }
+
+    static private ImageIcon loadIcon(String path) {
+        URL url = HeaderFactory.class.getResource(path);
+        if (url != null) {
+            return new ImageIcon(url);
+        } else {
+            System.err.println("Error loading image: " + path);
+            return null;
+        }
     }
 
     public static void main(String[] args) {

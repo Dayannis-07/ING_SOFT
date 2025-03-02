@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.net.URL;
 import java.util.ArrayList;
 import java.awt.event.MouseAdapter;
 
@@ -154,8 +155,8 @@ public class VerificarPublicacionesView extends JFrame{
         centerPanel.setLayout(new BorderLayout(10, 20));
         centerPanel.setBackground(Color.WHITE);
 
-        ImageIcon iconCheckImg = new ImageIcon("../Assets/check.png");
-        ImageIcon iconXImg = new ImageIcon("../Assets/remove.png");
+        ImageIcon iconCheckImg = loadIcon("/assets/check.png");
+        ImageIcon iconXImg = loadIcon("/assets/remove.png");
 
         Image imgCheck = iconCheckImg.getImage().getScaledInstance(45, 45, Image.SCALE_SMOOTH);
         Image imgX = iconXImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
@@ -187,7 +188,19 @@ public class VerificarPublicacionesView extends JFrame{
         return rightPanel;
     }
 
+    static private ImageIcon loadIcon(String path) {
+        URL url = HeaderFactory.class.getResource(path);
+        if (url != null) {
+            return new ImageIcon(url);
+        } else {
+            System.err.println("Error loading image: " + path);
+            return null;
+        }
+    }
+
     public static void main(String[] args) {
         new VerificarPublicacionesView();
     }
+
+
 }

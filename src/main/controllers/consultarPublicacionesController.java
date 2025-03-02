@@ -27,6 +27,57 @@ public class consultarPublicacionesController {
         return posts;
     }
 
+    public static ArrayList<String[]> filterByBoth(String dateFilter, String titleFilter){
+        JSONArray postsArray = new JSONArray(fileToString("posts.json"));
+        ArrayList<String[]> posts = new ArrayList<>();
+
+        for (int i = 0; i < postsArray.length(); i++){
+            JSONObject aux = postsArray.getJSONObject(i);
+            if (!aux.getBoolean("Approved") || !aux.getString("Date").equals(dateFilter) || !aux.getString("Title").equals(titleFilter)) continue;
+            System.out.println("passed");
+            String[] s = {aux.getString("Title"), aux.getString("Date"), aux.getString("Place")};
+            posts.add(s);
+        }
+
+        for(int i = 0; i < posts.size(); i++) System.out.println(posts.get(i)[0]);
+
+        return posts;
+    }
+
+    public static ArrayList<String[]> filterByDate(String dateFilter){
+        JSONArray postsArray = new JSONArray(fileToString("posts.json"));
+        ArrayList<String[]> posts = new ArrayList<>();
+
+        for (int i = 0; i < postsArray.length(); i++){
+            JSONObject aux = postsArray.getJSONObject(i);
+            if (!aux.getBoolean("Approved") || !aux.getString("Date").equals(dateFilter)) continue;
+            System.out.println("passed");
+            String[] s = {aux.getString("Title"), aux.getString("Date"), aux.getString("Place")};
+            posts.add(s);
+        }
+
+        for(int i = 0; i < posts.size(); i++) System.out.println(posts.get(i)[0]);
+
+        return posts;
+    }
+
+    public static ArrayList<String[]> filterByTitle(String titleFilter){
+        JSONArray postsArray = new JSONArray(fileToString("posts.json"));
+        ArrayList<String[]> posts = new ArrayList<>();
+
+        for (int i = 0; i < postsArray.length(); i++){
+            JSONObject aux = postsArray.getJSONObject(i);
+            if (!aux.getBoolean("Approved") || !aux.getString("Title").equals(titleFilter)) continue;
+            System.out.println("passed");
+            String[] s = {aux.getString("Title"), aux.getString("Date"), aux.getString("Place")};
+            posts.add(s);
+        }
+
+        for(int i = 0; i < posts.size(); i++) System.out.println(posts.get(i)[0]);
+
+        return posts;
+    }
+
     public static void checkPost(String title){
         JSONArray postsArray = new JSONArray(fileToString("posts.json"));
         

@@ -93,6 +93,11 @@ public class ConsultarPublicacionesView {
                         String titulo = buscarView.getTitulo();
                         JOptionPane.showMessageDialog(frame, "Buscando publicaciones con Fecha: " + fecha + " y Título: " + titulo);
                         // Aquí puedes añadir la lógica para filtrar las publicaciones
+                        panel.removeAll();
+                        addTitleToPanel();
+                        createPostsWithFilter(fecha, titulo);
+                        panel.revalidate();
+                        frame.repaint();
                         buscarView.dispose();
                     }
                 });
@@ -103,18 +108,26 @@ public class ConsultarPublicacionesView {
     }
     
     private void createPosts() {
-        /*String[][] posts = {
-            {"Título Post 1", "2023-10-01", "Ubicación 1"},
-            {"Título Post 2", "2023-10-02", "Ubicación 2"},
-            {"Título Post 3", "2023-10-03", "Ubicación 3"},
-            {"Título Post 4", "2023-10-04", "Ubicación 4"},
-            {"Título Post 5", "2023-10-05", "Ubicación 5"},
-            {"Título Post 6", "2023-10-06", "Ubicación 6"}
-        };*/
-        
-        
         ArrayList<String[]> posts = consultarPublicacionesController.getPosts(true);
 
+        for (String[] post : posts) {
+            JPanel pubPanel = createPostPanel(post);
+            panel.add(pubPanel);
+        }
+    }
+
+    private void createPostsWithFilter(String date, String title){
+        ArrayList<String[]> posts;
+        
+        if (date.equals("dd/mm/yyyy") && title.equals("")){
+            posts = consultarPublicacionesController.getPosts(true);
+        }else if(title.equals("")){
+            posts = consultarPublicacionesController.filterByDate(date);
+        }else if(date.equals("dd/mm/yyyy")){
+            posts = consultarPublicacionesController.filterByTitle(title);
+        }else{
+            posts = consultarPublicacionesController.filterByBoth(date, title);
+        }
 
         for (String[] post : posts) {
             JPanel pubPanel = createPostPanel(post);

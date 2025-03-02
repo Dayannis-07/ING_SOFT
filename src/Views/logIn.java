@@ -20,9 +20,6 @@ public class logIn extends JFrame{
     private JTextField txtEmail;
     private JPasswordField txtPassword;
 
-    private String userEmail;
-    private String userType;
-
     public logIn() {
         createFrame();
         createTopPanel();
@@ -205,21 +202,16 @@ public class logIn extends JFrame{
 
         btnLogin.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                String email = txtEmail.getText();
-                String password = new String(txtPassword.getPassword());
-    
-                String message = logInController.validateCredentials(email, password);
-                
-                if (message.startsWith("Inicio")) {  // Si el login es exitoso
-                    JOptionPane.showMessageDialog(frame, message, "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                    frame.dispose();  // Cerrar la ventana actual
-                    new consultarPublicaciones();  // Abrir la nueva ventana (reemplaza "Dashboard" con tu clase de destino)
-                } else {
-                    JOptionPane.showMessageDialog(frame, message, "Error", JOptionPane.ERROR_MESSAGE);
+                public void actionPerformed(ActionEvent e) {
+                    String email = txtEmail.getText();
+                    String password = new String(txtPassword.getPassword());
+            
+                    String message = logInController.validateCredentials(email, password);
+                    JOptionPane.showMessageDialog(frame, message, message.startsWith("Inicio") ? "Éxito" : "Error",
+                            message.startsWith("Inicio") ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.ERROR_MESSAGE);
                 }
             }
-        });
+        );
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;

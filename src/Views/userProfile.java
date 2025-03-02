@@ -2,49 +2,118 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
 import utils.Palette;
 import utils.Size;
 
-public class userProfile extends JFrame {
+public class userProfile {
     private JFrame frame;
+    private JPanel topPanel;
+    private JPanel panelIconos;
+    private JPanel panelIcon;
     private JPanel panel;
     private JPanel panelGris;
     private JPanel panelBlue;
     private JPanel panelCenter;
     private JPanel panelNotification;
+    private JPanel bottomPanel;
     private JPanel notificationsContainer;
     private JScrollPane scrollPane;
     private JLabel userImageProfile;
     private JPanel header;
     private JPanel footer;
     private JPanel space;
-    private String imagePath;
-    private List<String> imagePaths = new ArrayList<>();
 
     public userProfile() {
         createFrame();
-        initializeHeaderAndFooter();
+        createTopPanel();
         createMainPanel();
+        createBottomPanel();
         assembleFrame();
     }
 
     private void createFrame() {
-        frame = new JFrame("Perfil del usuario");
+        frame = new JFrame("Perfil de usuario");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(Size.FRAME_SIZE);
+        frame.setSize(Size.FRAME_SIZE); 
         frame.setLayout(new BorderLayout());
     }
 
-    private void initializeHeaderAndFooter() {
-        // Añadir el header y footer usando HeaderFactory y FooterFactory
-        JPanel header = new HeaderFactory(frame).createHeader();
-        JPanel footer = new FooterFactory(frame).createBottomPanel();
-        frame.add(header, BorderLayout.NORTH);
-        frame.add(footer, BorderLayout.SOUTH);
+    private void createTopPanel() {
+        topPanel = new JPanel(new BorderLayout());
+        topPanel.setBackground(Palette.instance().getWhite());
+        topPanel.setBorder(BorderFactory.createLineBorder(Palette.instance().getLightGray(), 1, true));
+        topPanel.setPreferredSize(Size.TOP_PANEL_SIZE); 
+
+        panelIconos = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        panelIconos.setBackground(Palette.instance().getWhite());
+        panelIconos.setPreferredSize(Size.PANEL_ICONOS_SIZE); 
+
+        panelIcon = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        panelIcon.setBackground(Palette.instance().getWhite());
+        panelIcon.setPreferredSize(Size.PANEL_ICON_SIZE); 
+
+        addIconsToTopPanel();
+        topPanel.add(panelIconos, BorderLayout.EAST);
+        topPanel.add(panelIcon, BorderLayout.WEST);
+    }
+
+    private void addIconsToTopPanel() {
+        ImageIcon iconCalendarImg = new ImageIcon("../Assets/calendar_icon.png");
+        ImageIcon iconHomepageImg = new ImageIcon("../Assets/home_icon2.png");
+        ImageIcon iconLogOutImg = new ImageIcon("../Assets/logout_icon2.png");
+        ImageIcon iconBHImg = new ImageIcon("../Assets/bh_icon.jpeg");
+
+        Image imgCalendar = iconCalendarImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+        Image imgHomepage = iconHomepageImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+        Image imgLogOut = iconLogOutImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+        Image imgBH = iconBHImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+
+        JLabel iconCalendar = new JLabel(new ImageIcon(imgCalendar));
+        JLabel iconHomepage = new JLabel(new ImageIcon(imgHomepage));
+        JLabel iconLogOut = new JLabel(new ImageIcon(imgLogOut));
+        JLabel iconBH = new JLabel(new ImageIcon(imgBH));
+
+        panelIconos.add(iconCalendar);
+        panelIconos.add(iconHomepage);
+        panelIconos.add(iconLogOut);
+        panelIcon.add(iconBH);
+
+        addIconListeners(iconCalendar, iconHomepage, iconLogOut);
+    }
+
+    private void addIconListeners(JLabel iconCalendar, JLabel iconHomepage, JLabel iconLogOut) {
+        iconCalendar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                //JOptionPane.showMessageDialog(frame, "Redirigiendo al Calendario...");
+                frame.dispose();
+                new CalendarApp();
+            }
+        });
+
+        iconHomepage.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                //JOptionPane.showMessageDialog(frame, "Redirigiendo a la Página Principal...");
+                frame.dispose();
+                new consultarPublicaciones();
+            }
+        });
+
+        iconLogOut.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int confirm = JOptionPane.showConfirmDialog(frame,
+                    "¿Seguro que deseas cerrar sesión?",
+                    "Cerrar Sesión",
+                    JOptionPane.YES_NO_OPTION
+                );
+                if (confirm == JOptionPane.YES_OPTION) {
+                    frame.dispose();
+                    new logIn();
+                }
+            }
+        });
     }
 
     private void createMainPanel() {
@@ -97,10 +166,6 @@ public class userProfile extends JFrame {
         lblNotification.setFont(new Font("Arial", Font.BOLD, 20));
         lblNotification.setForeground(Palette.instance().getWhite());
 
-        lblNotification.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); // Cambiar cursor al de "mano"
-
-        addSetCursor(lblNotification);
-
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -110,20 +175,6 @@ public class userProfile extends JFrame {
 
         panelBlue.add(lblNotification, gbc);
 
-    }
-
-    private void addSetCursor(JLabel lblNotification) {
-        lblNotification.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                try {
-                    frame.dispose();
-                    new verificarPublicaciones();
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
     }
 
     private void activity(){
@@ -243,10 +294,9 @@ public class userProfile extends JFrame {
         panelCenter.setBorder(BorderFactory.createLineBorder(Palette.instance().getDarkGray(), 1, true));
         //panelCenter.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 
-        createPanelNotification(imagePath);
-        scrollPanelNotification();
+        createPanelNotification();
+        scrollPaneNotification();
         createSpaceScroll();
-        loadImagePaths();
  
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -323,19 +373,7 @@ public class userProfile extends JFrame {
         });
     }
 
-    private void loadImagePaths() {
-        File folder = new File("../Assets/publications");
-        if (folder.exists() && folder.isDirectory()) {
-            File[] files = folder.listFiles((dir, name) -> name.toLowerCase().endsWith(".jpg") || name.toLowerCase().endsWith(".png"));
-            if (files != null) {
-                for (File file : files) {
-                    imagePaths.add(file.getAbsolutePath());
-                }
-            }
-        }
-    }
-
-    private JPanel createPanelNotification(String imagePath){
+    private JPanel createPanelNotification(){
         panelNotification = new JPanel(new BorderLayout());
         panelNotification.setBackground(Palette.instance().getLightGray());
         panelNotification.setPreferredSize(new Dimension(500, 370)); 
@@ -347,23 +385,10 @@ public class userProfile extends JFrame {
         createHeader();
         createFooter();
 
-        // Cargar imagen específica
-        ImageIcon notificationImageIcon = new ImageIcon(imagePath);
-        Image notificationImage = notificationImageIcon.getImage().getScaledInstance(470, 280, Image.SCALE_SMOOTH);
-        JLabel notificationImageLabel = new JLabel(new ImageIcon(notificationImage));
-
-        // Panel para contener la imagen y centrarla
-        JPanel imagePanel = new JPanel();
-        imagePanel.setBackground(Palette.instance().getWhite());
-        imagePanel.add(notificationImageLabel);
-
-        // Añadir elementos al panel
         panelNotification.add(header, BorderLayout.NORTH);
-        panelNotification.add(imagePanel, BorderLayout.CENTER);
         panelNotification.add(footer, BorderLayout.SOUTH);
 
         return panelNotification;
-
     }
 
     private JPanel createSpaceScroll(){
@@ -375,30 +400,62 @@ public class userProfile extends JFrame {
         return space;
     }
 
-    private void scrollPanelNotification() {
-        loadImagePaths(); // Cargar imágenes al iniciar
-    
+    private void scrollPaneNotification(){
+        // Panel contenedor de notificaciones con BoxLayout
         notificationsContainer = new JPanel();
         notificationsContainer.setLayout(new BoxLayout(notificationsContainer, BoxLayout.Y_AXIS));
         notificationsContainer.setBackground(Color.BLUE);
-    
-        int maxPanels = Math.min(imagePaths.size(), 5); // Máximo 5 paneles o cantidad de imágenes disponibles
-        for (int i = 0; i < maxPanels; i++) {
-            JPanel notification = createPanelNotification(imagePaths.get(i));
+
+        // Agregar 5 instancias de panelNotification
+        for (int i = 0; i < 5; i++) {
+            JPanel notification = createPanelNotification();
             JPanel spaceBetweenNotification = createSpaceScroll();
             notificationsContainer.add(notification);
             notificationsContainer.add(spaceBetweenNotification);
         }
-    
+
+        // Agregar el contenedor dentro de un JScrollPane
         scrollPane = new JScrollPane(notificationsContainer);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setPreferredSize(new Dimension(520, 375));
     }
 
+    
+    private void createBottomPanel() {
+        bottomPanel = new JPanel();
+        bottomPanel.setBackground(Palette.instance().getBeige());
+        bottomPanel.setPreferredSize(Size.BOTTOM_PANEL_SIZE); 
+
+        ImageIcon iconAddImg = new ImageIcon("../Assets/add_icon.png");
+
+        Image imgAdd = iconAddImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+
+        JLabel iconAdd = new JLabel(new ImageIcon(imgAdd));
+
+        bottomPanel.add(iconAdd);
+
+        addIconListenersBottomPanel(iconAdd);
+    }
+
+    private void addIconListenersBottomPanel(JLabel iconAdd) {
+        iconAdd.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                //JOptionPane.showMessageDialog(frame, "Agregar evento...");
+                frame.dispose();
+                new createEvent();
+            }
+        });
+    }
+
+
     private void assembleFrame() {
+        frame.add(topPanel, BorderLayout.NORTH);
         frame.add(panel, BorderLayout.CENTER);
+        frame.add(bottomPanel, BorderLayout.SOUTH);
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
     }
 
 

@@ -91,7 +91,6 @@ public class ConsultarPublicacionesView {
                     public void actionPerformed(ActionEvent e) {
                         String fecha = buscarView.getFecha();
                         String titulo = buscarView.getTitulo();
-                        JOptionPane.showMessageDialog(frame, "Buscando publicaciones con Fecha: " + fecha + " y Título: " + titulo);
                         // Aquí puedes añadir la lógica para filtrar las publicaciones
                         panel.removeAll();
                         addTitleToPanel();

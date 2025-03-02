@@ -33,7 +33,7 @@ public class consultarPublicacionesController {
 
         for (int i = 0; i < postsArray.length(); i++){
             JSONObject aux = postsArray.getJSONObject(i);
-            if (!aux.getBoolean("Approved") || !aux.getString("Date").equals(dateFilter) || !aux.getString("Title").equals(titleFilter)) continue;
+            if (!aux.getBoolean("Approved") || !aux.getString("Date").equals(dateFilter) || !aux.getString("Title").contains(titleFilter)) continue;
             System.out.println("passed");
             String[] s = {aux.getString("Title"), aux.getString("Date"), aux.getString("Place")};
             posts.add(s);
@@ -67,7 +67,7 @@ public class consultarPublicacionesController {
 
         for (int i = 0; i < postsArray.length(); i++){
             JSONObject aux = postsArray.getJSONObject(i);
-            if (!aux.getBoolean("Approved") || !aux.getString("Title").equals(titleFilter)) continue;
+            if (!aux.getBoolean("Approved") || !aux.getString("Title").contains(titleFilter)) continue;
             System.out.println("passed");
             String[] s = {aux.getString("Title"), aux.getString("Date"), aux.getString("Place")};
             posts.add(s);

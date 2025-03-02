@@ -60,7 +60,6 @@ public class verificarPublicaciones extends JFrame{
         for (int i = 0; i < posts.size(); i++) {
             JPanel pubPanel = new JPanel(new BorderLayout());
             String[] publicacion = posts.get(i);
-            int odioJava = i;
             pubPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
             pubPanel.setBorder(BorderFactory.createCompoundBorder(
                     BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1),
@@ -129,7 +128,7 @@ public class verificarPublicaciones extends JFrame{
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     JOptionPane.showMessageDialog(panel, "Publicación aceptada: " + publicacion[0]);
-                    consultarPublicacionesController.checkPost(odioJava);
+                    consultarPublicacionesController.checkPost(publicacion[0]);
                 }
             });
 
@@ -137,7 +136,7 @@ public class verificarPublicaciones extends JFrame{
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     JOptionPane.showMessageDialog(panel, "Publicación denegada: " + publicacion[0]);
-                    consultarPublicacionesController.denyPost(odioJava);
+                    consultarPublicacionesController.denyPost(publicacion[0]);
                 }
             });
 

@@ -7,6 +7,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -25,13 +27,19 @@ public class consultarPublicacionesController {
         return posts;
     }
 
-    public static void checkPost(int i){
+    public static void checkPost(String title){
         JSONArray postsArray = new JSONArray(fileToString("posts.json"));
-        JSONObject post = postsArray.getJSONObject(i);
+        
+        for (int i = 0; i < postsArray.length(); i++){
+            JSONObject post = postsArray.getJSONObject(i);
 
-        post.put("Approved", true);
+            if (!title.equals(post.getString("Title"))) continue;
 
-        postsArray.put(i, post);
+            post.put("Approved", true);
+
+            postsArray.put(i, post);
+            break;
+        }
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("posts.json", false))) {
             bw.write(postsArray.toString());
@@ -40,10 +48,17 @@ public class consultarPublicacionesController {
         }
     }
 
-    public static void denyPost(int i){
+    public static void denyPost(String title){
         JSONArray postsArray = new JSONArray(fileToString("posts.json"));
 
-        postsArray.remove(i);
+        for (int i = 0; i < postsArray.length(); i++){
+            JSONObject post = postsArray.getJSONObject(i);
+            
+            if (!title.equals(post.getString("Title"))) continue;
+
+            postsArray.remove(i);
+            break;
+        }
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("posts.json", false))) {
             bw.write(postsArray.toString());

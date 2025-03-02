@@ -1,12 +1,14 @@
 import javax.swing.*;
 import utils.Palette;
 import utils.Size;
-import utils.HeaderFactory;
-import utils.FooterFactory;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2a5e2b5e1a3398a7700cad25ab4a5c240c083ca4
 
 public class consultarPublicaciones {
     private JFrame frame;
@@ -33,8 +35,9 @@ public class consultarPublicaciones {
 
     private void initializeHeaderAndFooter() {
         // Añadir el header y footer usando HeaderFactory y FooterFactory
-        JPanel header = HeaderFactory.createHeader();
-        JPanel footer = FooterFactory.createBottomPanel();
+        JPanel header = new HeaderFactory(frame).createHeader();
+        JPanel footer = new FooterFactory(frame).createBottomPanel();
+        //JPanel footer = FooterFactory.createBottomPanel();
         frame.add(header, BorderLayout.NORTH);
         frame.add(footer, BorderLayout.SOUTH);
     }

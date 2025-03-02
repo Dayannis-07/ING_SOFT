@@ -8,7 +8,6 @@ import org.json.JSONObject;
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 
 public class createEventController {
 
@@ -29,11 +28,6 @@ public class createEventController {
             return;
         }
 
-        if (isEventAlreadyExists(eventTitle, date)) {
-            JOptionPane.showMessageDialog(frame, "El evento ya existe en esta fecha.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
         saveEventToFile(eventTitle, place, date, description, filePath);
         JOptionPane.showMessageDialog(frame, "Evento creado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
     }
@@ -47,25 +41,6 @@ public class createEventController {
         } catch (ParseException e) {
             return false;
         }
-    }
-
-    private static boolean isEventAlreadyExists(String eventTitle, String eventDate) {
-        File file = new File("events.txt");
-        if (!file.exists()) {
-            return false;
-        }
-
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                if (line.contains("Título: " + eventTitle + ",") && line.contains("Fecha: " + eventDate + ",")) {
-                    return true;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
     }
 
     private static String fileToString(String p) { 

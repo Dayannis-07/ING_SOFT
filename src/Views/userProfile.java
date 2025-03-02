@@ -329,7 +329,7 @@ public class userProfile extends JFrame {
     private void loadImagePaths() {
         File folder = new File("/Assets/publications");
         if (folder.exists() && folder.isDirectory()) {
-            File[] files = folder.listFiles((dir, name) -> name.toLowerCase().endsWith(".jpg") || name.toLowerCase().endsWith(".png"));
+            File[] files = folder.listFiles((dir, name) -> name.toLowerCase().endsWith(".jpg") || name.toLowerCase().endsWith(".png") || name.toLowerCase().endsWith(".jpeg"));
             if (files != null) {
                 for (File file : files) {
                     imagePaths.add(file.getAbsolutePath());

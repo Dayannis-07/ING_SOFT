@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class logInController {
-    private static final String USERS_FILE = "users.txt";
+    private static final String USERS_FILE = "src/Assests/users.txt";
 
     public static String validateCredentials(String email, String password) {
         if (email.isEmpty() || password.isEmpty()) {

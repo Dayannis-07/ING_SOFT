@@ -7,10 +7,10 @@ import java.io.IOException;
 import java.util.regex.Pattern;
 
 public class signInController {
-    private static final String USERS_FILE = "users.txt";
+    private static final String USERS_FILE = "src/Assets/users.txt";
 
-    public static String registerUser(String email, String password, String confirmPassword, String userType) {
-        if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+    public static String registerUser(String email, String password, String confirmPassword, String userType, String name, String lastName) {
+        if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || userType.isEmpty() || name.isEmpty() || lastName.isEmpty()) {
             return "Todos los campos son obligatorios.";
         }
 
@@ -30,7 +30,7 @@ public class signInController {
             return "Este correo ya está registrado.";
         }
 
-        if (saveUser(email, password, userType)) {
+        if (saveUser(email, password, userType, name, lastName)) {
             return "Registro exitoso.";
         } else {
             return "Error al guardar los datos.";
@@ -62,9 +62,9 @@ public class signInController {
         return false;
     }
 
-    private static boolean saveUser(String email, String password, String userType) {
+    private static boolean saveUser(String email, String password, String userType, String name, String lastName) {
         try (FileWriter writer = new FileWriter(USERS_FILE, true)) {
-            writer.write(email + "," + password + "," + userType + "\n");
+            writer.write(email + "," + password + "," + userType + "," + name + "," + lastName + "\n");
             return true;
         } catch (IOException e) {
             return false;

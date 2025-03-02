@@ -2,11 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseAdapter;
 import utils.Palette;
 import utils.Size;
-import utils.HeaderFactory;
 import utils.FooterFactory;
 import Controllers.createEventController;
 
@@ -39,7 +36,7 @@ public class createEvent extends JFrame {
 
     private void initializeHeaderAndFooter() {
         // Añadir el header y footer usando HeaderFactory y FooterFactory
-        JPanel header = HeaderFactory.createHeader();
+        JPanel header = new HeaderFactory(frame).createHeader();
         JPanel footer = FooterFactory.createBottomPanel();
         frame.add(header, BorderLayout.NORTH);
         frame.add(footer, BorderLayout.SOUTH);

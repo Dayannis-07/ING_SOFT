@@ -1,7 +1,6 @@
 import javax.swing.*;
 import utils.Palette;
 import utils.Size;
-import utils.HeaderFactory;
 import utils.FooterFactory;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -25,7 +24,7 @@ public class consultarPublicaciones {
     }
 
     private void initializeFrame() {
-        frame = new JFrame("Consultar Posts");
+        frame = new JFrame("Consultar Publicaciones");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(700, 500);
         frame.setLayout(new BorderLayout());
@@ -34,7 +33,7 @@ public class consultarPublicaciones {
 
     private void initializeHeaderAndFooter() {
         // Añadir el header y footer usando HeaderFactory y FooterFactory
-        JPanel header = HeaderFactory.createHeader();
+        JPanel header = new HeaderFactory(frame).createHeader();
         JPanel footer = FooterFactory.createBottomPanel();
         frame.add(header, BorderLayout.NORTH);
         frame.add(footer, BorderLayout.SOUTH);

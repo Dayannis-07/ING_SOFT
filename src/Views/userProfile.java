@@ -327,7 +327,7 @@ public class userProfile extends JFrame {
     }
 
     private void loadImagePaths() {
-        File folder = new File("../Assets/publications");
+        File folder = new File("/Assets/publications");
         if (folder.exists() && folder.isDirectory()) {
             File[] files = folder.listFiles((dir, name) -> name.toLowerCase().endsWith(".jpg") || name.toLowerCase().endsWith(".png"));
             if (files != null) {

@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
 
-
 public class consultarPublicaciones {
     private JFrame frame;
     private JPanel panel;
@@ -81,7 +80,18 @@ public class consultarPublicaciones {
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //showSearchDialog();
+                buscarPublicacionView buscarView = new buscarPublicacionView(frame);
+                buscarView.addBuscarListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        String fecha = buscarView.getFecha();
+                        String titulo = buscarView.getTitulo();
+                        JOptionPane.showMessageDialog(frame, "Buscando publicaciones con Fecha: " + fecha + " y Título: " + titulo);
+                        // Aquí puedes añadir la lógica para filtrar las publicaciones
+                        buscarView.dispose();
+                    }
+                });
+                buscarView.setVisible(true);
             }
         });
         return searchButton;

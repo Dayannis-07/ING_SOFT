@@ -4,6 +4,10 @@ import javax.swing.*;
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+
+import org.json.JSONObject;
+import org.json.JSONArray;
 
 public class createEventController {
 
@@ -63,10 +67,55 @@ public class createEventController {
         return false;
     }
 
+    private static String fileToString(String p) { 
+  
+        // initializing the variable to 
+        // store the string 
+        String contents = ""; 
+  
+        // Instantiating the FileReader class 
+        try (FileReader f = new FileReader(p)) { 
+  
+            // instantiating the BufferedReader class 
+            BufferedReader br = new BufferedReader(f); 
+  
+            // to store the current line read by the 
+            // readLine () method 
+            String current = ""; 
+  
+            // looping till we find the null char 
+            while ((current = br.readLine()) != null) 
+  
+                // storing the contents in string 
+                contents += current + "\n"; 
+        } 
+  
+        // catch block 
+        catch (IOException e) { 
+  
+            // printing the error 
+            e.printStackTrace(); 
+        } 
+  
+        // returning the string 
+        return contents; 
+    }
+
     private static void saveEventToFile(String eventTitle, String place, String date, String description, String filePath) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("events.txt", true))) {
-            bw.write("Título: " + eventTitle + ", Lugar: " + place + ", Fecha: " + date + ", Descripción: " + description + ", Archivo: " + filePath);
-            bw.newLine();
+        JSONObject newPost = new JSONObject();
+        JSONArray postsArray = new JSONArray(fileToString("posts.json"));
+
+        newPost.put("Title", eventTitle);
+        newPost.put("Place", place);
+        newPost.put("Date", date);
+        newPost.put("Description", description);
+        newPost.put("Path", filePath);
+        newPost.put("Approved", false);
+
+        postsArray.put(newPost);
+        
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("posts.json", false))) {
+            bw.write(postsArray.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }

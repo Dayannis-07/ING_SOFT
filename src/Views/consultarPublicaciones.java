@@ -5,6 +5,9 @@ import utils.Size;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import Controllers.consultarPublicacionesController;
 
 public class consultarPublicaciones {
     private JFrame frame;
@@ -58,14 +61,18 @@ public class consultarPublicaciones {
     }
 
     private void createPosts() {
-        String[][] posts = {
+        /*String[][] posts = {
             {"Título Post 1", "2023-10-01", "Ubicación 1"},
             {"Título Post 2", "2023-10-02", "Ubicación 2"},
             {"Título Post 3", "2023-10-03", "Ubicación 3"},
             {"Título Post 4", "2023-10-04", "Ubicación 4"},
             {"Título Post 5", "2023-10-05", "Ubicación 5"},
             {"Título Post 6", "2023-10-06", "Ubicación 6"}
-        };
+        };*/
+        
+        
+        ArrayList<String[]> posts = consultarPublicacionesController.getPosts(true);
+
 
         for (String[] post : posts) {
             JPanel pubPanel = createPostPanel(post);

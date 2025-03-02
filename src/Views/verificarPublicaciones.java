@@ -7,7 +7,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.awt.event.MouseAdapter;
+
+import Controllers.consultarPublicacionesController;
 
 public class verificarPublicaciones extends JFrame{
 
@@ -48,21 +51,16 @@ public class verificarPublicaciones extends JFrame{
         panel.add(titulo);
 
         // Crear publicaciones
-        String[][] publicaciones = {
-                { "Título Publicación 1", "2023-10-01", "Ubicación 1" },
-                { "Título Publicación 2", "2023-10-02", "Ubicación 2" },
-                { "Título Publicación 2", "2023-10-02", "Ubicación 2" },
-                { "Título Publicación 2", "2023-10-02", "Ubicación 2" },
-                { "Título Publicación 2", "2023-10-02", "Ubicación 2" },
-                { "Título Publicación 3", "2023-10-03", "Ubicación 3" }
-        };
+        ArrayList<String[]> posts = consultarPublicacionesController.getPosts(false);
 
         JPanel publicationsPanel = new JPanel();
         publicationsPanel.setLayout(new BoxLayout(publicationsPanel, BoxLayout.Y_AXIS));
         publicationsPanel.setBackground(Palette.instance().getWhite());
 
-        for (String[] publicacion : publicaciones) {
+        for (int i = 0; i < posts.size(); i++) {
             JPanel pubPanel = new JPanel(new BorderLayout());
+            String[] publicacion = posts.get(i);
+            int odioJava = i;
             pubPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
             pubPanel.setBorder(BorderFactory.createCompoundBorder(
                     BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1),
@@ -131,6 +129,7 @@ public class verificarPublicaciones extends JFrame{
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     JOptionPane.showMessageDialog(panel, "Publicación aceptada: " + publicacion[0]);
+                    consultarPublicacionesController.checkPost(odioJava);
                 }
             });
 
@@ -138,6 +137,7 @@ public class verificarPublicaciones extends JFrame{
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     JOptionPane.showMessageDialog(panel, "Publicación denegada: " + publicacion[0]);
+                    consultarPublicacionesController.denyPost(odioJava);
                 }
             });
 

@@ -23,7 +23,10 @@ public class CreateEventView extends JFrame {
     private JTextArea txtDescription;
     private JLabel selectedFile;
 
+    private createEventController controller;
+
     public CreateEventView() {
+        controller = new createEventController(false);
         createFrame();
         initializeHeaderAndFooter();
         createMainPanel();
@@ -207,7 +210,7 @@ public class CreateEventView extends JFrame {
         btnSubmit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                createEventController.submitEvent(txtEventTitle, txtPlace, txtDate, txtDescription, selectedFile, frame);
+                controller.submitEvent(txtEventTitle, txtPlace, txtDate, txtDescription, selectedFile, frame);
             }
         });
 

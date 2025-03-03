@@ -5,13 +5,19 @@ import javax.swing.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import main.models.Post;
+
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-public class createEventController {
+public class createEventController extends PostController {
 
-    public static void submitEvent(JTextField txtEventTitle, JTextField txtPlace, JTextField txtDate, JTextArea txtDescription, JLabel selectedFile, JFrame frame) {
+    public createEventController(boolean readOnlyAproved) {
+        super(readOnlyAproved);
+    }
+
+    public void submitEvent(JTextField txtEventTitle, JTextField txtPlace, JTextField txtDate, JTextArea txtDescription, JLabel selectedFile, JFrame frame) {
         String eventTitle = txtEventTitle.getText().trim();
         String place = txtPlace.getText().trim();
         String date = txtDate.getText().trim();
@@ -28,7 +34,10 @@ public class createEventController {
             return;
         }
 
-        saveEventToFile(eventTitle, place, date, description, filePath);
+        Post newPost = new Post(0, filePath, eventTitle, date, place, description, readOnlyAproved);
+
+        addPost(newPost);
+        savePosts();
         JOptionPane.showMessageDialog(frame, "Evento creado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
     }
 
@@ -40,61 +49,6 @@ public class createEventController {
             return true;
         } catch (ParseException e) {
             return false;
-        }
-    }
-
-    private static String fileToString(String p) { 
-  
-        // initializing the variable to 
-        // store the string 
-        String contents = ""; 
-  
-        // Instantiating the FileReader class 
-        try (FileReader f = new FileReader(p)) { 
-  
-            // instantiating the BufferedReader class 
-            BufferedReader br = new BufferedReader(f); 
-  
-            // to store the current line read by the 
-            // readLine () method 
-            String current = ""; 
-  
-            // looping till we find the null char 
-            while ((current = br.readLine()) != null) 
-  
-                // storing the contents in string 
-                contents += current + "\n"; 
-        } 
-  
-        // catch block 
-        catch (IOException e) { 
-  
-            // printing the error 
-            System.out.println("no coneguido");
-            return "[]";
-        } 
-  
-        // returning the string 
-        return contents; 
-    }
-
-    private static void saveEventToFile(String eventTitle, String place, String date, String description, String filePath) {
-        JSONObject newPost = new JSONObject();
-        JSONArray postsArray = new JSONArray(fileToString("posts.json"));
-
-        newPost.put("Title", eventTitle);
-        newPost.put("Place", place);
-        newPost.put("Date", date);
-        newPost.put("Description", description);
-        newPost.put("Path", filePath);
-        newPost.put("Approved", false);
-
-        postsArray.put(newPost);
-        
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("posts.json", false))) {
-            bw.write(postsArray.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }

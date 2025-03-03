@@ -16,6 +16,7 @@ public class Post {
         this.place = place;
         this.description = description;
         this.aproved = aproved;
+        this.id = id;
     }
     public int getId() {
         return id;

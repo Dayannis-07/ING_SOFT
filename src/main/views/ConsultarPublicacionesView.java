@@ -22,7 +22,7 @@ public class ConsultarPublicacionesView {
     private consultarPublicacionesController controller;
 
     public ConsultarPublicacionesView() {
-        controller = new consultarPublicacionesController(false);
+        controller = new consultarPublicacionesController(true);
         initializeFrame();
         initializeHeaderAndFooter();
         initializeMainPanel();

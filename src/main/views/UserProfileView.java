@@ -45,7 +45,7 @@ public class UserProfileView extends JFrame {
 
     private void initializeHeaderAndFooter() { 
         // Añadir el header y footer usando HeaderFactory y FooterFactory 
-        JPanel header = HeaderFactory.createHeader(); 
+        JPanel header = new HeaderFactory(frame); 
         JPanel footer = FooterFactory.createBottomPanel(); 
         frame.add(header, BorderLayout.NORTH); 
         frame.add(footer, BorderLayout.SOUTH); 

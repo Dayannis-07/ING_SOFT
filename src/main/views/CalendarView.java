@@ -40,7 +40,7 @@ public class CalendarView {
 
     private void initializeHeaderAndFooter() { 
         // Añadir el header y footer usando HeaderFactory y FooterFactory 
-        JPanel header = HeaderFactory.createHeader(); 
+        JPanel header = new HeaderFactory(frame);
         JPanel footer = FooterFactory.createBottomPanel(); 
         frame.add(header, BorderLayout.NORTH); 
         frame.add(footer, BorderLayout.SOUTH); 
@@ -90,8 +90,8 @@ public class CalendarView {
     }
 
     private void createMonthButtons(JPanel monthPanel) {
-        ImageIcon nextIcon = new ImageIcon(HeaderFactory.class.getResource("/Assets/right_arrow.png"));
-        ImageIcon prevIcon = new ImageIcon(HeaderFactory.class.getResource("/Assets/left_arrow.png"));
+        ImageIcon nextIcon = new ImageIcon(HeaderFactory.class.getResource("/assets/right_arrow.png"));
+        ImageIcon prevIcon = new ImageIcon(HeaderFactory.class.getResource("/assets/left_arrow.png"));
     
         Image nextImage = nextIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         Image prevImage = prevIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);

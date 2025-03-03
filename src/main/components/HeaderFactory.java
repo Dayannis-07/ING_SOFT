@@ -2,15 +2,23 @@ package main.components;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.net.URL;
 import main.utils.*;
+import main.views.CalendarView;
+import main.views.ConsultarPublicacionesView;
+import main.views.UserProfileView;
 
-public class HeaderFactory {
-    static public JPanel createHeader() {
-        JPanel topPanel = new JPanel(new BorderLayout());
-        topPanel.setBackground(Palette.instance().getWhite());
-        topPanel.setBorder(BorderFactory.createLineBorder(Palette.instance().getLightGray(), 1, true));
-        topPanel.setPreferredSize(Size.TOP_PANEL_SIZE); 
+public class HeaderFactory extends JPanel {
+    private JFrame frame;
+
+    public HeaderFactory(JFrame frame) {
+        this.frame = frame;
+        setLayout(new BorderLayout());
+        setBackground(Palette.instance().getWhite());
+        setBorder(BorderFactory.createLineBorder(Palette.instance().getLightGray(), 1, true));
+        setPreferredSize(Size.TOP_PANEL_SIZE); 
 
         JPanel iconsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         iconsPanel.setBackground(Palette.instance().getWhite());
@@ -21,13 +29,11 @@ public class HeaderFactory {
         brandPanel.setPreferredSize(Size.PANEL_ICON_SIZE); 
 
         addIcons(iconsPanel, brandPanel);
-        topPanel.add(iconsPanel, BorderLayout.EAST);
-        topPanel.add(brandPanel, BorderLayout.WEST);
-
-        return topPanel;
+        add(iconsPanel, BorderLayout.EAST);
+        add(brandPanel, BorderLayout.WEST);
     }
 
-    static private void addIcons(JPanel iconsPanel, JPanel brandPanel){
+    private void addIcons(JPanel iconsPanel, JPanel brandPanel){
         ImageIcon iconCalendarImg = loadIcon("/assets/calendar_icon.png");
         ImageIcon iconHomepageImg = loadIcon("/assets/home_icon2.png");
         ImageIcon iconProfileImg = loadIcon("/assets/profile_icon2.png");
@@ -37,18 +43,42 @@ public class HeaderFactory {
             Image imgCalendar = iconCalendarImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
             JLabel iconCalendar = new JLabel(new ImageIcon(imgCalendar));
             iconsPanel.add(iconCalendar);
+
+            iconCalendar.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent arg0) {
+                    frame.dispose();
+                    new CalendarView();
+                }
+            });
         }
 
         if (iconHomepageImg != null) {
             Image imgHomepage = iconHomepageImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
             JLabel iconHomepage = new JLabel(new ImageIcon(imgHomepage));
             iconsPanel.add(iconHomepage);
+
+            iconHomepage.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent arg0) {
+                    frame.dispose();
+                    new ConsultarPublicacionesView();
+                }
+            });
         }
 
         if (iconProfileImg != null) {
             Image imgProfile = iconProfileImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
             JLabel iconProfile = new JLabel(new ImageIcon(imgProfile));
             iconsPanel.add(iconProfile);
+
+            iconProfile.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent arg0) {
+                    frame.dispose();
+                    new UserProfileView();
+                }
+            });
         }
 
         if (iconBHImg != null) {

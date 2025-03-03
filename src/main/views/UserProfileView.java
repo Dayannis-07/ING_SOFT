@@ -91,7 +91,7 @@ public class UserProfileView extends JFrame {
     }
 
     private void createCircleImage() {
-        ImageIcon userImage = new ImageIcon("/Assets/userProfileImage.jpg");
+        ImageIcon userImage = new ImageIcon("/assets/userProfileImage.jpg");
         Image userImageCircle = userImage.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         userImageProfile = new JLabel(new ImageIcon(userImageCircle)); 
 
@@ -270,7 +270,7 @@ public class UserProfileView extends JFrame {
         header.setBorder(BorderFactory.createLineBorder(Palette.instance().getOtherLightGray(), 1, true));
         header.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5)); 
 
-        ImageIcon iconViewMoreImg = new ImageIcon("/Assets/viewMore.png");
+        ImageIcon iconViewMoreImg = new ImageIcon("/assets/viewMore.png");
 
         Image imgViewMore = iconViewMoreImg.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 
@@ -298,8 +298,8 @@ public class UserProfileView extends JFrame {
         footer.setBorder(BorderFactory.createLineBorder(Palette.instance().getOtherLightGray(), 1, true));
         footer.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5)); 
 
-        ImageIcon iconLikeImg = new ImageIcon("/Assets/like.png");
-        ImageIcon iconComentImg = new ImageIcon("/Assets/coment.png");
+        ImageIcon iconLikeImg = new ImageIcon("/assets/like.png");
+        ImageIcon iconComentImg = new ImageIcon("/assets/coment.png");
 
         Image imgLike = iconLikeImg.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         Image imgComent = iconComentImg.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
@@ -329,7 +329,7 @@ public class UserProfileView extends JFrame {
     }
 
     private void loadImagePaths() {
-        File folder = new File("/Assets/publications");
+        File folder = new File("/assets/publications");
         if (folder.exists() && folder.isDirectory()) {
             File[] files = folder.listFiles((dir, name) -> name.toLowerCase().endsWith(".jpg") || name.toLowerCase().endsWith(".png") || name.toLowerCase().endsWith(".jpeg"));
             if (files != null) {

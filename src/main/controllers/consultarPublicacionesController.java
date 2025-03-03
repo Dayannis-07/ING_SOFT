@@ -6,83 +6,89 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import main.models.Post;
+
 public class consultarPublicacionesController {
-    public static ArrayList<String[]> getPosts(boolean Approved){
-        JSONArray postsArray = new JSONArray(fileToString("posts.json"));
-        ArrayList<String[]> posts = new ArrayList<>();
+    private ArrayList<Post> posts;
+    private boolean readOnlyAproved;
 
-        for (int i = 0; i < postsArray.length(); i++){
-            JSONObject aux = postsArray.getJSONObject(i);
-            if (aux.getBoolean("Approved") != Approved) continue;
-            String[] s = {aux.getString("Title"), aux.getString("Date"), aux.getString("Place")};
-            posts.add(s);
+    public consultarPublicacionesController(boolean readOnlyAproved) {
+        posts = new ArrayList<>();
+        this.readOnlyAproved = readOnlyAproved;
+        loadPosts(readOnlyAproved);
+    }
+
+    public boolean canReadNotAproved(){
+        return !readOnlyAproved;
+    }
+
+    public void loadPosts(boolean onlyAproved) {
+        if (posts.size() != 0) {
+            posts.clear();
         }
+        JSONArray postsArray = new JSONArray(fileToString("posts.json"));
 
+        for (int i = 0; i < postsArray.length(); i++) {
+            JSONObject aux = postsArray.getJSONObject(i);
+            Post post = new Post(
+                    aux.getInt("id"),
+                    aux.getString("Path"),
+                    aux.getString("Title"),
+                    aux.getString("Date"),
+                    aux.getString("Place"),
+                    aux.getString("Description"),
+                    aux.getBoolean("Approved"));
+
+            if(onlyAproved && !post.isAproved()){
+                continue;
+            }
+            posts.add(post);
+        }
+    }
+
+    public ArrayList<Post> getPosts() {
         return posts;
     }
 
-    public static ArrayList<String[]> filterByBoth(String dateFilter, String titleFilter){
-        JSONArray postsArray = new JSONArray(fileToString("posts.json"));
-        ArrayList<String[]> posts = new ArrayList<>();
+    public ArrayList<Post> filterByBoth(String dateFilter, String titleFilter) {
+        Predicate<Post> equalDateAndContainsTitle = post -> post.getDate() == dateFilter & post.getTitle().contains(titleFilter);
+        ArrayList<Post> filteredPosts = new ArrayList<>(posts);
 
-        for (int i = 0; i < postsArray.length(); i++){
-            JSONObject aux = postsArray.getJSONObject(i);
-            if (!aux.getBoolean("Approved") || !aux.getString("Date").equals(dateFilter) || !aux.getString("Title").contains(titleFilter)) continue;
-            System.out.println("passed");
-            String[] s = {aux.getString("Title"), aux.getString("Date"), aux.getString("Place")};
-            posts.add(s);
-        }
-
-        for(int i = 0; i < posts.size(); i++) System.out.println(posts.get(i)[0]);
-
-        return posts;
+        filteredPosts.removeIf(equalDateAndContainsTitle);
+        return filteredPosts;
     }
 
-    public static ArrayList<String[]> filterByDate(String dateFilter){
-        JSONArray postsArray = new JSONArray(fileToString("posts.json"));
-        ArrayList<String[]> posts = new ArrayList<>();
+    public ArrayList<Post> filterByDate(String dateFilter) {
+        Predicate<Post> equalDate = post -> post.getDate() == dateFilter;
+        ArrayList<Post> filteredPosts = new ArrayList<>(posts);
 
-        for (int i = 0; i < postsArray.length(); i++){
-            JSONObject aux = postsArray.getJSONObject(i);
-            if (!aux.getBoolean("Approved") || !aux.getString("Date").equals(dateFilter)) continue;
-            System.out.println("passed");
-            String[] s = {aux.getString("Title"), aux.getString("Date"), aux.getString("Place")};
-            posts.add(s);
-        }
+        filteredPosts.removeIf(equalDate);
 
-        for(int i = 0; i < posts.size(); i++) System.out.println(posts.get(i)[0]);
-
-        return posts;
+        return filteredPosts;
     }
 
-    public static ArrayList<String[]> filterByTitle(String titleFilter){
-        JSONArray postsArray = new JSONArray(fileToString("posts.json"));
-        ArrayList<String[]> posts = new ArrayList<>();
+    public ArrayList<Post> filterByTitle(String titleFilter) {
+        Predicate<Post> notContainsTitle = post -> !post.getTitle().contains(titleFilter);
+        ArrayList<Post> filteredPosts = new ArrayList<>(posts);
 
-        for (int i = 0; i < postsArray.length(); i++){
-            JSONObject aux = postsArray.getJSONObject(i);
-            if (!aux.getBoolean("Approved") || !aux.getString("Title").contains(titleFilter)) continue;
-            System.out.println("passed");
-            String[] s = {aux.getString("Title"), aux.getString("Date"), aux.getString("Place")};
-            posts.add(s);
-        }
+        filteredPosts.removeIf(notContainsTitle);
 
-        for(int i = 0; i < posts.size(); i++) System.out.println(posts.get(i)[0]);
-
-        return posts;
+        return filteredPosts;
     }
 
-    public static void checkPost(String title){
+    public static void checkPost(String title) {
         JSONArray postsArray = new JSONArray(fileToString("posts.json"));
-        
-        for (int i = 0; i < postsArray.length(); i++){
+
+        for (int i = 0; i < postsArray.length(); i++) {
             JSONObject post = postsArray.getJSONObject(i);
 
-            if (!title.equals(post.getString("Title"))) continue;
+            if (!title.equals(post.getString("Title")))
+                continue;
 
             post.put("Approved", true);
 
@@ -97,13 +103,14 @@ public class consultarPublicacionesController {
         }
     }
 
-    public static void denyPost(String title){
+    public static void denyPost(String title) {
         JSONArray postsArray = new JSONArray(fileToString("posts.json"));
 
-        for (int i = 0; i < postsArray.length(); i++){
+        for (int i = 0; i < postsArray.length(); i++) {
             JSONObject post = postsArray.getJSONObject(i);
-            
-            if (!title.equals(post.getString("Title"))) continue;
+
+            if (!title.equals(post.getString("Title")))
+                continue;
 
             postsArray.remove(i);
             break;
@@ -116,38 +123,38 @@ public class consultarPublicacionesController {
         }
     }
 
-    private static String fileToString(String p) { 
-  
-        // initializing the variable to 
-        // store the string 
-        String contents = ""; 
-  
-        // Instantiating the FileReader class 
-        try (FileReader f = new FileReader(p)) { 
-  
-            // instantiating the BufferedReader class 
-            BufferedReader br = new BufferedReader(f); 
-  
-            // to store the current line read by the 
-            // readLine () method 
-            String current = ""; 
-  
-            // looping till we find the null char 
-            while ((current = br.readLine()) != null) 
-  
-                // storing the contents in string 
-                contents += current + "\n"; 
-        } 
-  
-        // catch block 
-        catch (IOException e) { 
-  
-            // printing the error 
+    private static String fileToString(String p) {
+
+        // initializing the variable to
+        // store the string
+        String contents = "";
+
+        // Instantiating the FileReader class
+        try (FileReader f = new FileReader(p)) {
+
+            // instantiating the BufferedReader class
+            BufferedReader br = new BufferedReader(f);
+
+            // to store the current line read by the
+            // readLine () method
+            String current = "";
+
+            // looping till we find the null char
+            while ((current = br.readLine()) != null)
+
+                // storing the contents in string
+                contents += current + "\n";
+        }
+
+        // catch block
+        catch (IOException e) {
+
+            // printing the error
             System.out.println("no conseguido");
             return "[]";
-        } 
-  
-        // returning the string 
-        return contents; 
+        }
+
+        // returning the string
+        return contents;
     }
 }

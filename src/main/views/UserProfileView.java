@@ -91,7 +91,8 @@ public class UserProfileView extends JFrame {
     }
 
     private void createCircleImage() {
-        ImageIcon userImage = new ImageIcon("/assets/userProfileImage.jpg");
+        ImageIcon userImage = new ImageIcon(getClass().getResource("/assets/userProfileImage.jpg"));
+        
         Image userImageCircle = userImage.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         userImageProfile = new JLabel(new ImageIcon(userImageCircle)); 
 
@@ -270,7 +271,7 @@ public class UserProfileView extends JFrame {
         header.setBorder(BorderFactory.createLineBorder(Palette.instance().getOtherLightGray(), 1, true));
         header.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5)); 
 
-        ImageIcon iconViewMoreImg = new ImageIcon("/assets/viewMore.png");
+        ImageIcon iconViewMoreImg = new ImageIcon(getClass().getResource("/assets/viewMore.png"));
 
         Image imgViewMore = iconViewMoreImg.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 
@@ -298,8 +299,8 @@ public class UserProfileView extends JFrame {
         footer.setBorder(BorderFactory.createLineBorder(Palette.instance().getOtherLightGray(), 1, true));
         footer.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5)); 
 
-        ImageIcon iconLikeImg = new ImageIcon("/assets/like.png");
-        ImageIcon iconComentImg = new ImageIcon("/assets/coment.png");
+        ImageIcon iconLikeImg = new ImageIcon(getClass().getResource("/assets/like.png"));
+        ImageIcon iconComentImg = new ImageIcon(getClass().getResource("/assets/coment.png"));
 
         Image imgLike = iconLikeImg.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         Image imgComent = iconComentImg.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
@@ -329,16 +330,23 @@ public class UserProfileView extends JFrame {
     }
 
     private void loadImagePaths() {
-        File folder = new File("/assets/publications");
-        if (folder.exists() && folder.isDirectory()) {
-            File[] files = folder.listFiles((dir, name) -> name.toLowerCase().endsWith(".jpg") || name.toLowerCase().endsWith(".png") || name.toLowerCase().endsWith(".jpeg"));
+        imagePaths.clear(); // Clear existing paths to avoid duplicates
+        try {
+            // Load the directory inside the JAR
+            File[] files = new File(getClass().getResource("/assets/publications").toURI()).listFiles();
             if (files != null) {
                 for (File file : files) {
                     imagePaths.add(file.getAbsolutePath());
                 }
+            } else {
+                System.out.println("No se encontraron imágenes en el folder");
             }
+        } catch (Exception e) {
+            System.out.println("Fallo para cargar las imágenes del folder: " + e.getMessage());
         }
     }
+    
+    
 
     private JPanel createPanelNotification(String imagePath){
         panelNotification = new JPanel(new BorderLayout());

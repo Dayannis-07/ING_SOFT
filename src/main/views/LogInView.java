@@ -4,116 +4,51 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import main.utils.Palette;
 import main.utils.Size;
+import main.components.Footer;
+import main.components.HeaderLogIn;
 import main.controllers.logInController;
 
-public class LogInView extends JFrame{
+public class LogInView extends JFrame {
     private JFrame frame;
-    private JPanel topPanel;
-    private JPanel panelIconos;
-    private JPanel panelIcon;
     private JPanel panel;
     private JPanel grayPanel;
-    private JPanel bottomPanel;
 
     private JTextField txtEmail;
     private JPasswordField txtPassword;
 
+    private logInController controller;
+
     public LogInView() {
+        controller = new logInController();
+
         createFrame();
-        createTopPanel();
+        initializeHeaderAndFooter();
         createMainPanel();
-        createBottomPanel();
         assembleFrame();
     }
 
     private void createFrame() {
         frame = new JFrame("Iniciar Sesión");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(Size.FRAME_SIZE); 
+        frame.setSize(Size.FRAME_SIZE);
         frame.setLayout(new BorderLayout());
     }
 
-    private void createTopPanel() {
-        topPanel = new JPanel(new BorderLayout());
-        topPanel.setBackground(Palette.instance().getWhite());
-        topPanel.setBorder(BorderFactory.createLineBorder(Palette.instance().getLightGray(), 1, true));
-        topPanel.setPreferredSize(Size.TOP_PANEL_SIZE); 
-
-        panelIconos = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        panelIconos.setBackground(Palette.instance().getWhite());
-        panelIconos.setPreferredSize(Size.PANEL_ICONOS_SIZE); 
-
-        panelIcon = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        panelIcon.setBackground(Palette.instance().getWhite());
-        panelIcon.setPreferredSize(Size.PANEL_ICON_SIZE); 
-
-        addIconsToTopPanel();
-        topPanel.add(panelIconos, BorderLayout.EAST);
-        topPanel.add(panelIcon, BorderLayout.WEST);
-    }
-
-    private void addIconsToTopPanel() {
-        ImageIcon iconCalendarImg = new ImageIcon("../Assets/calendar_icon.png");
-        ImageIcon iconHomepageImg = new ImageIcon("../Assets/home_icon2.png");
-        ImageIcon iconProfileImg = new ImageIcon("../Assets/profile_icon2.png");
-        ImageIcon iconBHImg = new ImageIcon("../Assets/bh_icon.jpeg");
-
-        Image imgCalendar = iconCalendarImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
-        Image imgHomepage = iconHomepageImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
-        Image imgProfile = iconProfileImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
-        Image imgBH = iconBHImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
-
-        JLabel iconCalendar = new JLabel(new ImageIcon(imgCalendar));
-        JLabel iconHomepage = new JLabel(new ImageIcon(imgHomepage));
-        JLabel iconProfile = new JLabel(new ImageIcon(imgProfile));
-        JLabel iconBH = new JLabel(new ImageIcon(imgBH));
-
-        panelIconos.add(iconCalendar);
-        panelIconos.add(iconHomepage);
-        panelIconos.add(iconProfile);
-        panelIcon.add(iconBH);
-
-        addIconListeners(iconCalendar, iconHomepage, iconProfile);
-    }
-
-    private void addIconListeners(JLabel iconCalendar, JLabel iconHomepage, JLabel iconProfile) {
-        iconCalendar.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                //JOptionPane.showMessageDialog(frame, "Redirigiendo al Calendario...");
-                frame.dispose();
-                new CalendarView();
-            }
-        });
-
-        iconHomepage.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                //JOptionPane.showMessageDialog(frame, "Redirigiendo a la Página Principal...");
-                frame.dispose();
-                new ConsultarPublicacionesView();
-            }
-        });
-
-        iconProfile.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                //JOptionPane.showMessageDialog(frame, "Redirigiendo al Perfil...");
-                frame.dispose();
-                new UserProfileView();
-            }
-        });
+    private void initializeHeaderAndFooter() {
+        // Añadir el header y footer 
+        JPanel header = new HeaderLogIn();
+        JPanel footer = new Footer();
+        frame.add(header, BorderLayout.NORTH);
+        frame.add(footer, BorderLayout.SOUTH);
     }
 
     private void createMainPanel() {
         panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createLineBorder(Palette.instance().getBeige(), 2, true));
         panel.setBackground(Palette.instance().getWhite());
-        panel.setPreferredSize(Size.PANEL_SIZE); 
+        panel.setPreferredSize(Size.PANEL_SIZE);
 
         createGrayPanel();
         panel.add(grayPanel, new GridBagConstraints());
@@ -123,7 +58,7 @@ public class LogInView extends JFrame{
         grayPanel = new JPanel(new GridBagLayout());
         grayPanel.setBackground(Palette.instance().getLightGray());
         grayPanel.setBorder(BorderFactory.createLineBorder(Palette.instance().getDarkGray(), 1, true));
-        grayPanel.setPreferredSize(Size.GRAY_PANEL_LOGIN_SIZE); 
+        grayPanel.setPreferredSize(Size.GRAY_PANEL_LOGIN_SIZE);
 
         addLoginTitle();
         addEmailField();
@@ -197,23 +132,34 @@ public class LogInView extends JFrame{
                 super.paintComponent(g);
             }
         };
-        btnLogin.setPreferredSize(Size.BUTTON_SIZE); 
+        btnLogin.setPreferredSize(Size.BUTTON_SIZE);
         btnLogin.setForeground(Palette.instance().getDarkGreen());
         btnLogin.setBorder(BorderFactory.createEmptyBorder(10, 5, 10, 5));
         btnLogin.setContentAreaFilled(false);
 
         btnLogin.addActionListener(new ActionListener() {
             @Override
-                public void actionPerformed(ActionEvent e) {
-                    String email = txtEmail.getText();
-                    String password = new String(txtPassword.getPassword());
-            
-                    String message = logInController.validateCredentials(email, password);
-                    JOptionPane.showMessageDialog(frame, message, message.startsWith("Inicio") ? "Éxito" : "Error",
-                            message.startsWith("Inicio") ? JOptionPane.INFORMATION_MESSAGE : JOptionPane.ERROR_MESSAGE);
+            public void actionPerformed(ActionEvent e) {
+                String email = txtEmail.getText();
+                String password = new String(txtPassword.getPassword());
+
+                String message = controller.validateCredentials(email, password);
+
+                if (message.startsWith("Inicio")) {
+                    if (controller.isAdmin(email)) {
+                        JOptionPane.showMessageDialog(frame, message, "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                        frame.dispose();
+                        new VerificarPublicacionesView(); // Redirigir a la vista de administrador
+                    } else {
+                        JOptionPane.showMessageDialog(frame, message, "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                        frame.dispose();
+                        new ConsultarPublicacionesView(); // Redirigir a la vista de usuario normal
+                    }
+                } else {
+                    showErrorMessage(message); 
                 }
             }
-        );
+        });
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -240,7 +186,7 @@ public class LogInView extends JFrame{
                 super.paintComponent(g);
             }
         };
-        btnRegister.setPreferredSize(Size.BUTTON_SIZE); 
+        btnRegister.setPreferredSize(Size.BUTTON_SIZE);
         btnRegister.setForeground(Palette.instance().getGray());
         btnRegister.setBorder(BorderFactory.createEmptyBorder(10, 5, 10, 5));
         btnRegister.setContentAreaFilled(false);
@@ -248,9 +194,8 @@ public class LogInView extends JFrame{
         btnRegister.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //JOptionPane.showMessageDialog(frame, "Redirigiendo a la pantalla de registro...", "Registrarse", JOptionPane.INFORMATION_MESSAGE);
                 frame.dispose();
-                new SignInView();
+                new SignInView(); // Redirigir a la vista de registro
             }
         });
 
@@ -265,18 +210,14 @@ public class LogInView extends JFrame{
         grayPanel.add(btnRegister, gbc);
     }
 
-    private void createBottomPanel() {
-        bottomPanel = new JPanel();
-        bottomPanel.setBackground(Palette.instance().getBeige());
-        bottomPanel.setPreferredSize(Size.BOTTOM_PANEL_SIZE); 
-    }
-
     private void assembleFrame() {
-        frame.add(topPanel, BorderLayout.NORTH);
         frame.add(panel, BorderLayout.CENTER);
-        frame.add(bottomPanel, BorderLayout.SOUTH);
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
+    }
+
+    private void showErrorMessage(String message) {
+        JOptionPane.showMessageDialog(frame, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
     public static void main(String[] args) {

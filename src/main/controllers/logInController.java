@@ -1,42 +1,79 @@
 package main.controllers;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import main.models.User;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class logInController {
-    private static final String USERS_FILE = "src/Assests/users.txt";
+    private static final String USERS_FILE = "src/main/credentials/users.json"; // Archivo JSON para usuarios
 
-    public static String validateCredentials(String email, String password) {
+    private List<User> loadUsers() {
+        List<User> users = new ArrayList<>();
+        try {
+            String jsonContent = fileToString(USERS_FILE);
+            JSONArray usersArray = new JSONArray(jsonContent);
+
+            for (int i = 0; i < usersArray.length(); i++) {
+                JSONObject userJson = usersArray.getJSONObject(i);
+                User user = new User(
+                    userJson.getString("name"),
+                    userJson.getString("lastName"),
+                    userJson.getString("email"),
+                    userJson.getString("password"),
+                    userJson.getString("userType"),
+                    userJson.getBoolean("isAdmin")
+                );
+                users.add(user);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+    public String validateCredentials(String email, String password) {
         if (email.isEmpty() || password.isEmpty()) {
             return "Por favor, complete todos los campos.";
         }
 
-        boolean userFound = false;
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(USERS_FILE))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] data = line.split(",");
-                if (data.length == 3) {
-                    String registeredEmail = data[0].trim();
-                    String registeredPassword = data[1].trim();
-                    String userType = data[2].trim();
-
-                    if (registeredEmail.equals(email)) {
-                        userFound = true;
-                        if (registeredPassword.equals(password)) {
-                            return "Inicio de sesión exitoso. Bienvenido, " + userType + ".";
-                        } else {
-                            return "Contraseña incorrecta.";
-                        }
-                    }
+        List<User> users = loadUsers();
+        for (User user : users) {
+            if (user.getEmail().equals(email)) {
+                if (user.getPassword().equals(password)) {
+                    return "Inicio de sesión exitoso. Bienvenido, " + user.getName() + " " + user.getLastName() + ".";
+                } else {
+                    return "Contraseña incorrecta.";
                 }
             }
-        } catch (IOException ex) {
-            return "Error al leer el archivo de usuarios.";
         }
+        return "Usuario no registrado.";
+    }
 
-        return userFound ? "Contraseña incorrecta." : "Usuario no registrado.";
+    // Método para verificar si el usuario es administrador
+    public boolean isAdmin(String email) {
+        List<User> users = loadUsers();
+        for (User user : users) {
+            if (user.getEmail().equals(email) && user.getIsAdmin()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private String fileToString(String filePath) {
+        StringBuilder contents = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String current;
+            while ((current = br.readLine()) != null) {
+                contents.append(current).append("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return contents.toString();
     }
 }

@@ -6,7 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import main.utils.*;
 import main.controllers.signInController;
-import main.components.*;
+import main.components.Footer;
+import main.components.HeaderSignIn;
 
 public class SignInView {
     private JFrame frame;
@@ -20,7 +21,11 @@ public class SignInView {
     private JTextField txtLastName;
     private JComboBox<String> comboUserType;
 
+    private signInController controller;
+
     public SignInView() {
+        controller = new signInController();
+
         createFrame();
         initializeHeaderAndFooter();
         createMainPanel();
@@ -35,9 +40,9 @@ public class SignInView {
     }
 
     private void initializeHeaderAndFooter() {
-        // Añadir el header y footer usando HeaderFactory y FooterFactory
-        JPanel header = new HeaderFactory(frame);
-        JPanel footer = FooterFactory.createBottomPanel();
+        // Añadir el header y footer
+        JPanel header = new HeaderSignIn(frame);
+        JPanel footer = new Footer();
         frame.add(header, BorderLayout.NORTH);
         frame.add(footer, BorderLayout.SOUTH);
     }
@@ -214,14 +219,13 @@ public class SignInView {
                 String Name = txtName.getText();
                 String LastName = txtLastName.getText();
 
-                // Delegar la lógica al controlador
-               String message = signInController.registerUser(email, password, confirmPassword, userType, Name, LastName);
+               String message = controller.registerUser(email, password, confirmPassword, userType, Name, LastName);
                 if (message.contains("Registro exitoso")) {
-                    JOptionPane.showMessageDialog(frame, message);
+                    JOptionPane.showMessageDialog(frame, message, "Exito", JOptionPane.INFORMATION_MESSAGE);
                     frame.dispose();
                     new LogInView();
                 }else{
-                JOptionPane.showMessageDialog(frame, message);
+                    showErrorMessage(message);
                 }
             }
         });
@@ -240,8 +244,12 @@ public class SignInView {
     private void assembleFrame() {
         frame.add(panel, BorderLayout.CENTER);
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
     }
 
+    private void showErrorMessage(String message){
+        JOptionPane.showMessageDialog(frame, message, "Error", JOptionPane.ERROR_MESSAGE);
+    }
 
     public static void main(String[] args) {
         new SignInView();

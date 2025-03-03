@@ -1,3 +1,4 @@
 src/**/*.class
 posts.json
+users.json
 out/

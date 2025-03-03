@@ -56,7 +56,7 @@ public class PostController {
     }
 
     public ArrayList<Post> getPosts() {
-        Predicate<Post> notAproved = post -> readOnlyAproved && !post.isAproved();
+        Predicate<Post> notAproved = post -> post.isAproved() != readOnlyAproved;
         ArrayList<Post> filteredPosts = new ArrayList<>(posts);
         filteredPosts.removeIf(notAproved);
         return filteredPosts;

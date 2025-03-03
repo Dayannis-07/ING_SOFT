@@ -62,6 +62,13 @@ public class PostController {
         return filteredPosts;
     }
 
+    public Post getPost(int id) {
+        for(Post post : posts) {
+            if(post.getId() == id) return post;
+        }
+        throw new IndexOutOfBoundsException("Post do not exists");
+    }
+
     public void addPost(Post post) {
         post.setId(lastId);
 

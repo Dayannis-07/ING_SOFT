@@ -1,8 +1,5 @@
 package main.controllers;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.function.Predicate;
 
 import main.models.Post;

@@ -20,7 +20,9 @@ import main.utils.Palette;
 import main.utils.Size;
 
 public class PostPanel extends JPanel {
-    public PostPanel(Post post) {
+    private ActionListener onViewPost;
+    public PostPanel(Post post, ActionListener onViewPost) {
+        this.onViewPost = onViewPost;
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createLineBorder(Color.LIGHT_GRAY, 1),
@@ -70,12 +72,7 @@ public class PostPanel extends JPanel {
         viewButton.setBorder(BorderFactory.createEmptyBorder(10, 5, 10, 5));
         viewButton.setContentAreaFilled(false);
 
-        viewButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(panel, "Mostrando detalles del post: " + postTitle);
-            }
-        });
+        viewButton.addActionListener(onViewPost);
 
         return viewButton;
     }

@@ -2,12 +2,9 @@ package main.controllers;
 
 import javax.swing.*;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import main.models.Post;
 
-import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 

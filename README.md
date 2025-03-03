@@ -9,21 +9,53 @@
     31708119	AMANDA MERCEDES 	MENDOZA HERNÁNDEZ 
 
 ## MODELO DE DOMINIO
+### Diagrama de clases:
 ![Modelo de dominio](./docs/scenariosView/domainModel/domainModel.svg)
 
-## DIAGRAMA DE ESTADO
+### Diagrama de estados:
 ![Diagrama de estado del modelo de dominio](./docs/scenariosView/domainModel/stateDiagramIMG.svg)
 
 ## MODELO DE CASOS DE USO
+### Diagrama de casos de uso
 ![Diagrama de Casos de Uso](./docs/scenariosView/img/useCaseDiagram.svg)
-![Plantillas de especificacion del diagrama de casos de uso](./docs/scenariosView/Plantilla%20casos%20de%20uso.pdf)
 
-## PROTOTIPO DE PANTALLAS
+### Diagrama de estados de casos de uso:
+
+
+### Especificación de los casos de uso:
+
+### Prototipo de pantallas:
 ![Consultar Publicaciones](./docs/scenariosView/img/consultarPublicaciones.jpg)
 ![Publicar Evento](./docs/scenariosView/img/publicarEvento.jpg)
 ![Verificar Publicaciones](./docs/scenariosView/img/verificarPublicaciones.jpg)
 ![Consultar Calendario](./docs/scenariosView/img/consultarCalendario.jpg)
 ![Buscar Publicación](./docs/scenariosView/img/buscarPublicacion.jpg)
 
+### Flujo de usuario:
+
+## MODELO DE ANÁLISIS
+### Diagrama de clases de análisis:
+
+### Diagrama de paquetes de análisis:
+
+### Diagrama de clases de análisis y de colaboración de casos de uso prioritarios:
+
+#### UC-1
+
+#### UC-2
+
+#### UC-3
+
+#### UC-4
+
+## MODELO DE DISEÑO
+### Diagrama de clases:
+
+### Diagrama de traza:
+
+### Diagrama de secuencia:
+
+### Modelo de despliegue:
+
+
 ## MODELO DE IMPLEMENTACIÓN
-No utilizamos ninguna librería externa

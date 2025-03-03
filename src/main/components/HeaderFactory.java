@@ -8,6 +8,7 @@ import java.net.URL;
 import main.utils.*;
 import main.views.CalendarView;
 import main.views.ConsultarPublicacionesView;
+import main.views.LogInView;
 import main.views.UserProfileView;
 
 public class HeaderFactory extends JPanel {
@@ -37,6 +38,7 @@ public class HeaderFactory extends JPanel {
         ImageIcon iconCalendarImg = loadIcon("/assets/calendar_icon.png");
         ImageIcon iconHomepageImg = loadIcon("/assets/home_icon2.png");
         ImageIcon iconProfileImg = loadIcon("/assets/profile_icon2.png");
+        ImageIcon iconLogOutImg = loadIcon("/assets/logout_icon2.png");
         ImageIcon iconBHImg = loadIcon("/assets/bh_icon.jpeg");
 
         if (iconCalendarImg != null) {
@@ -77,6 +79,20 @@ public class HeaderFactory extends JPanel {
                 public void mouseClicked(MouseEvent arg0) {
                     frame.dispose();
                     new UserProfileView();
+                }
+            });
+        }
+
+        if (iconLogOutImg != null) {
+            Image imgLogOut = iconLogOutImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+            JLabel iconLogOut = new JLabel(new ImageIcon(imgLogOut));
+            iconsPanel.add(iconLogOut);
+
+            iconLogOut.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent arg0) {
+                    frame.dispose();
+                    new LogInView();
                 }
             });
         }

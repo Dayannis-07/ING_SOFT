@@ -1,6 +1,8 @@
 {
     "java.project.referencedLibraries": [
-        "lib/**/*.jar",
-        "src/org/json-java.jar"
+        "c:\\Users\\dayan\\Desktop\\Tercer Semestre\\Ing. Software\\ING_SOFT\\src\\org\\json-java.jar"
+    ],
+    "java.project.sourcePaths": [
+        "src"
     ]
 }

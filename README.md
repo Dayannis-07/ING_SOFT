@@ -10,52 +10,57 @@
 
 ## MODELO DE DOMINIO
 ### Diagrama de clases:
-![Modelo de dominio](./docs/scenariosView/domainModel/domainModel.svg)
+![Modelo de dominio](/docs/img/domainModel.svg)
 
 ### Diagrama de estados:
-![Diagrama de estado del modelo de dominio](./docs/scenariosView/domainModel/stateDiagramIMG.svg)
+![Diagrama de estado del modelo de dominio](/docs/img/stateDiagramIMG.svg)
 
 ## MODELO DE CASOS DE USO
 ### Diagrama de casos de uso
-![Diagrama de Casos de Uso](./docs/scenariosView/img/useCaseDiagram.svg)
+![Diagrama de Casos de Uso](/docs/img/useCaseDiagram.svg)
 
 ### Diagrama de estados de casos de uso:
-
+![Diagrama de estados de casos de uso](/docs/img/useCasesStateDiagram.png)
 
 ### Especificación de los casos de uso:
-
+![Plantillas de casos de uso](/docs/scenariosView/useCases/Plantilla%20casos%20de%20uso.pdf)
 ### Prototipo de pantallas:
-![Consultar Publicaciones](./docs/scenariosView/img/consultarPublicaciones.jpg)
-![Publicar Evento](./docs/scenariosView/img/publicarEvento.jpg)
-![Verificar Publicaciones](./docs/scenariosView/img/verificarPublicaciones.jpg)
-![Consultar Calendario](./docs/scenariosView/img/consultarCalendario.jpg)
-![Buscar Publicación](./docs/scenariosView/img/buscarPublicacion.jpg)
+![Consultar Publicaciones](/docs/img/consultarPublicaciones.jpg)
+![Publicar Evento](/docs/img/publicarEvento.jpg)
+![Verificar Publicaciones](/docs/img/verificarPublicaciones.jpg)
+![Consultar Calendario](/docs/img/consultarCalendario.jpeg)
+![Buscar Publicación](/docs/img/buscarPublicacion.jpg)
 
 ### Flujo de usuario:
+![Flujo de usuario](/docs/img/flujoDeUsuario.jpg)
 
 ## MODELO DE ANÁLISIS
 ### Diagrama de clases de análisis:
-
+![Diagrama de clases de analisis](/docs/img/analysisClassDiagram.svg)
 ### Diagrama de paquetes de análisis:
+![Diagrama de paquetes Zoom](/docs/img/packageDiagramZoom.svg)
+![Diagrama de paquetes](/docs/img/packageDiagram.png)
+### Diagrama de clases de análisis de casos de uso prioritarios:
 
-### Diagrama de clases de análisis y de colaboración de casos de uso prioritarios:
-
-#### UC-1
-
-#### UC-2
-
-#### UC-3
-
-#### UC-4
+#### UC-1 Consultar publicaciones
+![Caso de uso consultar Publicaciones](/docs/img/consultarPublicacionesAnalysisClassDiagram.svg)
+#### UC-2 Buscar publicación
+![Caso de uso buscar publicaciones](/docs/img/buscarPublicacionAnalysisClassDiagram.svg)
+#### UC-3 Crear Evento
+![Caso de uso crear evento](/docs/img/crearEventoAnalysisClassDiagram.svg)
+#### UC-4 Verificar publicación
+![Caso de uso verificar publicación](/docs/img/verificarEventoAnalysisClassDiagram.svg)
+#### UC-5 Consultar Calendario
+![caso de uso consultar calendario](/docs/img/consultarCalendarioAnalysisClassDiagram.svg)
 
 ## MODELO DE DISEÑO
 ### Diagrama de clases:
-
+![Diagrama de clases de diseño](/docs/img/desingClassDiagram.svg)
 ### Diagrama de traza:
-
-### Diagrama de secuencia:
-
+![Diagrama de traza](/docs/img/traceDiagram.svg)
+### Diagrama de secuencia UC-Crear evento:
+![Diagrama de secuencia](/docs/img/sequenceDiagramUcCreateEvent.svg)
 ### Modelo de despliegue:
-
+![Modelo de desplieque](/docs/img/deploymentDiagram.svg)
 
 ## MODELO DE IMPLEMENTACIÓN

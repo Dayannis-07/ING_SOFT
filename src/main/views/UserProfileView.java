@@ -41,12 +41,13 @@ public class UserProfileView extends JFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(Size.FRAME_SIZE);
         frame.setLayout(new BorderLayout());
+        frame.setLocationRelativeTo(null);
     }
 
     private void initializeHeaderAndFooter() { 
         // Añadir el header y footer usando HeaderFactory y FooterFactory 
         JPanel header = new HeaderFactory(frame); 
-        JPanel footer = FooterFactory.createBottomPanel(); 
+        JPanel footer = new FooterFactory(frame); 
         frame.add(header, BorderLayout.NORTH); 
         frame.add(footer, BorderLayout.SOUTH); 
     }

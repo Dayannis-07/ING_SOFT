@@ -35,7 +35,7 @@ public class PostView extends JFrame {
         setTitle(currentPost.getTitle());
 
         add(new HeaderFactory(this), BorderLayout.NORTH);
-        add(FooterFactory.createBottomPanel(), BorderLayout.SOUTH);
+        add(new FooterFactory(this), BorderLayout.SOUTH);
 
         initializeMainPanel();
         

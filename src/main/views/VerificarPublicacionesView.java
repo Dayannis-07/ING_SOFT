@@ -51,7 +51,7 @@ public class VerificarPublicacionesView extends JFrame {
     private void initializeHeaderAndFooter() {
         // Add the header and footer using HeaderFactory and FooterFactory
         JPanel header = new HeaderFactory(this);
-        JPanel footer = FooterFactory.createBottomPanel();
+        JPanel footer = new FooterFactory(this);
         add(header, BorderLayout.NORTH);
         add(footer, BorderLayout.SOUTH);
     }

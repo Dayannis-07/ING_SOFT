@@ -20,6 +20,8 @@ public class LogInView extends JFrame {
 
     private logInController controller;
 
+    public static String userEmail;
+
     public LogInView() {
         controller = new logInController();
 
@@ -142,6 +144,8 @@ public class LogInView extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String email = txtEmail.getText();
                 String password = new String(txtPassword.getPassword());
+
+                userEmail = email;
 
                 String message = controller.validateCredentials(email, password);
 

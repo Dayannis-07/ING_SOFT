@@ -1,10 +1,17 @@
 package main.views;
 
 import javax.swing.*;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +19,7 @@ import main.utils.Palette;
 import main.utils.Size;
 import main.components.FooterFactory;
 import main.components.HeaderFactory;
+import main.models.User;
 
 public class UserProfileView extends JFrame {
     private JFrame frame;
@@ -28,8 +36,17 @@ public class UserProfileView extends JFrame {
     private JPanel space;
     private String imagePath;
     private List<String> imagePaths = new ArrayList<>();
+    private String userEmail;
+    private JLabel lblInfoPerson;
 
     public UserProfileView() {
+        this.userEmail = LogInView.userEmail;
+
+        lblInfoPerson = new JLabel();
+        lblInfoPerson.setFont(new Font("Arial", Font.BOLD, 20));
+        lblInfoPerson.setForeground(Palette.instance().getGray());
+
+        loadUserInfo();
         createFrame();
         initializeHeaderAndFooter();
         createMainPanel();
@@ -208,20 +225,58 @@ public class UserProfileView extends JFrame {
         panelBlue.add(lblInformation, gbc);
     }
 
+    private String readJsonFile(String filePath) throws IOException {
+        StringBuilder content = new StringBuilder();
+        BufferedReader br = new BufferedReader(new FileReader(filePath));
+        String line;
+
+        while ((line = br.readLine()) != null) {
+            content.append(line);
+        }
+        br.close();
+
+        return content.toString();
+    }
+
+    private void loadUserInfo() {
+        try {
+            String jsonData = readJsonFile("src/main/persistence/users.json");
+            JSONArray usersArray = new JSONArray(jsonData);
+
+            for (int i = 0; i < usersArray.length(); i++) {
+                JSONObject user = usersArray.getJSONObject(i);
+
+                //if (user.getString("email").equals(this.userEmail)) {
+                    if (user.getString("email").equals("dayannis@gmail.com")) {
+                    String info = "<html> Nombre: " + user.getString("name") + "<br/>" +
+                                  "Apellido: " + user.getString("lastName") + "<br/>" +
+                                  "Tipo: " + user.getString("userType") + "</html>";
+                    lblInfoPerson.setText(info);
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            lblInfoPerson.setText("Error al cargar la información.");
+        }
+    }
+
     private void infoPersonUser() {
-        JLabel lblInfoPerson = new JLabel("Información personal del usuario");
+        /*lblInfoPerson = new JLabel(hola);
         lblInfoPerson.setFont(new Font("Arial", Font.BOLD, 20));
-        lblInfoPerson.setForeground(Palette.instance().getGray());
+        lblInfoPerson.setForeground(Palette.instance().getGray());*/
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.gridwidth = 2;
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.insets = new Insets(10, 0, 20, 0);
+        gbc.gridwidth = 1;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(0, 0, 0, 300);
 
         panelGris.add(lblInfoPerson, gbc);
     }
+
+    
+ 
 
     private void createPanelBlue() {
         panelBlue = new JPanel();

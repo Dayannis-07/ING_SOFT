@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import main.controllers.consultarPublicacionesController;
 import main.models.Post;
+import main.utils.Size;
 
 public class ConsultarPublicacionesView {
     private JFrame frame;
@@ -34,7 +35,7 @@ public class ConsultarPublicacionesView {
     private void initializeFrame() {
         frame = new JFrame("Consultar Publicaciones");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(700, 500);
+        frame.setSize(Size.FRAME_SIZE);
         frame.setLayout(new BorderLayout());
         frame.setLocationRelativeTo(null);
     }

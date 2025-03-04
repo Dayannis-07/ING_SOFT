@@ -1,6 +1,8 @@
 {
     "java.project.referencedLibraries": [
-        "c:\\Users\\dayan\\Desktop\\Tercer Semestre\\Ing. Software\\ING_SOFT\\src\\org\\json-java.jar"
+        "src/org/json-java.jar",
+        "src/org/junit-4.12.jar",
+        "src/org/hamcrest-all-1.3.jar"
     ],
     "java.project.sourcePaths": [
         "src"

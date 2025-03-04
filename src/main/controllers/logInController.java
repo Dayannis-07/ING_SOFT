@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class logInController {
-    private static final String USERS_FILE = "src/main/credentials/users.json"; // Archivo JSON para usuarios
+    private static final String USERS_FILE = "src/main/persistence/users.json"; // Archivo JSON para usuarios
 
     private List<User> loadUsers() {
         List<User> users = new ArrayList<>();

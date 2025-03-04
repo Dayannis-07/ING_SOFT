@@ -7,7 +7,7 @@ import main.models.User;
 import java.io.*;
 
 public class signInController {
-    private static final String USERS_FILE = "src/main/credentials/users.json"; // Archivo JSON para usuarios
+    private static final String USERS_FILE = "src/main/persistence/users.json"; // Archivo JSON para usuarios
 
     public String registerUser(String email, String password, String confirmPassword, String userType, String name, String lastName) {
         // Validar campos vacíos

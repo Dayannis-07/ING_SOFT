@@ -32,7 +32,7 @@ public class PostController {
         if (posts.size() != 0) {
             posts.clear();
         }
-        JSONArray postsArray = new JSONArray(fileToString("posts.json"));
+        JSONArray postsArray = new JSONArray(fileToString("src/main/persistence/posts.json"));
 
         for (int i = 0; i < postsArray.length(); i++) {
             JSONObject aux = postsArray.getJSONObject(i);
@@ -92,7 +92,7 @@ public class PostController {
             postsArray.put(jsonPost);
         }
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("posts.json", false))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("src/main/persistence/posts.json", false))) {
             bw.write(postsArray.toString());
         } catch (IOException e) {
             e.printStackTrace();

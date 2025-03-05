@@ -2,10 +2,14 @@ package main.components;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -31,18 +35,33 @@ public class PostPanel extends JPanel {
     }
     private JPanel createLeftPanel(Post post) {
         JPanel leftPanel = new JPanel();
-        leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+        JPanel contentPanel = new JPanel();
+
+        contentPanel.setBackground(Palette.instance().getWhite());
+        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
+
+        leftPanel.setLayout(new BorderLayout());
         leftPanel.setBackground(Color.WHITE);
+
+        ImageIcon postImgFile = new ImageIcon(post.getPath());
+        Image postImg = postImgFile.getImage().getScaledInstance(128, 128, Image.SCALE_SMOOTH);
+        JLabel postImgLbl = new JLabel(new ImageIcon(postImg));
 
         JLabel titleLabel = new JLabel("Título: " + post.getTitle());
         JLabel dateLabel = new JLabel("Fecha: " + post.getDate());
         JLabel locationLabel = new JLabel("Ubicación: " + post.getPlace());
         JButton viewButton = createViewButton(post.getTitle());
 
-        leftPanel.add(titleLabel);
-        leftPanel.add(dateLabel);
-        leftPanel.add(locationLabel);
-        leftPanel.add(viewButton);
+        contentPanel.add(titleLabel);
+        contentPanel.add(dateLabel);
+        contentPanel.add(locationLabel);
+        contentPanel.add(viewButton);
+
+        if(!post.getPath().equals("Ningún archivo seleccionado")){
+            leftPanel.add(Box.createRigidArea(new Dimension(40, 10)), BorderLayout.CENTER);
+        }
+        leftPanel.add(contentPanel, BorderLayout.EAST);
+        leftPanel.add(postImgLbl, BorderLayout.WEST);
 
         return leftPanel;
     }

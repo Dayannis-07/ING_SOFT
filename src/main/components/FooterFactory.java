@@ -23,7 +23,7 @@ public class FooterFactory extends JPanel{
     }
 
     private void addIcon(JFrame frame){
-        ImageIcon addIconImg = loadIcon("/assets/add_Icon.png");
+        ImageIcon addIconImg = loadIcon("/assets/add_icon.png");
 
         if (addIconImg != null) {
             Image imgAdd = addIconImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);

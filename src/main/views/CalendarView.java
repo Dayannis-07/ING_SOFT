@@ -223,7 +223,7 @@ public class CalendarView {
             postsPanel.setLayout(new BoxLayout(postsPanel, BoxLayout.Y_AXIS));
 
             for (int j = 0; j < posts.size(); j++) {
-                JLabel eventLbl = new JLabel(posts.get(j).getTitle());
+                JLabel eventLbl = new JLabel("<html><p>" + posts.get(j).getTitle() + "</p></html>");
 
                 final int index = j;
                 eventLbl.addMouseListener(new MouseAdapter() {

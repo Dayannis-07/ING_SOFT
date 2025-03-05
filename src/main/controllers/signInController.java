@@ -2,16 +2,18 @@ package main.controllers;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import main.models.User; 
+import main.models.User;
 
 import java.io.*;
 
 public class signInController {
     private static final String USERS_FILE = "src/main/persistence/users.json"; // Archivo JSON para usuarios
 
-    public String registerUser(String email, String password, String confirmPassword, String userType, String name, String lastName) {
+    public String registerUser(String email, String password, String confirmPassword, String userType, String name,
+            String lastName) {
         // Validar campos vacíos
-        if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || userType.isEmpty() || name.isEmpty() || lastName.isEmpty()) {
+        if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || userType.isEmpty() || name.isEmpty()
+                || lastName.isEmpty()) {
             return "Todos los campos son obligatorios.";
         }
 
@@ -50,7 +52,7 @@ public class signInController {
     }
 
     private static boolean validatePassword(String password) {
-        String passwordPattern = "^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+        String passwordPattern = "^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{8,}$";
         return password.matches(passwordPattern);
     }
 
@@ -105,7 +107,7 @@ public class signInController {
 
         // Guardar el array actualizado en el archivo JSON
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(USERS_FILE, false))) {
-            bw.write(usersArray.toString()); 
+            bw.write(usersArray.toString());
             return true;
         } catch (IOException e) {
             e.printStackTrace();

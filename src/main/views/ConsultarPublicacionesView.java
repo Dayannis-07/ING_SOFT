@@ -120,12 +120,13 @@ public class ConsultarPublicacionesView {
         JPanel publicationsPane = new JPanel();
         publicationsPane.setLayout(new BoxLayout(publicationsPane, BoxLayout.Y_AXIS));
 
-        for (Post post : posts) {
-            JPanel pubPanel = new PostPanel(post, new ActionListener() {
+        for (int i = posts.size()-1; i >= 0; i--) {
+            final int index = i;
+            JPanel pubPanel = new PostPanel(posts.get(i), new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
-                new PostView(post.getId());
+                new PostView(posts.get(index).getId());
             }
         });
             publicationsPane.add(pubPanel);

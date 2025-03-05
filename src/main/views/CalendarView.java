@@ -8,7 +8,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import main.components.FooterFactory;
 import main.components.HeaderFactory;
-import main.controllers.CalendarController;
+import main.controllers.CalendarController; 
 import main.utils.Palette;
 
 public class CalendarView {

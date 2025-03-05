@@ -401,8 +401,6 @@ public class UserProfileView extends JFrame {
             System.out.println("Fallo para cargar las imágenes del folder: " + e.getMessage());
         }
     }
-    
-    
 
     private JPanel createPanelNotification(String imagePath){
         panelNotification = new JPanel(new BorderLayout());

@@ -4,8 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Image;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -58,6 +60,12 @@ public class PostView extends JFrame {
         JPanel postPanel = new JPanel();
         postPanel.setLayout(new BoxLayout(postPanel, BoxLayout.Y_AXIS));
         postPanel.setBackground(Palette.instance().getWhite());
+
+        ImageIcon postImgFile = new ImageIcon(currentPost.getPath());
+        Image postImg = postImgFile.getImage().getScaledInstance(400, 300, Image.SCALE_SMOOTH);
+        JLabel postImgLbl = new JLabel(new ImageIcon(postImg));
+
+        postPanel.add(postImgLbl);
 
         JLabel title = new JLabel(currentPost.getTitle());
         title.setFont(new Font("Arial", Font.BOLD, 30));

@@ -12,7 +12,7 @@ public class CalendarController extends PostController{
 
     public ArrayList<Post> getPostsByDate(int day, int month) {
         Predicate<Post> match = post -> post.getMonth() != month || post.getDay() != day;
-        ArrayList<Post> filteredPosts = new ArrayList<>(posts);
+        ArrayList<Post> filteredPosts = getPosts();
 
         filteredPosts.removeIf(match);
 

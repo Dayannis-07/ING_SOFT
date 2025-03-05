@@ -247,7 +247,7 @@ public class UserProfileView extends JFrame {
                 JSONObject user = usersArray.getJSONObject(i);
 
                 //if (user.getString("email").equals(this.userEmail)) {
-                    if (user.getString("email").equals("dayannis@gmail.com")) {
+                    if (user.getString("email").equals(this.userEmail)) {
                     String info = "<html> Nombre: " + user.getString("name") + "<br/>" +
                                   "Apellido: " + user.getString("lastName") + "<br/>" +
                                   "Tipo: " + user.getString("userType") + "</html>";

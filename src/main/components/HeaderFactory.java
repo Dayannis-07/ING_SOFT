@@ -13,6 +13,7 @@ import main.views.UserProfileView;
 
 public class HeaderFactory extends JPanel {
     private JFrame frame;
+    
 
     public HeaderFactory(JFrame frame) {
         this.frame = frame;

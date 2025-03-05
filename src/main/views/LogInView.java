@@ -8,6 +8,7 @@ import main.utils.Palette;
 import main.utils.Size;
 import main.components.Footer;
 import main.components.HeaderLogIn;
+import main.components.RoundedButton;
 import main.controllers.logInController;
 
 public class LogInView extends JFrame {
@@ -121,23 +122,7 @@ public class LogInView extends JFrame {
     }
 
     private void addLoginButton() {
-        JButton btnLogin = new JButton("Ingresar") {
-            @Override
-            protected void paintComponent(Graphics g) {
-                if (!isOpaque()) {
-                    Graphics2D g2 = (Graphics2D) g.create();
-                    g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                    g2.setColor(Palette.instance().getLightGreen());
-                    g2.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
-                    g2.dispose();
-                }
-                super.paintComponent(g);
-            }
-        };
-        btnLogin.setPreferredSize(Size.BUTTON_SIZE);
-        btnLogin.setForeground(Palette.instance().getDarkGreen());
-        btnLogin.setBorder(BorderFactory.createEmptyBorder(10, 5, 10, 5));
-        btnLogin.setContentAreaFilled(false);
+        RoundedButton btnLogin = new RoundedButton("Ingresar", Palette.instance().getLightGreen());
 
         btnLogin.addActionListener(new ActionListener() {
             @Override
@@ -177,19 +162,8 @@ public class LogInView extends JFrame {
     }
 
     private void addRegisterButton() {
-        JButton btnRegister = new JButton("Registrarse") {
-            @Override
-            protected void paintComponent(Graphics g) {
-                if (!isOpaque()) {
-                    Graphics2D g2 = (Graphics2D) g.create();
-                    g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                    g2.setColor(Palette.instance().getTransparentBeige());
-                    g2.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
-                    g2.dispose();
-                }
-                super.paintComponent(g);
-            }
-        };
+        RoundedButton btnRegister = new RoundedButton("Registrarse", Palette.instance().getTransparentBeige());
+
         btnRegister.setPreferredSize(Size.BUTTON_SIZE);
         btnRegister.setForeground(Palette.instance().getGray());
         btnRegister.setBorder(BorderFactory.createEmptyBorder(10, 5, 10, 5));

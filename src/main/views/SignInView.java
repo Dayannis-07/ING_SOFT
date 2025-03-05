@@ -8,6 +8,7 @@ import main.utils.*;
 import main.controllers.signInController;
 import main.components.Footer;
 import main.components.HeaderSignIn;
+import main.components.RoundedButton;
 
 public class SignInView {
     private JFrame frame;
@@ -191,19 +192,8 @@ public class SignInView {
     }
 
     private void addRegisterButton() {
-        JButton btnRegister = new JButton("Registrarse") {
-            @Override
-            protected void paintComponent(Graphics g) {
-                if (!isOpaque()) {
-                    Graphics2D g2 = (Graphics2D) g.create();
-                    g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                    g2.setColor(Palette.instance().getLightGreen());
-                    g2.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
-                    g2.dispose();
-                }
-                super.paintComponent(g);
-            }
-        };
+        RoundedButton btnRegister = new RoundedButton("Registrarse", Palette.instance().getLightGreen());
+
         btnRegister.setPreferredSize(Size.BUTTON_SIZE);
         btnRegister.setForeground(Palette.instance().getDarkGreen());
         btnRegister.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15));

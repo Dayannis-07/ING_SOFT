@@ -2,9 +2,6 @@ package main.components;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
@@ -51,19 +48,7 @@ public class PostPanel extends JPanel {
     }
 
     private JButton createViewButton(String postTitle) {
-        JButton viewButton = new JButton("Ver más") {
-            @Override
-            protected void paintComponent(Graphics g) {
-                if (!isOpaque()) {
-                    Graphics2D g2 = (Graphics2D) g.create();
-                    g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                    g2.setColor(Palette.instance().getDarkGray());
-                    g2.fillRoundRect(0, 0, getWidth(), getHeight(), 20, 20);
-                    g2.dispose();
-                }
-                super.paintComponent(g);
-            }
-        };
+        RoundedButton viewButton = new RoundedButton("Ver más", Palette.instance().getDarkGray());
 
         viewButton.setPreferredSize(Size.BUTTON_SIZE);
         viewButton.setBorder(BorderFactory.createEmptyBorder(10, 5, 10, 5));

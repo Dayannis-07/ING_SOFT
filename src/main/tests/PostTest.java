@@ -18,4 +18,18 @@ public class PostTest {
         assertEquals("description", p.getDescription());
         assertEquals(true, p.isAproved());
     }
+
+    @Test
+    public void postGetMothTest(){
+        Post p = new Post(0, "path", "title", "01/02/2025", "place", "description", true);
+
+        assertEquals(2, p.getMonth());
+    }
+
+    @Test
+    public void postGetDayTest(){
+        Post p = new Post(0, "path", "title", "01/02/2025", "place", "description", true);
+
+        assertEquals(1, p.getDay());
+    }
 }

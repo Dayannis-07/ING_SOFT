@@ -39,6 +39,22 @@ public class Post {
     public boolean isAproved() {
         return aproved;
     }
+
+    public int getMonth() {
+        String month = date.split("/")[1];
+        return Integer.parseInt(month);
+    }
+
+    public int getDay() {
+        String day = date.split("/")[0];
+        return Integer.parseInt(day);
+    }
+
+    public int getYear() {
+        String year = date.split("/")[2];
+        return Integer.parseInt(year);
+    }
+
     public void setId(int id) {
         this.id = id;
     }

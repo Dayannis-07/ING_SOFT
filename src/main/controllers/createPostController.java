@@ -8,18 +8,18 @@ import main.models.Post;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-public class createEventController extends PostController {
+public class createPostController extends PostController {
 
-    public createEventController(boolean readOnlyAproved) {
+    public createPostController(boolean readOnlyAproved) {
         super(readOnlyAproved);
     }
 
-    public void submitEvent(JTextField txtEventTitle, JTextField txtPlace, JTextField txtDate, JTextArea txtDescription, JLabel selectedFile, JFrame frame) {
+    public void submitEvent(JTextField txtEventTitle, JTextField txtPlace, JTextField txtDate, JTextArea txtDescription, String selectedFile, JFrame frame) {
         String eventTitle = txtEventTitle.getText().trim();
         String place = txtPlace.getText().trim();
         String date = txtDate.getText().trim();
         String description = txtDescription.getText().trim();
-        String filePath = selectedFile.getText().trim();
+        String filePath = selectedFile;
 
         if (eventTitle.isEmpty() || place.isEmpty() || date.isEmpty() || description.isEmpty()) {
             JOptionPane.showMessageDialog(frame, "Todos los campos deben estar llenos.", "Error", JOptionPane.ERROR_MESSAGE);

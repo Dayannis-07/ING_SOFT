@@ -123,6 +123,7 @@ public class LogInView extends JFrame {
 
     private void addLoginButton() {
         RoundedButton btnLogin = new RoundedButton("Ingresar", Palette.instance().getLightGreen());
+        btnLogin.setForeground(Palette.instance().getDarkGreen());
 
         btnLogin.addActionListener(new ActionListener() {
             @Override
@@ -173,7 +174,7 @@ public class LogInView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
-                new SignInView(); // Redirigir a la vista de registro
+                new SignUpView(); // Redirigir a la vista de registro
             }
         });
 
@@ -198,7 +199,4 @@ public class LogInView extends JFrame {
         JOptionPane.showMessageDialog(frame, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
-    public static void main(String[] args) {
-        new LogInView();
-    }
 }

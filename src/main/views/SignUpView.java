@@ -5,12 +5,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import main.utils.*;
-import main.controllers.signInController;
+import main.controllers.signUpController;
 import main.components.Footer;
-import main.components.HeaderSignIn;
+import main.components.HeaderSignUp;
 import main.components.RoundedButton;
 
-public class SignInView {
+public class SignUpView {
     private JFrame frame;
     private JPanel panel;
     private JPanel grayPanel;
@@ -22,10 +22,10 @@ public class SignInView {
     private JTextField txtLastName;
     private JComboBox<String> comboUserType;
 
-    private signInController controller;
+    private signUpController controller;
 
-    public SignInView() {
-        controller = new signInController();
+    public SignUpView() {
+        controller = new signUpController();
 
         createFrame();
         initializeHeaderAndFooter();
@@ -42,7 +42,7 @@ public class SignInView {
 
     private void initializeHeaderAndFooter() {
         // Añadir el header y footer
-        JPanel header = new HeaderSignIn(frame);
+        JPanel header = new HeaderSignUp(frame);
         JPanel footer = new Footer();
         frame.add(header, BorderLayout.NORTH);
         frame.add(footer, BorderLayout.SOUTH);
@@ -241,7 +241,4 @@ public class SignInView {
         JOptionPane.showMessageDialog(frame, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
-    public static void main(String[] args) {
-        new SignInView();
-    }
 }

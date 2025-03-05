@@ -10,7 +10,7 @@ import javax.swing.*;
 //import org.w3c.dom.events.MouseEvent;
 
 import main.utils.*;
-import main.views.CreateEventView;
+import main.views.CreatePostView;
 
 public class FooterFactory extends JPanel{
     
@@ -23,7 +23,7 @@ public class FooterFactory extends JPanel{
     }
 
     private void addIcon(JFrame frame){
-        ImageIcon addIconImg = loadIcon("/assets/add_Icon.png");
+        ImageIcon addIconImg = loadIcon("/assets/add_icon.png");
 
         if (addIconImg != null) {
             Image imgAdd = addIconImg.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
@@ -34,7 +34,7 @@ public class FooterFactory extends JPanel{
                 @Override
                 public void mouseClicked(MouseEvent arg0) {
                     frame.dispose();
-                    new CreateEventView();
+                    new CreatePostView();
                 }
             });
         }

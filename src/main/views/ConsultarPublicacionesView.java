@@ -107,14 +107,20 @@ public class ConsultarPublicacionesView {
     private void createPostsWithFilter(String date, String title) {
         ArrayList<Post> posts;
 
-        if (date.equals("dd/mm/yyyy") && title.equals("")) {
+        System.out.println(date);
+
+        if ((date.equals("dd/mm/yyyy") || date.equals("")) && title.equals("")) {
             posts = controller.getPosts();
+            System.out.println("Filtrado por ninguno");
         } else if (title.equals("")) {
             posts = controller.filterByDate(date);
+            System.out.println("Filtrado por date");
         } else if (date.equals("dd/mm/yyyy")) {
             posts = controller.filterByTitle(title);
+            System.out.println("Filtrado por title");
         } else {
             posts = controller.filterByBoth(date, title);
+            System.out.println("Filtrado por ambos");
         }
 
         JPanel publicationsPane = new JPanel();

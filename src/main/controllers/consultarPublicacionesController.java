@@ -20,7 +20,7 @@ public class consultarPublicacionesController extends PostController {
     }
 
     public ArrayList<Post> filterByDate(String dateFilter) {
-        Predicate<Post> equalDate = post -> post.getDate() == dateFilter;
+        Predicate<Post> equalDate = post -> post.getDate() != dateFilter && !post.getDate().equals("");
         ArrayList<Post> filteredPosts = getPosts();
 
         filteredPosts.removeIf(equalDate);

@@ -10,7 +10,7 @@ import java.awt.*;
 public class RoundedButton extends JButton {
     Color color;
     public RoundedButton(String label, Color color) {
-        super("Registrarse");
+        super(label);
         this.color = color;
 
         setPreferredSize(Size.BUTTON_SIZE);

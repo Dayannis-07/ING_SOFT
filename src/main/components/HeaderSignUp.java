@@ -8,10 +8,10 @@ import java.net.URL;
 import main.utils.*;
 import main.views.*;
 
-public class HeaderSignIn extends JPanel {
+public class HeaderSignUp extends JPanel {
     private JFrame frame;
 
-    public HeaderSignIn(JFrame frame) {
+    public HeaderSignUp(JFrame frame) {
         this.frame = frame;
         setLayout(new BorderLayout());
         setBackground(Palette.instance().getWhite());

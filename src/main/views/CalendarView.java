@@ -8,7 +8,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import main.components.FooterFactory;
 import main.components.HeaderFactory;
-import main.controllers.CalendarController;
+import main.controllers.CalendarController; 
 import main.utils.Palette;
 
 public class CalendarView {
@@ -107,10 +107,12 @@ public class CalendarView {
         nextIcon = new ImageIcon(nextImage);
         prevIcon = new ImageIcon(prevImage);
 
-        nextMonthLabel = new JLabel(nextIcon);
+        nextMonthLabel = new JLabel(nextIcon);        
         nextMonthLabel.setBounds(200, 60, 50, 50);
+        nextMonthLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
         prevMonthLabel = new JLabel(prevIcon);
         prevMonthLabel.setBounds(20, 60, 50, 50);
+        prevMonthLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         monthPanel.add(prevMonthLabel);
         monthPanel.add(monthLabel);
@@ -215,16 +217,18 @@ public class CalendarView {
 
         for (int i = 0; i < daysInMonth; i++) {
             JLabel label = new JLabel(String.valueOf(i + 1), SwingConstants.RIGHT);
-
+        
             var posts = controller.getPostsByDate(i + 1, month + 1);
-
+        
             var postsPanel = new JPanel();
             postsPanel.setBackground(Palette.instance().getWhite());
             postsPanel.setLayout(new BoxLayout(postsPanel, BoxLayout.Y_AXIS));
-
+            postsPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
             for (int j = 0; j < posts.size(); j++) {
-                JLabel eventLbl = new JLabel("<html><p>" + posts.get(j).getTitle() + "</p></html>");
-
+                String truncatedTitle = truncateTitle(posts.get(j).getTitle(), 10);
+                JLabel eventLbl = new JLabel(truncatedTitle);
+        
                 final int index = j;
                 eventLbl.addMouseListener(new MouseAdapter() {
                     @Override
@@ -236,9 +240,17 @@ public class CalendarView {
                 postsPanel.add(eventLbl);
                 postsPanel.add(Box.createRigidArea(new Dimension(5, 10)));
             }
-
+        
             dayPanels[i + startDay].add(label, BorderLayout.NORTH);
             dayPanels[i + startDay].add(postsPanel, BorderLayout.CENTER);
+        }
+    }
+
+    private String truncateTitle(String title, int maxLength) {
+        if (title.length() > maxLength) {
+            return title.substring(0, maxLength) + "...";
+        } else {
+            return title;
         }
     }
 

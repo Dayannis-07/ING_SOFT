@@ -10,7 +10,7 @@ import javax.swing.*;
 //import org.w3c.dom.events.MouseEvent;
 
 import main.utils.*;
-import main.views.CreateEventView;
+import main.views.CreatePostView;
 
 public class FooterFactory extends JPanel{
     
@@ -34,7 +34,7 @@ public class FooterFactory extends JPanel{
                 @Override
                 public void mouseClicked(MouseEvent arg0) {
                     frame.dispose();
-                    new CreateEventView();
+                    new CreatePostView();
                 }
             });
         }

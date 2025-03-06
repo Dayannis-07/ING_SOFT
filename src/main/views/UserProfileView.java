@@ -38,6 +38,7 @@ public class UserProfileView extends JFrame {
     private List<String> imagePaths = new ArrayList<>();
     private String userEmail;
     private JLabel lblInfoPerson;
+    private int numberPublications;
 
     public UserProfileView() {
         this.userEmail = LogInView.userEmail;
@@ -121,10 +122,6 @@ public class UserProfileView extends JFrame {
         lblNotification.setFont(new Font("Arial", Font.BOLD, 20));
         lblNotification.setForeground(Palette.instance().getWhite());
 
-        lblNotification.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); // Cambiar cursor al de "mano"
-
-        addSetCursor(lblNotification);
-
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -134,20 +131,6 @@ public class UserProfileView extends JFrame {
 
         panelBlue.add(lblNotification, gbc);
 
-    }
-
-    private void addSetCursor(JLabel lblNotification) {
-        lblNotification.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                try {
-                    frame.dispose();
-                    new VerificarPublicacionesView();
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
     }
 
     private void activity(){
@@ -386,22 +369,38 @@ public class UserProfileView extends JFrame {
     }
 
     private void loadImagePaths() {
-        imagePaths.clear(); // Clear existing paths to avoid duplicates
+        imagePaths.clear();
+    
         try {
-            // Load the directory inside the JAR
-            File[] files = new File(getClass().getResource("/assets/publications").toURI()).listFiles();
-            if (files != null) {
-                for (File file : files) {
-                    imagePaths.add(file.getAbsolutePath());
+            String jsonData = readJsonFile("src/main/persistence/posts.json");
+            JSONArray postsArray = new JSONArray(jsonData);
+            numberPublications = postsArray.length();
+    
+            // Extraer las rutas de imagen y almacenarlas en imagePaths
+            for (int i = 0; i < postsArray.length(); i++) {
+                JSONObject post = postsArray.getJSONObject(i);
+                if (post.has("Path")) {
+                    String path = post.getString("Path");
+                    File imageFile = new File(path);
+    
+                    if (imageFile.exists()) {
+                        imagePaths.add(path); // Solo agregamos la imagen si el archivo existe
+                    } else {
+                        System.out.println("Imagen no encontrada: " + path);
+                    }
                 }
-            } else {
-                System.out.println("No se encontraron imágenes en el folder");
             }
+    
+            if (imagePaths.isEmpty()) {
+                System.out.println("No se encontraron imágenes en el archivo JSON.");
+            }
+    
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo JSON: " + e.getMessage());
         } catch (Exception e) {
-            System.out.println("Fallo para cargar las imágenes del folder: " + e.getMessage());
+            System.out.println("Error procesando las rutas de imágenes: " + e.getMessage());
         }
     }
-    
     
 
     private JPanel createPanelNotification(String imagePath){
@@ -451,7 +450,7 @@ public class UserProfileView extends JFrame {
         notificationsContainer.setLayout(new BoxLayout(notificationsContainer, BoxLayout.Y_AXIS));
         notificationsContainer.setBackground(Color.BLUE);
     
-        int maxPanels = Math.min(imagePaths.size(), 5); // Máximo 5 paneles o cantidad de imágenes disponibles
+        int maxPanels = Math.min(imagePaths.size(), numberPublications); //cantidad de imágenes disponibles
         for (int i = 0; i < maxPanels; i++) {
             JPanel notification = createPanelNotification(imagePaths.get(i));
             JPanel spaceBetweenNotification = createSpaceScroll();

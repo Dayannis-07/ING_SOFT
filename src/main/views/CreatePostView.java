@@ -9,9 +9,9 @@ import main.utils.Size;
 import main.components.FooterFactory;
 import main.components.HeaderFactory;
 import main.components.RoundedButton;
-import main.controllers.createEventController;
+import main.controllers.createPostController;
 
-public class CreateEventView extends JFrame {
+public class CreatePostView extends JFrame {
     private JFrame frame;
     private JPanel panel;
     private JPanel grayPanel;
@@ -24,10 +24,12 @@ public class CreateEventView extends JFrame {
     private JTextArea txtDescription;
     private JLabel selectedFile;
 
-    private createEventController controller;
+    private String filePath; // Variable para almacenar la ruta completa
 
-    public CreateEventView() {
-        controller = new createEventController(false);
+    private createPostController controller;
+
+    public CreatePostView() {
+        controller = new createPostController(false);
         createFrame();
         initializeHeaderAndFooter();
         createMainPanel();
@@ -148,10 +150,22 @@ public class CreateEventView extends JFrame {
                 int selection = fileChooser.showOpenDialog(null);
 
                 if (selection == JFileChooser.APPROVE_OPTION) {
-                    String filePath = fileChooser.getSelectedFile().getAbsolutePath();
-                    selectedFile.setText(filePath);
+                    // Obtener la ruta completa del archivo
+                    filePath = fileChooser.getSelectedFile().getAbsolutePath();
+
+                    // Mostrar una versión truncada en el JLabel
+                    if (filePath.length() > 30) { // Limitar a 30 caracteres
+                        selectedFile.setText(filePath.substring(0, 15) + "..." + filePath.substring(filePath.length() - 15));
+                    } else {
+                        selectedFile.setText(filePath);
+                    }
+
+                    // Mostrar la ruta completa como tooltip
+                    selectedFile.setToolTipText(filePath);
                 } else {
                     selectedFile.setText("No se seleccionó ningún archivo.");
+                    selectedFile.setToolTipText(null); // Limpiar el tooltip si no se selecciona archivo
+                    filePath = null; // Limpiar la ruta si no se selecciona archivo
                 }
             }
         });
@@ -191,11 +205,14 @@ public class CreateEventView extends JFrame {
 
     private void addSubmitButton() {
         JButton btnSubmit = new RoundedButton("Enviar", Palette.instance().getLightGreen());
+        btnSubmit.setForeground(Palette.instance().getDarkGreen());
 
         btnSubmit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.submitEvent(txtEventTitle, txtPlace, txtDate, txtDescription, selectedFile, frame);
+                // Pasar la ruta completa al controlador
+                controller.submitEvent(txtEventTitle, txtPlace, txtDate, txtDescription, filePath, frame);
+                clearFields();
             }
         });
 
@@ -208,12 +225,19 @@ public class CreateEventView extends JFrame {
         grayPanel.add(btnSubmit, gbc);
     }
 
+    private void clearFields() {
+        txtEventTitle.setText(""); 
+        txtPlace.setText("");      
+        txtDate.setText("");       
+        txtDescription.setText(""); 
+        selectedFile.setText("Ningún archivo seleccionado"); 
+        selectedFile.setToolTipText(null);
+        filePath = null; 
+    }
+
     private void assembleFrame() {
         frame.add(panel, BorderLayout.CENTER);
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new CreateEventView();
-    }
 }

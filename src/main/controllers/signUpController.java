@@ -6,7 +6,7 @@ import main.models.User;
 
 import java.io.*;
 
-public class signInController {
+public class signUpController {
     private static final String USERS_FILE = "src/main/persistence/users.json"; // Archivo JSON para usuarios
 
     public String registerUser(String email, String password, String confirmPassword, String userType, String name,

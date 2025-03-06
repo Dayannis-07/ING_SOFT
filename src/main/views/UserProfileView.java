@@ -122,10 +122,6 @@ public class UserProfileView extends JFrame {
         lblNotification.setFont(new Font("Arial", Font.BOLD, 20));
         lblNotification.setForeground(Palette.instance().getWhite());
 
-        lblNotification.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); // Cambiar cursor al de "mano"
-
-        addSetCursor(lblNotification);
-
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -135,20 +131,6 @@ public class UserProfileView extends JFrame {
 
         panelBlue.add(lblNotification, gbc);
 
-    }
-
-    private void addSetCursor(JLabel lblNotification) {
-        lblNotification.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                try {
-                    frame.dispose();
-                    new VerificarPublicacionesView();
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
     }
 
     private void activity(){

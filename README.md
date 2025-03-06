@@ -64,7 +64,9 @@
 ![Modelo de desplieque](/docs/img/deploymentDiagram.svg)
 
 ## MODELO DE IMPLEMENTACIÓN
-Utilizamos las  librerias externas hamcrest-all-1.3.jar, json-java.jar y junit-4.12.jar que se encuentran en la carpeto org dentor del src
+Utilizamos las  librerias externas hamcrest-all-1.3.jar, json-java.jar y junit-4.12.jar que se encuentran en la carpeta src/org
+
+Para ejecutar el proyecto se debe tener instalada en vscode la extensión Project Manager for Java, abrir la pestaña JAVA PROJECTS de la parte inferior, darle al + de Referenced Libraries y seleccionar el archivo json-java.jar en la carpeta src/org. Con esto se puede ejecutar Main.java desde vscode con normalidad
 
 ## MODELO DE PRUEBAS
 1. **PostTest**

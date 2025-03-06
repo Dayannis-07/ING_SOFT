@@ -16,6 +16,7 @@ public class RoundedButton extends JButton {
         setPreferredSize(Size.BUTTON_SIZE);
         setBorder(BorderFactory.createEmptyBorder(10, 5, 10, 5));
         setContentAreaFilled(false);
+        this.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 
     @Override

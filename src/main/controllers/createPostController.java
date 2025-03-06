@@ -38,7 +38,7 @@ public class createPostController extends PostController {
         JOptionPane.showMessageDialog(frame, "Evento creado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    private static boolean isValidDate(String date) {
+    public static boolean isValidDate(String date) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         sdf.setLenient(false);
         try {

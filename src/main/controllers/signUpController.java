@@ -46,12 +46,12 @@ public class signUpController {
         }
     }
 
-    private static boolean validateEmail(String email) {
+    public static boolean validateEmail(String email) {
         String emailPattern = "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$";
         return email.matches(emailPattern);
     }
 
-    private static boolean validatePassword(String password) {
+    public static boolean validatePassword(String password) {
         String passwordPattern = "^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{8,}$";
         return password.matches(passwordPattern);
     }
